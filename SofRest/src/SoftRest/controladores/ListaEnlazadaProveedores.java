@@ -77,7 +77,7 @@ public class ListaEnlazadaProveedores {
     public void Cargar() {
         Proveedores prov;
         String sql;
-        //sql = sirve para seleccionar la tabla "clientes" en la base de datos "proyecto"
+        //sql = sirve para seleccionar la tabla "proveedores" en la base de datos "proyecto"
         sql = "SELECT * FROM proveedores";
         Statement st;
 
@@ -85,14 +85,14 @@ public class ListaEnlazadaProveedores {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             //bucle para asignar datos a la clase Cliente
-            while (rs.next()) {//pasa a la siguiente fila hata que ya no haya datos en la tabla Clientes
+            while (rs.next()) {//pasa a la siguiente fila hata que ya no haya datos en la tabla Proveedores
                 prov = new Proveedores();
 
-                prov.setRuc(rs.getString(1));//se extrae de la base de dato la columnna 1 y se asigna a la cedula de la Clase ClientP
-                prov.setNombre(rs.getString(2));//se extrae de la base de dato la columnna 2 y se asigna a el nombre de la Clase ClientP
-                prov.setDireccion(rs.getString(4));//se extrae de la base de dato la columnna 4 y se asigna a la direccion de la Clase ClientP
-                prov.setEmail(rs.getString(5));//se extrae de la base de dato la columnna 5 y se asigna el email de la Clase ClientP
-                prov.setTelefono(rs.getString(6));//se extrae de la base de dato la columnna 6 y se asigna el telefono de la Clase ClientP
+                prov.setRuc(rs.getString(1));//se extrae de la bd la columnna 1 y se asigna a el ruc de la Clase Proveedor
+                prov.setNombre(rs.getString(2));//se extrae de la bd la columnna 2 y se asigna a el nombre de la Clase Proveedor
+                prov.setDireccion(rs.getString(4));//se extrae de la bd la columnna 3 y se asigna a la direccion de la Clase Proveedor
+                prov.setEmail(rs.getString(5));//se extrae de la bd la columnna 4 y se asigna el email de la Clase Proveedor
+                prov.setTelefono(rs.getString(6));//se extrae de la bd la columnna 5 y se asigna el telefono de la Clase Proveedor
                 InsertarInicio(prov);//se insertan en la lista enlazada
             }
         } catch (SQLException ex) {
