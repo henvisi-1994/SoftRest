@@ -2,8 +2,8 @@ package SoftRest.vistas;
 
 import SoftRest.controladores.ConectorBD;
 import SoftRest.controladores.Cliente;
-import SoftRest.controladores.ListaEnlazadaClientes;
 import SoftRest.controladores.ListaEnlazadaProveedores;
+import SoftRest.controladores.Proveedores;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -23,15 +23,15 @@ public class frmProveedores extends javax.swing.JFrame {
     ConectorBD con = new ConectorBD();
     Connection cn = con.conexion();
     
-    String atributo = "cli_ced";
+    String atributo = "prov_ced";
     DefaultTableModel modelo;
     
     //Se crea la lista enlazada ListaCli
     public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
-    public Cliente cli;
+    public Proveedores prov;
     
     public frmProveedores() {
-        this.setTitle("INSERTAR CLIENTE");
+        this.setTitle("INSERTAR PROVEEDORES");
         initComponents();
         setLocationRelativeTo(null);
         setResizable(true);
@@ -39,14 +39,12 @@ public class frmProveedores extends javax.swing.JFrame {
         ListaPro.Visualizar();
         validarNumeros(txtcedula);
         validarLetras(txtNombre);
-        validarLetras(txtApellido);
         validarLetras(txtDireccion);
         validarNumeros(txtTelefono);
         cerrar();
     }
      public void Limpiar(){
         txtcedula.setText("");
-        txtApellido.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
         txtEmail.setText("");
@@ -56,7 +54,6 @@ public class frmProveedores extends javax.swing.JFrame {
     {
        txtcedula.setEditable(b);
        txtNombre.setEditable(b);
-       txtApellido.setEditable(b);
        txtDireccion.setEditable(b);
        txtEmail.setEditable(b);
        txtTelefono.setEditable(b);
@@ -70,7 +67,6 @@ public class frmProveedores extends javax.swing.JFrame {
         
         txtcedula.setEditable(false);
         txtNombre.setEditable(false);
-        txtApellido.setEditable(false);
         txtDireccion.setEditable(false);
         txtEmail.setEditable(false);
         txtTelefono.setEditable(false);
@@ -92,7 +88,6 @@ public class frmProveedores extends javax.swing.JFrame {
         btUltimo.setEnabled(true);
         txtcedula.setEditable(true);
         txtNombre.setEditable(true);
-        txtApellido.setEditable(true);
         txtDireccion.setEditable(true);
         txtEmail.setEditable(true);
         txtTelefono.setEditable(true);
@@ -229,12 +224,10 @@ public class frmProveedores extends javax.swing.JFrame {
         btCerrar = new javax.swing.JButton();
         panelCentral = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtcedula = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -406,10 +399,7 @@ public class frmProveedores extends javax.swing.JFrame {
         panelCentral.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setText("C.I.");
-
-        jLabel2.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel2.setText("Apellido");
+        jLabel1.setText("RUC");
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel3.setText("Nombre");
@@ -422,7 +412,7 @@ public class frmProveedores extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel5.setText("Proveedor");
+        jLabel5.setText("Proveedores");
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel8.setText("Telefono");
@@ -446,11 +436,9 @@ public class frmProveedores extends javax.swing.JFrame {
                                 .addGroup(panelCentralLayout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addGap(18, 18, 18)))
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
@@ -460,27 +448,24 @@ public class frmProveedores extends javax.swing.JFrame {
                                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                                     .addComponent(txtcedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))))
                         .addGap(42, 42, 42)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(469, 469, 469))))
+                        .addComponent(jLabel5)
+                        .addGap(431, 431, 431))))
         );
         panelCentralLayout.setVerticalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
+            .addGroup(panelCentralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(16, 16, 16)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addGap(185, 185, 185))
+            .addGroup(panelCentralLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -493,7 +478,7 @@ public class frmProveedores extends javax.swing.JFrame {
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -528,47 +513,44 @@ public class frmProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        cli = new Cliente();
+        prov = new Proveedores();
 
-        String nombre, apellido, cedula, email, direccion, cargo, telefono, comparar;
+        String nombre, ruc, email, direccion, cargo, telefono, comparar;
         int avanzar = 0;
 
         nombre = txtNombre.getText();
-        apellido = txtApellido.getText();
-        cedula = txtcedula.getText();
+        ruc = txtcedula.getText();
         direccion = txtDireccion.getText();
         email = txtEmail.getText();
         telefono = txtTelefono.getText();
 
         nombre = nombre.replaceAll(" ", "");
-        apellido = apellido.replaceAll(" ", "");
-        cedula = cedula.replaceAll(" ", "");
+        ruc = ruc.replaceAll(" ", "");
         direccion = direccion.replaceAll(" ", "");
         email = email.replaceAll(" ", "");
         telefono = telefono.replaceAll(" ", "");
 
         //Verifica el los campos estan vacios
-        if (nombre.length() == 0 || apellido.length() == 0 || cedula.length() == 0 || email.length() == 0 ||direccion.length() == 0|| telefono.length() == 0) {
+        if (nombre.length() == 0 || ruc.length() == 0 || email.length() == 0 ||direccion.length() == 0|| telefono.length() == 0) {
             JOptionPane.showMessageDialog(null, "POR FAVOR NO DEJE CAMPOS VACIOS");
         } else {
 
             try{
-                if (ValidarCedula(cedula)) {
+                if (ValidarCedula(ruc)) {
                 //Compara si la cedula del ASESORES ingresado se repite
                 comparar = txtcedula.getText();
                 if (ListaPro.buscarProveedor(comparar) != null) {
                     avanzar = 1;
                 }
                 if (avanzar == 0) {
-                    cli = new Cliente();
-                    cli.setCedula(txtcedula.getText());
-                    cli.setNombre(txtNombre.getText());
-                    cli.setApellido(txtApellido.getText());
-                    cli.setDireccion(txtDireccion.getText());
-                    cli.setEmail(txtEmail.getText());
-                    cli.setTelefono(txtTelefono.getText());
+                    prov = new Proveedores();
+                    prov.setRuc(txtcedula.getText());
+                    prov.setNombre(txtNombre.getText());
+                    prov.setDireccion(txtDireccion.getText());
+                    prov.setEmail(txtEmail.getText());
+                    prov.setTelefono(txtTelefono.getText());
 
-                    ListaPro.InsertarInicio(cli);
+                    ListaPro.InsertarInicio(prov);
                     ListaPro.Guardar();
                     
                     ListaPro.VaciarLista();
@@ -679,7 +661,6 @@ public class frmProveedores extends javax.swing.JFrame {
     private javax.swing.JButton btSiguiente;
     private javax.swing.JButton btUltimo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -688,7 +669,6 @@ public class frmProveedores extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbNum;
     private javax.swing.JPanel panelCentral;
-    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
