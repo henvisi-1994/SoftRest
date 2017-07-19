@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/henvisi/Dropbox/ProgramacionIV/ProyectoProgra4/SoftRes1.0/SofRest/src/sofrest/SofRest.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmProveedoresLista.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmProveedores.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/ListaEnlazadaProveedores.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/NodoProveedores.java</file>
         </group>
     </open-files>
 </project-private>
