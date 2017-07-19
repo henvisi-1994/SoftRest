@@ -35,7 +35,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        btnEntrar = new javax.swing.JButton();
         jpassClave = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
 
@@ -56,16 +55,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
         txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 80, -1));
 
-        btnEntrar.setBackground(new java.awt.Color(153, 51, 0));
-        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEntrar.setText("Ingresar");
-        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
-
         jpassClave.setBackground(new java.awt.Color(153, 51, 0));
         jpassClave.setForeground(new java.awt.Color(255, 255, 255));
         jpassClave.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -82,11 +71,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-      Logeo();
-        
-    }//GEN-LAST:event_btnEntrarActionPerformed
-
     private void jpassClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpassClaveKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             btnentrarMouseClicked(null);
@@ -98,7 +82,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         //da clic en el boton aceptar y luego lo ejecuta
         if(enter==KeyEvent.VK_ENTER)
         {
-             btnEntrar.doClick();
+             Logeo();
         }
     }      
     /**
@@ -138,7 +122,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
