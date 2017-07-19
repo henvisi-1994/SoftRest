@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class ListaEnlazadaClientes {
     
-    public Nodo<Cliente> cab;
+    public NodoClientes<Cliente> cab;
     public ConectorBD con = new ConectorBD();
     public Connection cn = con.conexion();
    
@@ -30,7 +30,7 @@ public class ListaEnlazadaClientes {
         return vacia;
     }
     public ListaEnlazadaClientes InsertarInicio(Cliente x) {
-        Nodo<Cliente> nuevo = new Nodo(x);
+        NodoClientes<Cliente> nuevo = new NodoClientes(x);
         if (estaVacia()) {
             cab = nuevo;
         } else {
@@ -40,15 +40,15 @@ public class ListaEnlazadaClientes {
         return this;
     }
     public void Visualizar() {
-        Nodo<Cliente> n;
+        NodoClientes<Cliente> n;
         n = cab;
         while (n != null) {
             System.out.print(" [ " + n.info.Imprimir() + "] => \n");
             n = n.sgte;
         }
     }
-    public Nodo buscarCliente(String ced){
-        Nodo<Cliente> indice;
+    public NodoClientes buscarCliente(String ced){
+        NodoClientes<Cliente> indice;
         for(indice = cab; indice != null; indice = indice.sgte){
             if(indice.info.getCedula()==ced){
                 return indice;
@@ -57,7 +57,7 @@ public class ListaEnlazadaClientes {
         return null;
     }
     public void VaciarLista(){
-        Nodo<Cliente> indice;
+        NodoClientes<Cliente> indice;
         if(!estaVacia()){
             while (cab != null) {
                 indice = cab;

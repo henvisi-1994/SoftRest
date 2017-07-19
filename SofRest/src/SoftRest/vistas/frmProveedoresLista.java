@@ -200,7 +200,6 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
-        buscarApellido = new javax.swing.JRadioButton();
         buscarNombre = new javax.swing.JRadioButton();
         buscarCedula = new javax.swing.JRadioButton();
         btnBuscar = new javax.swing.JButton();
@@ -396,16 +395,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
                 txtBuscarKeyTyped(evt);
             }
         });
-        jPanel5.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 15, 283, -1));
-
-        buscarApellido.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
-        buscarApellido.setText("Apellido");
-        buscarApellido.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscarApellidoMouseClicked(evt);
-            }
-        });
-        jPanel5.add(buscarApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 16, -1, -1));
+        jPanel5.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 15, 350, -1));
 
         buscarNombre.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
         buscarNombre.setText("Nombre");
@@ -697,10 +687,6 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void buscarApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarApellidoMouseClicked
-        txtBuscar.requestFocus();
-    }//GEN-LAST:event_buscarApellidoMouseClicked
-
     private void buscarNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarNombreMouseClicked
         txtBuscar.requestFocus();
     }//GEN-LAST:event_buscarNombreMouseClicked
@@ -714,7 +700,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarCedulaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (buscarCedula.isSelected() || buscarNombre.isSelected() || buscarApellido.isSelected()) {
+        if (buscarCedula.isSelected() || buscarNombre.isSelected()) {
             if (buscarCedula.isSelected()) {
                 atributo = "prov_ced";
                 MostrarTabla(txtBuscar.getText());
@@ -838,7 +824,6 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarUno;
     private javax.swing.JButton btnMostrarTabla;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JRadioButton buscarApellido;
     private javax.swing.JRadioButton buscarCedula;
     private javax.swing.JRadioButton buscarNombre;
     private javax.swing.ButtonGroup buttonGroup1;

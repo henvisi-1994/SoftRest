@@ -9,12 +9,12 @@ package SoftRest.controladores;
  *
  * @author Eddie Bustamante
  */
-    public class Nodo<T> {
+    public class NodoClientes<T> {
 
         public T info;
-        public Nodo sgte;
+        public NodoClientes sgte;
 
-        public Nodo(T info) {
+        public NodoClientes(T info) {
             this.info = info;
             this.sgte = null;
         }
