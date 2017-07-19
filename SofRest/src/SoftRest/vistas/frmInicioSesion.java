@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package SoftRest.vistas;
 
-import vistas.FrmMenuPrincipal;
+import SoftRest.vistas.FrmMenuPrincipal;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
