@@ -2,7 +2,7 @@ package SoftRest.controladores;
 
 /**
  *
- * @author Eddie Bustamante
+ * @author Paul Torres
  */
 public class Proveedores {
     protected String ruc;
@@ -63,7 +63,7 @@ public class Proveedores {
     }
 
     public String ImprimirProveedor() {
-        return "[ " + ruc + "\t" + nombre + "\t" + email + "\t" + direccion + "\t"+ telefono ;
-    }
-    
+        return "[ " + ruc + "\t" + nombre + "\t" + email 
+                + "\t" + direccion + "\t"+ telefono ;
+    }    
 }

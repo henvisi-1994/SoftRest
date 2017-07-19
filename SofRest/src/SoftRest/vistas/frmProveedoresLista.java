@@ -407,7 +407,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         jPanel5.add(buscarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 16, -1, -1));
 
         buscarCedula.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
-        buscarCedula.setText("Cedula");
+        buscarCedula.setText("Ruc");
         buscarCedula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buscarCedulaMouseClicked(evt);
