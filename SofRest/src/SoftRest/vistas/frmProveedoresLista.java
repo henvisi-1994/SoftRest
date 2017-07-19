@@ -1,7 +1,10 @@
 package SoftRest.vistas;
+
 import SoftRest.controladores.ConectorBD;
 import SoftRest.controladores.ListaEnlazadaClientes;
 import SoftRest.controladores.Cliente;
+import SoftRest.controladores.ListaEnlazadaProveedores;
+import SoftRest.controladores.Proveedores;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -23,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Paul Torres
@@ -31,38 +35,35 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
     ConectorBD con = new ConectorBD();
     Connection cn = con.conexion();
-    
-    String atributo = "cli_ced";
+
+    String atributo = "prov_ruc";
     DefaultTableModel modelo;
-    
+
     //Se crea la lista enlazada ListaCli
-    public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
-    public Cliente cli;
-    
-    
+    public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
+    public Proveedores prov;
+
     public frmProveedoresLista() {
-        this.setTitle("LISTA DE CLIENTES");
+        this.setTitle("LISTA DE PROVEEDORES");
         initComponents();
         setLocationRelativeTo(null);
         setResizable(true);
-        
+
         MostrarTabla("");
         buttonGroup1.add(buscarCedula);
         buttonGroup1.add(buscarNombre);
-        buttonGroup1.add(buscarApellido);
         buscarCedula.doClick();
-        ListaCli.Cargar();
-        ListaCli.Visualizar();
-        
+        ListaPro.Cargar();
+        ListaPro.Visualizar();
     }
+
     public void MostrarTabla(String valor) {
-        
+
         DefaultTableModel modelo = new DefaultTableModel();
-        
+
         //nombre de los parametros del la tabla modelo
-        modelo.addColumn("Cedula");
+        modelo.addColumn("RUC");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido");
         modelo.addColumn("direccion");
         modelo.addColumn("Email");
         modelo.addColumn("Telefono");
@@ -70,12 +71,12 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
         String sql;
         if (valor.equals("")) {
-            sql = "SELECT * FROM clientes";
+            sql = "SELECT * FROM proveedores";
         } else {
-            sql = "SELECT * FROM clientes WHERE " + atributo + "='" + valor + "'";
+            sql = "SELECT * FROM proveedores WHERE " + atributo + "='" + valor + "'";
         }
 
-        String datos[] = new String[6];
+        String datos[] = new String[5];
         Statement st;
         try {
             st = cn.createStatement();
@@ -87,35 +88,29 @@ public class frmProveedoresLista extends javax.swing.JFrame {
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
-                datos[5] = rs.getString(6);
                 modelo.addRow(datos);
             }
             tabla.setModel(modelo);
         } catch (SQLException ex) {
-            Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     public void Inhabilitar() {
-        
         btnEditar.setEnabled(true);
         btnEliminarUno.setEnabled(false);
         btnCancelarEliminar.setEnabled(false);
-        
     }
-    
+
     public void Habilitar() {
-        
-        
         btnEditar.setEnabled(true);
         btnEliminarUno.setEnabled(true);
         btnCancelarEliminar.setEnabled(true);
         btnRegresar.setEnabled(true);
-        
-        
     }
-     public boolean ValidarCedula(String cedula) {
+
+    public boolean ValidarCedula(String cedula) {
         boolean valido;
         int[] digito = new int[10];
         int sumaDeDigitos = 0;
@@ -175,6 +170,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         }
         return valido;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -530,7 +526,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
         char c = evt.getKeyChar();
 
-        if(txtNombre1.getText().length()>=30){
+        if (txtNombre1.getText().length() >= 30) {
             evt.consume();
         }
         if (Character.isDigit(c)) {
@@ -550,7 +546,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
     private void txtApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido1KeyTyped
         char c = evt.getKeyChar();
-        if(txtApellido1.getText().length()>=30){
+        if (txtApellido1.getText().length() >= 30) {
             evt.consume();
         }
         if (Character.isDigit(c)) {
@@ -570,7 +566,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
     private void txtEmail1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmail1KeyTyped
         char c = evt.getKeyChar();
-        if(txtEmail1.getText().length()>=35){
+        if (txtEmail1.getText().length() >= 35) {
             evt.consume();
         }
 
@@ -582,7 +578,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
     private void txtTelefono1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono1KeyTyped
         char c = evt.getKeyChar();
-        if(txtTelefono1.getText().length()>=9){
+        if (txtTelefono1.getText().length() >= 9) {
             evt.consume();
         }
         if (!Character.isDigit(c)) {
@@ -597,7 +593,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
     private void txtDireccion1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccion1KeyTyped
         char c = evt.getKeyChar();
-        if(txtDireccion1.getText().length()>=40){
+        if (txtDireccion1.getText().length() >= 40) {
             evt.consume();
         }
         if (Character.isLowerCase(c)) {
@@ -624,44 +620,42 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCedula1KeyTyped
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
-        String nombre, apellido, cedula, direccion, email,telefono, comparar;
+        String nombre, ruc, direccion, email, telefono, comparar;
         nombre = txtNombre1.getText();
-        apellido = txtApellido1.getText();
-        cedula = txtCedula1.getText();
+        ruc = txtCedula1.getText();
         direccion = txtDireccion1.getText();
         email = txtEmail1.getText();
         telefono = txtTelefono1.getText();
 
         nombre = nombre.replaceAll(" ", "");
-        apellido = apellido.replaceAll(" ", "");
-        cedula = cedula.replaceAll(" ", "");
+        ruc = ruc.replaceAll(" ", "");
         direccion = direccion.replaceAll(" ", "");
         email = email.replaceAll(" ", "");
         telefono = telefono.replaceAll(" ", "");
 
         //Verifica el los campos estan vacios
-        if (nombre.length() == 0 || apellido.length() == 0 || cedula.length() == 0 || email.length() == 0 || telefono.length() == 0||direccion.length()==0) {
+        if (nombre.length() == 0 || ruc.length() == 0 || email.length() == 0 || telefono.length() == 0 || direccion.length() == 0) {
             JOptionPane.showMessageDialog(null, "POR FAVOR NO DEJE CAMPOS VACIOS");
         } else {
-            if (ValidarCedula(cedula)) {
+            if (ValidarCedula(ruc)) {
                 //Compara si la cedula del CLIENTE ingresado se repite
                 try {
-                    PreparedStatement pps = cn.prepareStatement("UPDATE clientes SET cli_ced='" + txtCedula1.getText()
-                        + "',cli_nom='" + txtNombre1.getText() + "',cli_ape='" + txtApellido1.getText() + "',cli_dir='" + txtDireccion1.getText()+ "',cli_ema='" + txtEmail1.getText()
-                        + "',cli_tel='" + txtTelefono1.getText() + "' WHERE cli_ced='" + txtCedula1.getText() + "'");
+                    PreparedStatement pps = cn.prepareStatement("UPDATE proveedores SET prov_ruc='" + txtCedula1.getText()
+                            + "',prov_nom='" + txtNombre1.getText() + "',prov_dir='" + txtDireccion1.getText() + "',prov_ema='" + txtEmail1.getText()
+                            + "',prov_tel='" + txtTelefono1.getText() + "' WHERE prov_ruc='" + txtCedula1.getText() + "'");
                     pps.executeUpdate();
                     MostrarTabla("");
                     VentanaActualizar.setVisible(false);
-                    ListaCli.VaciarLista();
-                    ListaCli.Cargar();
-                    ListaCli.Visualizar();
-                    JOptionPane.showMessageDialog(null, "CLIENTE ACTUALIZADO");
+                    ListaPro.VaciarLista();
+                    ListaPro.Cargar();
+                    ListaPro.Visualizar();
+                    JOptionPane.showMessageDialog(null, "PROVEEDOR ACTUALIZADO");
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO");
+                JOptionPane.showMessageDialog(null, "NUMERO DE RUC INVALIDO");
             }
         }
     }//GEN-LAST:event_btnActualizar1ActionPerformed
@@ -720,19 +714,16 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarCedulaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(buscarCedula.isSelected()||buscarNombre.isSelected()||buscarApellido.isSelected()){
+        if (buscarCedula.isSelected() || buscarNombre.isSelected() || buscarApellido.isSelected()) {
             if (buscarCedula.isSelected()) {
-                atributo = "cli_ced";
+                atributo = "prov_ced";
                 MostrarTabla(txtBuscar.getText());
             } else if (buscarNombre.isSelected()) {
-                atributo = "cli_nom";
-                MostrarTabla(txtBuscar.getText());
-            } else if (buscarApellido.isSelected()) {
-                atributo = "cli_ape";
+                atributo = "prov_nom";
                 MostrarTabla(txtBuscar.getText());
             }
             btnRegresar.setEnabled(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe primero escoger como desea buscarlo");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -744,17 +735,17 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     private void btnEliminarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUnoActionPerformed
         int fila = tabla.getSelectedRow();
         if (fila >= 0) {
-            int resp = JOptionPane.showConfirmDialog(null, "¿ESTAS SEGURO ELIMINAR ESTE CLIENTE?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
+            int resp = JOptionPane.showConfirmDialog(null, "¿ESTAS SEGURO ELIMINAR ESTE PROVEEDOR?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
                 try {
                     String valor = tabla.getValueAt(fila, 0).toString();
-                    PreparedStatement pps = cn.prepareStatement("DELETE FROM clientes WHERE cli_ced = '" + valor + "'");
+                    PreparedStatement pps = cn.prepareStatement("DELETE FROM clientes WHERE prov_cruc = '" + valor + "'");
                     pps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "CLIENTE ELIMINADO");
+                    JOptionPane.showMessageDialog(null, "PROVEEDOR ELIMINADO");
                     MostrarTabla("");
-                    ListaCli.VaciarLista();
-                    ListaCli.Cargar();
-                    ListaCli.Visualizar();
+                    ListaPro.VaciarLista();
+                    ListaPro.Cargar();
+                    ListaPro.Visualizar();
                 } catch (SQLException ex) {
                     Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -776,7 +767,6 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
             txtCedula1.setText(tabla.getValueAt(fila, 0).toString());
             txtNombre1.setText(tabla.getValueAt(fila, 1).toString());
-            txtApellido1.setText(tabla.getValueAt(fila, 2).toString());
             txtDireccion1.setText(tabla.getValueAt(fila, 3).toString());
             txtEmail1.setText(tabla.getValueAt(fila, 4).toString());
             txtTelefono1.setText(tabla.getValueAt(fila, 5).toString());
