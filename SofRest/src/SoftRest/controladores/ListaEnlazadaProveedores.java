@@ -47,7 +47,7 @@ public class ListaEnlazadaProveedores {
             n = n.sgte;
         }
     }
-    public Nodo buscarCliente(String ced){
+    public Nodo buscarProveedor(String ced){
         Nodo<Cliente> indice;
         for(indice = cab; indice != null; indice = indice.sgte){
             if(indice.info.getCedula()==ced){
