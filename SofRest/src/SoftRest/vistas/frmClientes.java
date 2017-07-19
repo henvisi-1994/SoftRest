@@ -5,7 +5,7 @@
  */
 package SoftRest.vistas;
 
-import Archivos.ConectorBD;
+import SoftRest.controladores.ConectorBD;
 import SoftRest.controladores.Cliente;
 import SoftRest.controladores.ListaEnlazadaClientes;
 import java.awt.event.KeyAdapter;

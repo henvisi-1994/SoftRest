@@ -1,5 +1,4 @@
 package SoftRest.controladores;
-import Archivos.ConectorBD;
 import SoftRest.vistas.frmClientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
