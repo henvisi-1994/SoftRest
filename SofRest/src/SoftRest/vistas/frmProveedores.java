@@ -1,36 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package SoftRest.vistas;
 
-import SoftRest.controladores.ConectorBD;
-import SoftRest.controladores.Cliente;
-import SoftRest.controladores.ListaEnlazadaProveedores;
 import SoftRest.controladores.Proveedores;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Paul Torres
+ * @author henvisi
  */
 public class frmProveedores extends javax.swing.JInternalFrame {
 
-    /*ConectorBD con = new ConectorBD();
-    Connection cn = con.conexion();*/
-    
-    String atributo = "prov_ced";
-    DefaultTableModel modelo;
-    
-    //Se crea la lista enlazada ListaCli
-   // public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
-    public Proveedores prov;
-    
+    private Proveedores prov;
+
+    /**
+     * Creates new form frmProveedores1
+     */
     public frmProveedores() {
         this.setTitle("INSERTAR PROVEEDORES");
         initComponents();
@@ -43,7 +38,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         validarNumeros(txtTelefono);
         cerrar();
     }
-     public void Limpiar(){
+ public void Limpiar(){
         txtcedula.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
@@ -396,84 +391,37 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btCerrar);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 535, -1));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, -1));
 
         panelCentral.setBackground(new java.awt.Color(204, 204, 204));
+        panelCentral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel1.setText("RUC");
+        panelCentral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 28, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel3.setText("Nombre");
+        panelCentral.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 70, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel7.setText("Direccion");
+        panelCentral.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 112, -1, -1));
+        panelCentral.add(txtcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 29, 235, -1));
+        panelCentral.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 71, 235, -1));
+        panelCentral.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 113, 235, -1));
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel6.setText("Email");
+        panelCentral.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 154, -1, -1));
+        panelCentral.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 155, 235, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel8.setText("Telefono");
+        panelCentral.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 196, -1, -1));
+        panelCentral.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 197, 235, -1));
 
-        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
-        panelCentral.setLayout(panelCentralLayout);
-        panelCentralLayout.setHorizontalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCentralLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addContainerGap())
-                    .addGroup(panelCentralLayout.createSequentialGroup()
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panelCentralLayout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(50, 50, 50))
-                                .addGroup(panelCentralLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                                    .addComponent(txtcedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))))
-                        .addGap(751, 751, 751))))
-        );
-        panelCentralLayout.setVerticalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(panelCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 41, -1, -1));
+        getContentPane().add(panelCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 41, 600, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -512,42 +460,42 @@ public class frmProveedores extends javax.swing.JInternalFrame {
 
             try{
                 if (ValidarCedula(ruc)) {
-                //Compara si la cedula del ASESORES ingresado se repite
-                comparar = txtcedula.getText();
-            /* if (ListaPro.buscarProveedor(comparar) != null) {
-                    avanzar = 1;
-                }*/
-                if (avanzar == 0) {
-                    prov = new Proveedores();
-                    prov.setRuc(txtcedula.getText());
-                    prov.setNombre(txtNombre.getText());
-                    prov.setDireccion(txtDireccion.getText());
-                    prov.setEmail(txtEmail.getText());
-                    prov.setTelefono(txtTelefono.getText());
+                    //Compara si la cedula del ASESORES ingresado se repite
+                    comparar = txtcedula.getText();
+                    /* if (ListaPro.buscarProveedor(comparar) != null) {
+                        avanzar = 1;
+                    }*/
+                    if (avanzar == 0) {
+                        prov = new Proveedores();
+                        prov.setRuc(txtcedula.getText());
+                        prov.setNombre(txtNombre.getText());
+                        prov.setDireccion(txtDireccion.getText());
+                        prov.setEmail(txtEmail.getText());
+                        prov.setTelefono(txtTelefono.getText());
 
-                 /*   ListaPro.InsertarInicio(prov);
-                    ListaPro.Guardar();
-                    
-                    ListaPro.VaciarLista();
-                    ListaPro.Cargar();
-                    ListaPro.Visualizar();*/
+                        /*   ListaPro.InsertarInicio(prov);
+                        ListaPro.Guardar();
 
-                    Inhabilitar();
+                        ListaPro.VaciarLista();
+                        ListaPro.Cargar();
+                        ListaPro.Visualizar();*/
+
+                        Inhabilitar();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "YA EXISTE UN CLIENTE CON ESE NUMERO DE CEDULA");
+                        txtcedula.transferFocus();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "YA EXISTE UN CLIENTE CON ESE NUMERO DE CEDULA");
-                    txtcedula.transferFocus();
+                    JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO");
-                 }
             } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO REPITA EL INGRESO");
-            } 
-    }
+                JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO REPITA EL INGRESO");
+            }
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-       
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btBuscarActionPerformed
 
@@ -561,15 +509,15 @@ public class frmProveedores extends javax.swing.JInternalFrame {
 
     private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
         frmClientesLista clilis=new frmClientesLista();
-        clilis.setVisible(true);       
+        clilis.setVisible(true);
     }//GEN-LAST:event_btListarActionPerformed
 
     private void btInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInicioActionPerformed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btInicioActionPerformed
 
     private void btPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeroActionPerformed
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btPrimeroActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
@@ -577,7 +525,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btSiguienteActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
-      
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btUltimoActionPerformed
 
@@ -586,10 +534,6 @@ public class frmProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btCerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
