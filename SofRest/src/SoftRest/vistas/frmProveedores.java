@@ -91,7 +91,7 @@ public class frmProveedores extends javax.swing.JInternalFrame {
     //habilitar/deshabilitar cuadros de texto
     public void cerrar(){
         try{
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e){
                     confirmaSalida();
