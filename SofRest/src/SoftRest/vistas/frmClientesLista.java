@@ -34,14 +34,14 @@ import javax.swing.table.TableRowSorter;
  */
 public class frmClientesLista extends javax.swing.JFrame {
 
-    ConectorBD con = new ConectorBD();
-    Connection cn = con.conexion();
+   /* ConectorBD con = new ConectorBD();
+    Connection cn = con.conexion();*/
     
     String atributo = "cli_ced";
     DefaultTableModel modelo;
     
     //Se crea la lista enlazada ListaCli
-    public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
+  //  public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
     public Cliente cli;
     
     
@@ -51,18 +51,18 @@ public class frmClientesLista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         
-        MostrarTabla("");
+      //  MostrarTabla("");
         buttonGroup1.add(buscarCedula);
         buttonGroup1.add(buscarNombre);
         buttonGroup1.add(buscarApellido);
         buscarCedula.doClick();
-        ListaCli.Cargar();
-        ListaCli.Visualizar();
+/*        ListaCli.Cargar();
+        ListaCli.Visualizar();*/
         
     }
     public void MostrarTabla(String valor) {
         
-        DefaultTableModel modelo = new DefaultTableModel();
+     /*   DefaultTableModel modelo = new DefaultTableModel();
         
         //nombre de los parametros del la tabla modelo
         modelo.addColumn("Cedula");
@@ -98,7 +98,7 @@ public class frmClientesLista extends javax.swing.JFrame {
             tabla.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }
     
@@ -650,21 +650,21 @@ public class frmClientesLista extends javax.swing.JFrame {
         } else {
             if (ValidarCedula(cedula)) {
                 //Compara si la cedula del CLIENTE ingresado se repite
-                try {
+               /*  try {
                     PreparedStatement pps = cn.prepareStatement("UPDATE clientes SET cli_ced='" + txtCedula1.getText()
                         + "',cli_nom='" + txtNombre1.getText() + "',cli_ape='" + txtApellido1.getText() + "',cli_dir='" + txtDireccion1.getText()+ "',cli_ema='" + txtEmail1.getText()
                         + "',cli_tel='" + txtTelefono1.getText() + "' WHERE cli_ced='" + txtCedula1.getText() + "'");
                     pps.executeUpdate();
-                    MostrarTabla("");
+                   // MostrarTabla("");
                     VentanaActualizar.setVisible(false);
-                    ListaCli.VaciarLista();
+                   ListaCli.VaciarLista();
                     ListaCli.Cargar();
                     ListaCli.Visualizar();
                     JOptionPane.showMessageDialog(null, "CLIENTE ACTUALIZADO");
 
                 } catch (SQLException ex) {
                     Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             } else {
                 JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO");
             }
@@ -751,18 +751,18 @@ public class frmClientesLista extends javax.swing.JFrame {
         if (fila >= 0) {
             int resp = JOptionPane.showConfirmDialog(null, "¿ESTAS SEGURO ELIMINAR ESTE CLIENTE?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
-                try {
+               /*  try {
                     String valor = tabla.getValueAt(fila, 0).toString();
                     PreparedStatement pps = cn.prepareStatement("DELETE FROM clientes WHERE cli_ced = '" + valor + "'");
                     pps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "CLIENTE ELIMINADO");
-                    MostrarTabla("");
+                   MostrarTabla("");
                     ListaCli.VaciarLista();
                     ListaCli.Cargar();
                     ListaCli.Visualizar();
                 } catch (SQLException ex) {
                     Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             } else {
                 tabla.clearSelection();
                 Inhabilitar();

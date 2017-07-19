@@ -33,8 +33,8 @@ import javax.swing.table.TableRowSorter;
  */
 public class frmProveedoresLista extends javax.swing.JFrame {
 
-    ConectorBD con = new ConectorBD();
-    Connection cn = con.conexion();
+  /*  ConectorBD con = new ConectorBD();
+    Connection cn = con.conexion();*/
 
     String atributo = "prov_ruc";
     DefaultTableModel modelo;
@@ -78,7 +78,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
         String datos[] = new String[5];
         Statement st;
-        try {
+       /* try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
@@ -93,7 +93,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
             tabla.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }
 
@@ -629,7 +629,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         } else {
             if (ValidarCedula(ruc)) {
                 //Compara si la cedula del CLIENTE ingresado se repite
-                try {
+              /*  try {
                     PreparedStatement pps = cn.prepareStatement("UPDATE proveedores SET prov_ruc='" + txtCedula1.getText()
                             + "',prov_nom='" + txtNombre1.getText() + "',prov_dir='" + txtDireccion1.getText() + "',prov_ema='" + txtEmail1.getText()
                             + "',prov_tel='" + txtTelefono1.getText() + "' WHERE prov_ruc='" + txtCedula1.getText() + "'");
@@ -643,7 +643,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
 
                 } catch (SQLException ex) {
                     Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             } else {
                 JOptionPane.showMessageDialog(null, "NUMERO DE RUC INVALIDO");
             }
@@ -723,7 +723,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         if (fila >= 0) {
             int resp = JOptionPane.showConfirmDialog(null, "¿ESTAS SEGURO ELIMINAR ESTE PROVEEDOR?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
-                try {
+                /*try {
                     String valor = tabla.getValueAt(fila, 0).toString();
                     PreparedStatement pps = cn.prepareStatement("DELETE FROM clientes WHERE prov_cruc = '" + valor + "'");
                     pps.executeUpdate();
@@ -734,7 +734,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
                     ListaPro.Visualizar();
                 } catch (SQLException ex) {
                     Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             } else {
                 tabla.clearSelection();
                 Inhabilitar();
