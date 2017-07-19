@@ -4,6 +4,7 @@ import SoftRest.controladores.ConectorBD;
 import SoftRest.controladores.Cliente;
 import SoftRest.controladores.ListaEnlazadaProveedores;
 import SoftRest.controladores.Proveedores;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -18,25 +19,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Paul Torres
  */
-public class frmProveedores extends javax.swing.JFrame {
+public class frmProveedores extends javax.swing.JInternalFrame {
 
-    ConectorBD con = new ConectorBD();
-    Connection cn = con.conexion();
+    /*ConectorBD con = new ConectorBD();
+    Connection cn = con.conexion();*/
     
     String atributo = "prov_ced";
     DefaultTableModel modelo;
     
     //Se crea la lista enlazada ListaCli
-    public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
+   // public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
     public Proveedores prov;
     
     public frmProveedores() {
         this.setTitle("INSERTAR PROVEEDORES");
         initComponents();
-        setLocationRelativeTo(null);
         setResizable(true);
-        ListaPro.Cargar();
-        ListaPro.Visualizar();
+    /*    ListaPro.Cargar();
+        ListaPro.Visualizar();*/
         validarNumeros(txtcedula);
         validarLetras(txtNombre);
         validarLetras(txtDireccion);
@@ -231,11 +231,11 @@ public class frmProveedores extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToolBar1.setBackground(new java.awt.Color(102, 102, 102));
         jToolBar1.setForeground(new java.awt.Color(153, 153, 153));
@@ -396,6 +396,8 @@ public class frmProveedores extends javax.swing.JFrame {
         });
         jToolBar1.add(btCerrar);
 
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 535, -1));
+
         panelCentral.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
@@ -409,10 +411,6 @@ public class frmProveedores extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel6.setText("Email");
-
-        jLabel5.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel5.setText("Proveedores");
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel8.setText("Telefono");
@@ -447,16 +445,10 @@ public class frmProveedores extends javax.swing.JFrame {
                                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                                     .addComponent(txtcedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))))
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel5)
-                        .addGap(431, 431, 431))))
+                        .addGap(751, 751, 751))))
         );
         panelCentralLayout.setVerticalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addGap(185, 185, 185))
             .addGroup(panelCentralLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -478,27 +470,10 @@ public class frmProveedores extends javax.swing.JFrame {
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(panelCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 41, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -539,9 +514,9 @@ public class frmProveedores extends javax.swing.JFrame {
                 if (ValidarCedula(ruc)) {
                 //Compara si la cedula del ASESORES ingresado se repite
                 comparar = txtcedula.getText();
-                if (ListaPro.buscarProveedor(comparar) != null) {
+            /* if (ListaPro.buscarProveedor(comparar) != null) {
                     avanzar = 1;
-                }
+                }*/
                 if (avanzar == 0) {
                     prov = new Proveedores();
                     prov.setRuc(txtcedula.getText());
@@ -550,12 +525,12 @@ public class frmProveedores extends javax.swing.JFrame {
                     prov.setEmail(txtEmail.getText());
                     prov.setTelefono(txtTelefono.getText());
 
-                    ListaPro.InsertarInicio(prov);
+                 /*   ListaPro.InsertarInicio(prov);
                     ListaPro.Guardar();
                     
                     ListaPro.VaciarLista();
                     ListaPro.Cargar();
-                    ListaPro.Visualizar();
+                    ListaPro.Visualizar();*/
 
                     Inhabilitar();
                 } else {
@@ -614,38 +589,7 @@ public class frmProveedores extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmProveedores().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
@@ -662,7 +606,6 @@ public class frmProveedores extends javax.swing.JFrame {
     private javax.swing.JButton btUltimo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
