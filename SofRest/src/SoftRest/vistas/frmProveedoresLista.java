@@ -40,7 +40,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
     DefaultTableModel modelo;
 
     //Se crea la lista enlazada ListaCli
-    public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
+//    public ListaEnlazadaProveedores ListaPro = new ListaEnlazadaProveedores();
     public Proveedores prov;
 
     public frmProveedoresLista() {
@@ -49,12 +49,12 @@ public class frmProveedoresLista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
 
-        MostrarTabla("");
+       // MostrarTabla("");
         buttonGroup1.add(buscarCedula);
         buttonGroup1.add(buscarNombre);
         buscarCedula.doClick();
-        ListaPro.Cargar();
-        ListaPro.Visualizar();
+      /*  ListaPro.Cargar();
+        ListaPro.Visualizar();*/
     }
 
     public void MostrarTabla(String valor) {

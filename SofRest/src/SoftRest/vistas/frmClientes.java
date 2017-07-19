@@ -34,7 +34,7 @@ public class frmClientes extends javax.swing.JFrame {
     DefaultTableModel modelo;
     
     //Se crea la lista enlazada ListaCli
-    public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
+   // public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
     public Cliente cli;
     
     public frmClientes() {
@@ -42,8 +42,8 @@ public class frmClientes extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(true);
-        ListaCli.Cargar();
-        ListaCli.Visualizar();
+       /* ListaCli.Cargar();
+        ListaCli.Visualizar();*/
         validarNumeros(txtcedula);
         validarLetras(txtNombre);
         validarLetras(txtApellido);
@@ -549,7 +549,7 @@ public class frmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "POR FAVOR NO DEJE CAMPOS VACIOS");
         } else {
 
-            try{
+            /*try{
                 if (ValidarCedula(cedula)) {
                 //Compara si la cedula del ASESORES ingresado se repite
                 comparar = txtcedula.getText();
@@ -565,12 +565,12 @@ public class frmClientes extends javax.swing.JFrame {
                     cli.setEmail(txtEmail.getText());
                     cli.setTelefono(txtTelefono.getText());
 
-                   /* ListaCli.InsertarInicio(cli);
+                    ListaCli.InsertarInicio(cli);
                     ListaCli.Guardar();
                     
                     ListaCli.VaciarLista();
                     ListaCli.Cargar();
-                    ListaCli.Visualizar();*/
+                    ListaCli.Visualizar();
 
                     Inhabilitar();
                 } else {
@@ -582,7 +582,7 @@ public class frmClientes extends javax.swing.JFrame {
                  }
             } catch (Exception e){
             JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO REPITA EL INGRESO");
-            } 
+            } */
     }
     }//GEN-LAST:event_btGuardarActionPerformed
 
