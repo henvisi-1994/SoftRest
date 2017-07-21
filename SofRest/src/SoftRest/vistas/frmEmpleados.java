@@ -5,7 +5,8 @@
  */
 package SoftRest.vistas;
 
-import controladores.DAOEmpleados;
+import SoftRest.controladores.cEmpleados;
+import SoftRest.modelos.Empleados;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,7 +20,7 @@ import javax.swing.JPanel;
 public class frmEmpleados extends javax.swing.JInternalFrame {
     //datos
 
-    DAOEmpleados lis;
+    cEmpleados lis;
     //Registro indica la posicion en el conjunto de datos
     int Registro = 0;
     //op = 0 Si se guarda un nuevo registro; op=1 Si se actualiza un registro
@@ -343,18 +344,44 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
-        //limpiar textos
-        limpiar_textos();
+ String msg="";
+        int pos=0;
+        //lee datos del formulario y valida
+        Empleados ob=leer();
+        if(ob==null) return; //Si no se ha validado,finaliza el método         
+        try{            
+            //verifica si ya se ha ingresado un producto
+            cEmpleados l=lis.buscar_ruc_bd(txtCedula.getText());
+            int n=l.Count();
+            if(n>=1 && op==0){
+                lbMensaje.setText("Ruc de Empleado ya ingresado");                
+                return; //finaliza método
+            }           
+            if(op==0){  //guardar un nuevo objeto - insert en base de datos              
+                txtCedula.setText(""+lis.insertar(ob));            
+                msg="Registro guardado exitosamente";  
+            }
+            else{ //guarda un objeto modificado; update en base dedatos                
+                lis.actualizar(ob);                
+                msg="Registro actualizado exitosamente";                
+            }           
+        }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
+        habilitar(true);        
+        //mover_tabla(pos);
+        lbMensaje.setText(msg);         
+        
+//limpiar textos
+      //  limpiar_textos();
         //habilitar textos
-        habilitar_textos(true);
+      //  habilitar_textos(true);
 //        long pos = 1;
 //        if (lis.Count() >= 0) //        pos=Integer.parseInt(lis.get_Codigo(lis.Count()-1))+1;
 //        {
 //            txtCedula.setText(pos + "");
 //        }
-        txtCedula.requestFocus();
+      //  txtCedula.requestFocus();
         //desabilitar botones
-        habilitar_botones(false);
+     //   habilitar_botones(false);
        // op = 0;
     }//GEN-LAST:event_btNuevoActionPerformed
 
@@ -657,4 +684,21 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtdato;
     // End of variables declaration//GEN-END:variables
+
+    private Empleados leer() {
+          Empleados ob=null;
+        if(form_validado()){
+            ob=new Empleados();
+            ob.setCedula(txtCedula.getText());
+            ob.setNombre(txtNombre.getText());
+            ob.setDirecion(txtDireccion.getText());	  
+            ob.setTelefono(txtTelefono.getText());	
+           
+               
+            //obtiene el codigo de la categoria y fabricante seleccionados
+                               
+            System.out.print(ob.toString());            
+        }
+        return ob;
+    }
 }

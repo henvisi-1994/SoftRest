@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package SoftRest.vistas;
-import SoftRest.controladores.ConectorBD;
-import SoftRest.controladores.ListaEnlazadaClientes;
 import SoftRest.controladores.Cliente;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;

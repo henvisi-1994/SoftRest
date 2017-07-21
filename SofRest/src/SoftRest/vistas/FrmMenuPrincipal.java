@@ -5,10 +5,12 @@
  */
 package SoftRest.vistas;
 
+import SoftRest.modelos.ConexionBD;
 import SoftRest.vistas.frmClientes;
 import SoftRest.vistas.frmClientesLista;
 import modelos.ImagenFondo;
 import java.awt.Dimension;
+import java.sql.Connection;
 
 /**
  *
@@ -22,6 +24,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public FrmMenuPrincipal() {
         initComponents();
         disenio("fondo.jpg");
+
+        
     }
 
     /**
@@ -338,4 +342,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
+
+    private ConexionBD ConexionBD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
