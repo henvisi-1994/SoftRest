@@ -24,6 +24,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public FrmMenuPrincipal() {
         initComponents();
         disenio("fondo.jpg");
+        Connection cn =ConexionBD.ConectarBD();
 
         
     }
