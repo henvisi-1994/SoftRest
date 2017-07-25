@@ -1,7 +1,7 @@
 package SoftRest.vistas;
 
 
-import SoftRest.controladores.Cliente;
+import SoftRest.modelos.Clientes;
 import SoftRest.controladores.Proveedores;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.KeyAdapter;

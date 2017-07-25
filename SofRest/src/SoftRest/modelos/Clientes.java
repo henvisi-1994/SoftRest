@@ -1,10 +1,10 @@
-package SoftRest.controladores;
+package SoftRest.modelos;
 
 /**
  *
  * @author Eddie Bustamante
  */
-public class Cliente {
+public class Clientes {
 
     protected String cedula;
     protected String nombre;
@@ -13,7 +13,7 @@ public class Cliente {
     protected String email;
     protected String direccion;
 
-    public Cliente(String cedula, String nombre, String apellido, String telefono, String email, String direccion) {
+    public Clientes(String cedula, String nombre, String apellido, String telefono, String email, String direccion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -22,7 +22,7 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public Cliente() {
+    public Clientes() {
 
     }
 

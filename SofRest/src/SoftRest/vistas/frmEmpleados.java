@@ -344,7 +344,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
- String msg="";
+     String msg="";
         int pos=0;
         //lee datos del formulario y valida
         Empleados ob=leer();
@@ -686,8 +686,8 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private Empleados leer() {
-          Empleados ob=null;
-        if(form_validado()){
+            Empleados ob=null;
+            if(form_validado()){
             ob=new Empleados();
             ob.setCedula(txtCedula.getText());
             ob.setNombre(txtNombre.getText());

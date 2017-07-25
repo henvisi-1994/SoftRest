@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package SoftRest.vistas;
-import SoftRest.controladores.Cliente;
+import SoftRest.modelos.Clientes;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -40,7 +40,7 @@ public class frmClientesLista extends javax.swing.JFrame {
     
     //Se crea la lista enlazada ListaCli
   //  public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
-    public Cliente cli;
+    public Clientes cli;
     
     
     public frmClientesLista() {
@@ -759,7 +759,7 @@ public class frmClientesLista extends javax.swing.JFrame {
                     ListaCli.Cargar();
                     ListaCli.Visualizar();
                 } catch (SQLException ex) {
-                    Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
                 }*/
             } else {
                 tabla.clearSelection();

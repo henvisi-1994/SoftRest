@@ -1,8 +1,6 @@
 package SoftRest.vistas;
 
 
-import SoftRest.controladores.Cliente;
-
 import SoftRest.controladores.Proveedores;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -732,7 +730,7 @@ public class frmProveedoresLista extends javax.swing.JFrame {
                     ListaPro.Cargar();
                     ListaPro.Visualizar();
                 } catch (SQLException ex) {
-                    Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
                 }*/
             } else {
                 tabla.clearSelection();

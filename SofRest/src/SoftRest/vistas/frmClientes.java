@@ -6,15 +6,20 @@
 package SoftRest.vistas;
 
 
-import SoftRest.controladores.Cliente;
+import SoftRest.controladores.cClientes;
+import SoftRest.modelos.Clientes;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,9 +38,15 @@ public class frmClientes extends javax.swing.JFrame {
     String atributo = "cli_ced";
     DefaultTableModel modelo;
     
+    cClientes lis;
+    //Registro indica la posicion en el conjunto de datos
+    int Registro = 0;
+    //op = 0 Si se guarda un nuevo registro; op=1 Si se actualiza un registro
+    int op = 0;
+    
     //Se crea la lista enlazada ListaCli
    // public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
-    public Cliente cli;
+    public Clientes cli;
     
     public frmClientes() {
         this.setTitle("INSERTAR CLIENTE");
@@ -51,7 +62,51 @@ public class frmClientes extends javax.swing.JFrame {
         validarNumeros(txtTelefono);
         cerrar();
     }
-     public void Limpiar(){
+     private Clientes leer() {
+            Clientes ob=null;
+            if(form_validado()){
+            ob=new Clientes();
+            ob.setCedula(txtcedula.getText());
+            ob.setNombre(txtNombre.getText());
+            ob.setApellido(txtApellido.getText());	  
+            ob.setTelefono(txtTelefono.getText());	  
+            ob.setEmail(txtEmail.getText());	  
+            ob.setDireccion(txtDireccion.getText());	
+           
+               
+            //obtiene el codigo de la categoria y fabricante seleccionados
+                               
+            System.out.print(ob.toString());            
+        }
+        return ob;
+    }
+     public boolean form_validado() {
+        boolean ok = true;
+        //validar requerido
+        if (!Validaciones.esRequerido(txtcedula)) {
+            ok = false;
+            lbNum.setText("Nombre categoría es requerido");
+        }
+        //aquí colocar invocación a otros métodos de validación
+
+        //validar más controles
+        return ok;
+    }
+
+    //ver registro
+    public void ver_registro(int pos) {
+
+    }
+
+    private void disenio_ventana(String nombreImagen) {
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/Imagenes/" + nombreImagen));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
+    }
+    public void Limpiar(){
         txtcedula.setText("");
         txtApellido.setText("");
         txtNombre.setText("");
@@ -59,8 +114,7 @@ public class frmClientes extends javax.swing.JFrame {
         txtEmail.setText("");
         txtTelefono.setText("");
     }
-    public void Habilitar_texto(boolean b )
-    {
+    public void Habilitar_texto(boolean b ){
        txtcedula.setEditable(b);
        txtNombre.setEditable(b);
        txtApellido.setEditable(b);
@@ -83,7 +137,6 @@ public class frmClientes extends javax.swing.JFrame {
         txtTelefono.setEditable(false);
         Limpiar();
     }
-    
     public void Habilitar() {
         
         btNuevo.setEnabled(true);
@@ -104,8 +157,7 @@ public class frmClientes extends javax.swing.JFrame {
         txtEmail.setEditable(true);
         txtTelefono.setEditable(true);
         
-    }
-    //habilitar/deshabilitar cuadros de texto
+    }//habilitar/deshabilitar cuadros de texto
     public void cerrar(){
         try{
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -137,7 +189,6 @@ public class frmClientes extends javax.swing.JFrame {
             }
         });
     }
-    
     public void validarNumeros(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
             @Override
@@ -247,6 +298,7 @@ public class frmClientes extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
+        lbMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -436,9 +488,8 @@ public class frmClientes extends javax.swing.JFrame {
             .addGroup(panelCentralLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCentralLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addContainerGap())
+                    .addComponent(lbMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
                     .addGroup(panelCentralLayout.createSequentialGroup()
                         .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -451,22 +502,23 @@ public class frmClientes extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTelefono)
-                            .addComponent(txtEmail)
+                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDireccion)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
+                            .addComponent(txtApellido)
+                            .addGroup(panelCentralLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtcedula, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(751, 751, 751))))
+                                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(txtcedula))))))
+                .addGap(591, 591, 591))
         );
         panelCentralLayout.setVerticalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -499,7 +551,7 @@ public class frmClientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -516,74 +568,77 @@ public class frmClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
-        Limpiar();
+        String msg="";
+        int pos=0;
+        //lee datos del formulario y valida
+        Clientes ob=leer();
+        if(ob==null) return; //Si no se ha validado,finaliza el método         
+        try{            
+            //verifica si ya se ha ingresado un producto
+            cClientes l=lis.buscar_ruc_bd(txtcedula.getText());
+            int n=l.Count();
+            if(n>=1 && op==0){
+                lbNum.setText("Ruc de Empleado ya ingresado");                
+                return; //finaliza método
+            }           
+            if(op==0){  //guardar un nuevo objeto - insert en base de datos              
+                txtcedula.setText(""+lis.insertar(ob));            
+                msg="Registro guardado exitosamente";  
+            }
+            else{ //guarda un objeto modificado; update en base dedatos                
+                lis.actualizar(ob);                
+                msg="Registro actualizado exitosamente";                
+            }           
+        }catch(Exception ex){lbNum.setText(ex.getMessage());}
+        //mover_tabla(pos);
+        lbNum.setText(msg);
+        //Limpiar();
         Habilitar();
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        // TODO add your handling code here:
+       //habilitar textos
+        Habilitar();
+        //enviar curso al campo nombre
+        txtcedula.requestFocus();
+        //desabilitar botones
+        op = 1;
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        cli = new Cliente();
+        String msg = "";
+        int pos = 0;
+        //lee datos del formulario y valida
+//        Categoria cat=leer();
+        //if(cat==null) return; //Si no se ha validado,finaliza el método
 
-        String nombre, apellido, cedula, email, direccion, cargo, telefono, comparar;
-        int avanzar = 0;
-
-        nombre = txtNombre.getText();
-        apellido = txtApellido.getText();
-        cedula = txtcedula.getText();
-        direccion = txtDireccion.getText();
-        email = txtEmail.getText();
-        telefono = txtTelefono.getText();
-
-        nombre = nombre.replaceAll(" ", "");
-        apellido = apellido.replaceAll(" ", "");
-        cedula = cedula.replaceAll(" ", "");
-        direccion = direccion.replaceAll(" ", "");
-        email = email.replaceAll(" ", "");
-        telefono = telefono.replaceAll(" ", "");
-
-        //Verifica el los campos estan vacios
-        if (nombre.length() == 0 || apellido.length() == 0 || cedula.length() == 0 || email.length() == 0 ||direccion.length() == 0|| telefono.length() == 0) {
-            JOptionPane.showMessageDialog(null, "POR FAVOR NO DEJE CAMPOS VACIOS");
-        } else {
-
-            /*try{
-                if (ValidarCedula(cedula)) {
-                //Compara si la cedula del ASESORES ingresado se repite
-                comparar = txtcedula.getText();
-                if (ListaCli.buscarCliente(comparar) != null) {
-                    avanzar = 1;
-                }
-                if (avanzar == 0) {
-                    cli = new Cliente();
-                    cli.setCedula(txtcedula.getText());
-                    cli.setNombre(txtNombre.getText());
-                    cli.setApellido(txtApellido.getText());
-                    cli.setDireccion(txtDireccion.getText());
-                    cli.setEmail(txtEmail.getText());
-                    cli.setTelefono(txtTelefono.getText());
-
-                    ListaCli.InsertarInicio(cli);
-                    ListaCli.Guardar();
-                    
-                    ListaCli.VaciarLista();
-                    ListaCli.Cargar();
-                    ListaCli.Visualizar();
-
-                    Inhabilitar();
+        try {
+            //verifica si ya se ha ingresado categoría
+            //   pos=lis.buscar_nombre(txtNombre.getText());
+            if (pos >= 0) {
+                if (op == 0) {
+                    lbMensaje.setText("Nombre de Cliente ya ingresado");
+                } else if (pos > 0 && op != 0) {
+                    lbMensaje.setText("Nombre categoría ya ingresada");
                 } else {
-                    JOptionPane.showMessageDialog(null, "YA EXISTE UN CLIENTE CON ESE NUMERO DE CEDULA");
-                    txtcedula.transferFocus();
+                    lbMensaje.setText("No hay cambios que guardar");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO");
-                 }
-            } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "NUMERO DE CEDULA INVALIDO REPITA EL INGRESO");
-            } */
-    }
+                return; //finaliza método
+            }
+            if (op == 0) {  //guardar un nuevo objeto - insert en base de datos
+                //       lis.insertar(cat);
+                msg = "Registro guardado exitosamente";
+            } else { //guarda un objeto modificado; update en base de datos
+                //      lis.actualizar(cat);
+                msg = "Registro actualizado exitosamente";
+            }
+            //    lis.consultaAll();
+            Registro = op == 0 ? lis.Count() - 1 : Registro;
+        } catch (Exception ex) {
+            lbMensaje.setText(ex.getMessage());
+        }
+        Habilitar();
+        lbMensaje.setText(msg);
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
@@ -605,20 +660,25 @@ public class frmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btListarActionPerformed
 
     private void btInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInicioActionPerformed
-       // TODO add your handling code here:
+        Registro = 0;
+        ver_registro(Registro);
     }//GEN-LAST:event_btInicioActionPerformed
 
     private void btPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeroActionPerformed
-         // TODO add your handling code here:
+        Registro--;
+        Registro = Registro >= 0 && Registro < lis.Count() ? Registro : 0;
+        ver_registro(Registro);
     }//GEN-LAST:event_btPrimeroActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
-        // TODO add your handling code here:
+       Registro++;
+        Registro = Registro >= 0 && Registro < lis.Count() ? Registro : lis.Count() - 1;
+        ver_registro(Registro);
     }//GEN-LAST:event_btSiguienteActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
-      
-        // TODO add your handling code here:
+       Registro = lis.Count() - 1;
+        ver_registro(Registro);
     }//GEN-LAST:event_btUltimoActionPerformed
 
     private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
@@ -681,6 +741,7 @@ public class frmClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbMensaje;
     private javax.swing.JLabel lbNum;
     private javax.swing.JPanel panelCentral;
     private javax.swing.JTextField txtApellido;
