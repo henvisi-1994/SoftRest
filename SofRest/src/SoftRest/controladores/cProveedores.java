@@ -147,7 +147,7 @@ public class cProveedores {
         //return estado;
     }
 
-    //actualizar un registro en la base de datos
+    //eliminar un registro en la base de datos
     public void eliminar(String ruc) {
         String str = "delete from proveedores where ruc_prov=?";
         //lista de parametros
