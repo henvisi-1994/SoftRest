@@ -225,7 +225,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       frmProveedores prov = new frmProveedores();
+       frmProveedor prov = new frmProveedor();
         int x = 338;
         int y = Escritorio.getWidth() - 180;
         prov.setSize(y, x);
