@@ -22,8 +22,7 @@ public class cEmpleados {
            
     //tabla de datos
     DefaultTableModel datos;
-    public String[] columnNames = {"Cedula", "Nombre","Direccion",
-                                     "Teléfono"};
+    public String[] columnNames = {"Cedula", "Nombre", "Direccion", "Telefono", "Local"};
     //retorna el número de filas
     public int Count(){return datos.getRowCount();}
 
@@ -53,6 +52,13 @@ public class cEmpleados {
         return (Empleados)Lista.get(pos);
     }
     
+    //Metodos que retornan valores de una celda segun campos individuales
+    public String get_Cedula(int pos){
+        return datos.getValueAt(pos, 0).toString();
+    }
+    public String get_Nombre(int pos){
+        return datos.getValueAt(pos, 1).toString();
+    }
    //agrega la nueva fila al modelo de tabla   
     public void addFila(String cedula, String nom, String direccion, String telefono)
     {
@@ -78,14 +84,15 @@ public class cEmpleados {
     {
         cEmpleados lis=new cEmpleados();
         ob.setCedula(lis.insertar((Empleados)ob));
-        String str="insert into Empleados(" +
-                "ced_empleado,nombre_emp,dir_emp,telf_emp) " + "values(?,?,?,?)";
+        String str="insert into empleados(" +
+                "ced_empleado, nombre_emp, dir_emp, telf_emp, id_local) " + "values(?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getCedula());
         param.add(ob.getNombre());
         param.add(ob.getDirecion());
          param.add(ob.getTelefono());
+         param.add(1);
          
         System.out.println(str);
         
@@ -103,18 +110,19 @@ public class cEmpleados {
     //actualizar un registro en la base de datos
     public void actualizar(Empleados ob)
     {
-        cEmpleados lis=new cEmpleados();
+          cEmpleados lis=new cEmpleados();
         lis.actualizar((Empleados)ob);
         
-        String str="update cliente set  nombre_emp=?,dir_emp=?,telf_emp=?  "
+        String str="update empleados SET  nombre_emp=?, dir_emp=?, telf_emp=?, id_local=? "
                 + "where ced_empleado=?";
         //lista de parametros
         ArrayList param=new ArrayList();
-       
-        param.add(ob.getNombre());
-        param.add(ob.getDirecion());
-        param.add(ob.getTelefono());
+        param.add(ob.getNombre());  
+        param.add(ob.getDirecion());  
+        param.add(ob.getTelefono()); 
+        param.add(1);
         param.add(ob.getCedula());
+        
         System.out.print(str);
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
@@ -169,7 +177,7 @@ public class cEmpleados {
     //consulta todos los elementos de la tabla productos
     public void consultaAll()
     {
-        String str="select * from Empleados order by ced_empleado";
+        String str="select * from empleados order by ced_empleado";
         ResultSet rs = null;
         try{
                 rs=ConexionBD.Consulta(str);
@@ -180,11 +188,10 @@ public class cEmpleados {
     }
        
     //consulta por codigo
-    public cEmpleados buscar_codigo_bd(String cedula)
+     public cEmpleados buscar_ruc_completo_bd(String ruc)
     {
         cEmpleados ob=new cEmpleados();
-        String str="select * from Empleados where ced_empleado =" + cedula +
-                " order by ced_empleado";
+        String str="select * from empleados where ced_empleado = '" + ruc + "'";
         System.out.println(""+str);
         ResultSet rs = null;
         try{
@@ -198,7 +205,9 @@ public class cEmpleados {
             throw new RuntimeException(ex.getMessage());
         }
         return ob;
-    }   
+    } 
+    
+    
     
     
     //consulta por codigo

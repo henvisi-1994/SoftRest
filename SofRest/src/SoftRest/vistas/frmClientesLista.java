@@ -5,6 +5,7 @@
  */
 package SoftRest.vistas;
 import SoftRest.modelos.Clientes;
+import SoftRest.modelos.ConexionBD;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -59,8 +60,8 @@ public class frmClientesLista extends javax.swing.JFrame {
         
     }
     public void MostrarTabla(String valor) {
-        
-     /*   DefaultTableModel modelo = new DefaultTableModel();
+     /*   
+       DefaultTableModel modelo = new DefaultTableModel();
         
         //nombre de los parametros del la tabla modelo
         modelo.addColumn("Cedula");
@@ -73,15 +74,15 @@ public class frmClientesLista extends javax.swing.JFrame {
 
         String sql;
         if (valor.equals("")) {
-            sql = "SELECT * FROM clientes";
+            sql = "SELECT * FROM Clientes";
         } else {
-            sql = "SELECT * FROM clientes WHERE " + atributo + "='" + valor + "'";
+            sql = "SELECT * FROM Clientes WHERE " + atributo + "='" + valor + "'";
         }
 
         String datos[] = new String[6];
         Statement st;
         try {
-            st = cn.createStatement();
+            st = ConexionBD.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 //Se asigna los datos de la base de datos en la tabla modelo 
@@ -96,8 +97,8 @@ public class frmClientesLista extends javax.swing.JFrame {
             tabla.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
+        }
+*/
     }
     
     public void Inhabilitar() {

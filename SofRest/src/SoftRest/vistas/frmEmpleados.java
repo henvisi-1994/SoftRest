@@ -7,11 +7,14 @@ package SoftRest.vistas;
 
 import SoftRest.controladores.cEmpleados;
 import SoftRest.modelos.Empleados;
+import java.awt.Point;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JViewport;
 
 /**
  *
@@ -33,6 +36,18 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         initComponents();
        // setResizable(false);
         // disenio_ventana("fondo.jpg");
+         //inicia en el primer registro
+        Registro=0;
+        int op=0;
+        lis=new cEmpleados();
+	//op= 0 Si se guarda un nuevo registro; op=1 Si se actualiza un registro
+	try{           
+            lis.consultaAll();                    
+        }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
+        //000000000000tabla.setModel(lis.getTablaDatos());   
+        habilitar(true);        
+
+        //invocar al método de formato de tabla
     }
 
     /**
@@ -63,16 +78,10 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         btBuscar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btInicio = new javax.swing.JButton();
-        btAtras = new javax.swing.JButton();
         lbRegistro = new javax.swing.JLabel();
-        btSiguiente = new javax.swing.JButton();
-        btUltimo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtdato = new javax.swing.JTextField();
         btbuscar_varios = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
         lbMensaje = new javax.swing.JLabel();
 
         setClosable(true);
@@ -242,57 +251,9 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btEliminar);
         jToolBar1.add(jSeparator1);
-
-        btInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/primero.png"))); // NOI18N
-        btInicio.setToolTipText("Inicio");
-        btInicio.setFocusable(false);
-        btInicio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btInicio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInicioActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btInicio);
-
-        btAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anterior.png"))); // NOI18N
-        btAtras.setToolTipText("Atrás");
-        btAtras.setFocusable(false);
-        btAtras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btAtras.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAtrasActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btAtras);
         jToolBar1.add(lbRegistro);
 
-        btSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
-        btSiguiente.setToolTipText("Siguiente");
-        btSiguiente.setFocusable(false);
-        btSiguiente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btSiguiente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btSiguiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSiguienteActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btSiguiente);
-
-        btUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ultimo.png"))); // NOI18N
-        btUltimo.setToolTipText("Último");
-        btUltimo.setFocusable(false);
-        btUltimo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btUltimo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btUltimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btUltimoActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btUltimo);
-
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 40));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
         jLabel5.setText("Dato a buscar:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, 20));
@@ -311,33 +272,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btbuscar_varios, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
-
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Cedula", "Nombre", "Direcion", "Título 4", "Tipo"
-            }
-        ));
-        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaMouseClicked(evt);
-            }
-        });
-        tabla.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tablaKeyReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tabla);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 480, 130));
         getContentPane().add(lbMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 490, 20));
 
         pack();
@@ -400,39 +334,30 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        String msg = "";
-        int pos = 0;
+         String msg="";
+        int pos=0;
         //lee datos del formulario y valida
-//        Categoria cat=leer();
-        //if(cat==null) return; //Si no se ha validado,finaliza el método
-
-        try {
-            //verifica si ya se ha ingresado categoría
-            //   pos=lis.buscar_nombre(txtNombre.getText());
-            if (pos >= 0) {
-                if (op == 0) {
-                    lbMensaje.setText("Nombre de Empleado ya ingresado");
-                } else if (pos > 0 && op != 0) {
-                    lbMensaje.setText("Nombre categoría ya ingresada");
-                } else {
-                    lbMensaje.setText("No hay cambios que guardar");
-                }
+        Empleados ob=leer();
+        if(ob==null) return; //Si no se ha validado,finaliza el método         
+        try{            
+            //verifica si ya se ha ingresado un producto
+            cEmpleados l=lis.buscar_ruc_completo_bd(txtCedula.getText());
+            int n=l.Count();
+            if(n>=1 && op==0){
+                lbMensaje.setText("Ruc de Cliente ya ingresado");                
                 return; //finaliza método
+            }           
+            if(op==0){  //guardar un nuevo objeto - insert en base de datos              
+                txtCedula.setText(""+lis.insertar(ob));            
+                msg="Registro guardado exitosamente";  
             }
-            if (op == 0) {  //guardar un nuevo objeto - insert en base de datos
-                //       lis.insertar(cat);
-                msg = "Registro guardado exitosamente";
-            } else { //guarda un objeto modificado; update en base de datos
-                //      lis.actualizar(cat);
-                msg = "Registro actualizado exitosamente";
-            }
-            //    lis.consultaAll();
-            Registro = op == 0 ? lis.Count() - 1 : Registro;
-        } catch (Exception ex) {
-            lbMensaje.setText(ex.getMessage());
-        }
-        habilitar(true);
-        lbMensaje.setText(msg);
+            else{ //guarda un objeto modificado; update en base dedatos                
+                lis.actualizar(ob);                
+                msg="Registro actualizado exitosamente";                
+            }           
+        }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
+        habilitar(true);        
+        lbMensaje.setText(msg);          
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
@@ -443,28 +368,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btEliminarActionPerformed
 
-    private void btInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInicioActionPerformed
-        Registro = 0;
-        ver_registro(Registro);
-    }//GEN-LAST:event_btInicioActionPerformed
-
-    private void btAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasActionPerformed
-        Registro--;
-        Registro = Registro >= 0 && Registro < lis.Count() ? Registro : 0;
-        ver_registro(Registro);
-    }//GEN-LAST:event_btAtrasActionPerformed
-
-    private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
-        Registro++;
-        Registro = Registro >= 0 && Registro < lis.Count() ? Registro : lis.Count() - 1;
-        ver_registro(Registro);
-    }//GEN-LAST:event_btSiguienteActionPerformed
-
-    private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
-        Registro = lis.Count() - 1;
-        ver_registro(Registro);
-    }//GEN-LAST:event_btUltimoActionPerformed
-
     private void txtdatoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdatoKeyReleased
 
     }//GEN-LAST:event_txtdatoKeyReleased
@@ -472,19 +375,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private void btbuscar_variosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbuscar_variosActionPerformed
 
     }//GEN-LAST:event_btbuscar_variosActionPerformed
-
-    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        int row = tabla.getSelectedRow();
-        Registro = row >= 0 && row < lis.Count() ? row : Registro;
-        ver_registro(Registro);
-    }//GEN-LAST:event_tablaMouseClicked
-
-    private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
-        // if evt.getKeyChar()
-        int row = tabla.getSelectedRow();
-        Registro = row >= 0 && row < lis.Count() ? row : Registro;
-        ver_registro(Registro);
-    }//GEN-LAST:event_tablaKeyReleased
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         if (Validaciones.esRequerido(txtNombre)) {
@@ -579,8 +469,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         habilitar_textos(!ok);
         //habilitar botones
         habilitar_botones(ok);
-        //visualizar el registro actual
-        ver_registro(Registro);
     }
 
     //metodo para limpiar cajas de texto
@@ -602,14 +490,11 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         btEditar.setEnabled(ok);
         btBuscar.setEnabled(ok);
         btEliminar.setEnabled(ok);
-        btInicio.setEnabled(ok);
-        btAtras.setEnabled(ok);
-        btSiguiente.setEnabled(ok);
-        btUltimo.setEnabled(ok);
         //hacen lo contrario de los otros botones
         btGuardar.setEnabled(!ok);
         btCancelar.setEnabled(!ok);
     }
+   
 
     //metodo para crear un objeto
 //    public Categoria leer()
@@ -638,9 +523,8 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }
 
     //ver registro
-    public void ver_registro(int pos) {
-
-    }
+    //ver registro
+    
 
     private void disenio_ventana(String nombreImagen) {
         ((JPanel) getContentPane()).setOpaque(false);
@@ -653,16 +537,12 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAtras;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btGuardar;
-    private javax.swing.JButton btInicio;
     private javax.swing.JButton btNuevo;
-    private javax.swing.JButton btSiguiente;
-    private javax.swing.JButton btUltimo;
     private javax.swing.JButton btbuscar_varios;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -672,12 +552,10 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbMensaje;
     private javax.swing.JLabel lbRegistro;
-    private javax.swing.JTable tabla;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
