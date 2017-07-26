@@ -3,6 +3,7 @@ package SoftRest.vistas;
 
 import SoftRest.modelos.Clientes;
 import SoftRest.controladores.Proveedores;
+import SoftRest.controladores.cProveedores;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -20,8 +21,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmProveedores extends javax.swing.JInternalFrame {
 
-    /*ConectorBD con = new ConectorBD();
-    Connection cn = con.conexion();*/
+    cProveedores lis;
+    //Registro indica la posicion en el conjunto de datos
+    int Registro = 0;
+    //op = 0 Si se guarda un nuevo registro; op=1 Si se actualiza un registro
+    int op = 0;    
     
     String atributo = "prov_ced";
     DefaultTableModel modelo;
