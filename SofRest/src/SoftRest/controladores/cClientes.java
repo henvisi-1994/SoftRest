@@ -27,22 +27,9 @@ public class cClientes {
     //Constructor
     public cClientes(){
         Lista= new ArrayList<Clientes>();
-        datos=new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-            /*
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                if(columnIndex == 7|| (columnIndex == 8)){
-                    return Boolean.class;
-                }
-                return super.getColumnClass(columnIndex);
-            }*/
-        };
+        datos=new DefaultTableModel();
         for(int i=0;i<columnNames.length;i++)
-                datos.addColumn(columnNames[i]);
+            datos.addColumn(columnNames[i]);
     }
     
     //obtener un producto
@@ -74,9 +61,10 @@ public class cClientes {
     //inserta un registro en la base de datos
     public String insertar(Clientes ob)
     {
-        cClientes lis=new cClientes();
-        ob.setCedula(lis.insertar((Clientes)ob));
-        String str="insert into cliente(" +"ced_cli,nom_cli,apell_cli,tel_cli,email_cli,dir_cli) " + "values(?,?,?,?,?,?)";
+        //cClientes lis=new cClientes();
+        //ob.setCedula(insertar((Clientes)ob));
+        String str="insert into cliente(ced_cli,nom_cli,ape_cli,tel_cli,email_cli,dir_cli)" + 
+                    "values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getCedula());
@@ -86,11 +74,12 @@ public class cClientes {
         param.add(ob.getEmail());
         param.add(ob.getDireccion());
          
-        System.out.println(str);
+        System.out.println("Paso3...."+str);
         
         //boolean estado=false;
         try{           
-            ConexionBD.Ejecutar_sql_parametro(str,param);            
+            ConexionBD.Ejecutar_sql_parametro(str,param);    
+            System.out.println("Paso4....");
             System.out.println("inserto");
             return ob.getCedula();
         }
@@ -105,7 +94,7 @@ public class cClientes {
         cClientes lis=new cClientes();
         lis.actualizar((Clientes)ob);
         
-        String str="update ciente set  nom_cli=?,apell_cli=?,tel_cli=?,email_cli=?,dir_cli=? "
+        String str="update ciente set  nom_cli=?,ape_cli=?,tel_cli=?,email_cli=?,dir_cli=? "
                 + "where ced_cli=?";
         //lista de parametros
         ArrayList param=new ArrayList();
@@ -246,14 +235,16 @@ public class cClientes {
     }      
 
     public cClientes buscar_ruc_completo_bd(String ruc) {
-       cClientes ob=new cClientes();
-        String str="select * from Clientes where ced_cli like '%" + ruc + "%' order by ced_cli";
+        cClientes ob=new cClientes();
+        System.out.println("Paso1.1 ..."+ruc);
+   
+        String str="select * from cliente  where ced_cli like '%" + ruc + "%' order by ced_cli";
         System.out.println(""+str);
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
             ob.rellenar(rs);            
-            System.out.println("relleno");
+            System.out.println("Paso1.2, tabla rellenada ...");
             rs.close();
         }
         catch(Exception ex){

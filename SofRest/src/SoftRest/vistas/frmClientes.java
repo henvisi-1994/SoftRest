@@ -38,7 +38,7 @@ public class frmClientes extends javax.swing.JFrame {
     String atributo = "cli_ced";
     DefaultTableModel modelo;
     
-    cClientes lis;
+    cClientes lis=new cClientes();
     //Registro indica la posicion en el conjunto de datos
     int Registro = 0;
     //op = 0 Si se guarda un nuevo registro; op=1 Si se actualiza un registro
@@ -590,17 +590,21 @@ public class frmClientes extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         String msg = "";
         int pos = 0;
+        //String cedula = txtcedula.getText();
     
         //lee datos del formulario y valida
-//        Categoria cat=leer();
+        Clientes cli=leer();
         //if(cat==null) return; //Si no se ha validado,finaliza el método
 
         try {
             //verifica si ya se ha ingresado categoría
-               cClientes l=lis.buscar_ruc_completo_bd(txtcedula.getText());
+            
+               System.out.println("Paso1 ..."+cli.getCedula());
+               cClientes l=lis.buscar_ruc_completo_bd(cli.getCedula());
+               System.out.println("Paso2 cliente consultado ..."+l.Count());
                pos =l.Count();
-               JOptionPane.showMessageDialog(null, pos);
-                 if (pos>=1 && op==0) {
+              
+                if (pos>=1 && op==0) {
                     lbMensaje.setText("Nombre de Cliente  ya ingresado");
                      return; //finaliza método
                 }
