@@ -83,10 +83,10 @@ public class frmClientes extends javax.swing.JFrame {
      public boolean form_validado() {
         boolean ok = true;
         //validar requerido
-        if (!Validaciones.esRequerido(txtcedula)) {
-            ok = false;
-            lbNum.setText("Nombre categoría es requerido");
-        }
+//        if (!Validaciones.esRequerido(txtcedula)) {
+//            ok = false;
+//            lbNum.setText("Nombre categoría es requerido");
+//        }
         //aquí colocar invocación a otros métodos de validación
 
         //validar más controles
@@ -608,33 +608,26 @@ public class frmClientes extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         String msg = "";
         int pos = 0;
+    
         //lee datos del formulario y valida
 //        Categoria cat=leer();
         //if(cat==null) return; //Si no se ha validado,finaliza el método
 
         try {
             //verifica si ya se ha ingresado categoría
-            //   pos=lis.buscar_nombre(txtNombre.getText());
-            if (pos >= 0) {
-                if (op == 0) {
-                    lbMensaje.setText("Nombre de Cliente ya ingresado");
-                } else if (pos > 0 && op != 0) {
-                    lbMensaje.setText("Nombre categoría ya ingresada");
-                } else {
-                    lbMensaje.setText("No hay cambios que guardar");
+               cClientes l=lis.buscar_ruc_completo_bd(txtcedula.getText());
+               pos =l.Count();
+               JOptionPane.showMessageDialog(null, pos);
+                 if (pos>=1 && op==0) {
+                    lbMensaje.setText("Nombre de Cliente  ya ingresado");
+                     return; //finaliza método
                 }
-                return; //finaliza método
-            }
-            if (op == 0) {  //guardar un nuevo objeto - insert en base de datos
-                //       lis.insertar(cat);
-                msg = "Registro guardado exitosamente";
-            } else { //guarda un objeto modificado; update en base de datos
-                //      lis.actualizar(cat);
-                msg = "Registro actualizado exitosamente";
-            }
-            //    lis.consultaAll();
-            Registro = op == 0 ? lis.Count() - 1 : Registro;
-        } catch (Exception ex) {
+                if (op==0) {
+                    l.insertar(cli);
+                  msg="Cliente  ingresado correctamente";
+                } 
+       } catch (Exception ex) {
+
             lbMensaje.setText(ex.getMessage());
         }
         Habilitar();

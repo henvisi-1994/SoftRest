@@ -76,7 +76,7 @@ public class cClientes {
     {
         cClientes lis=new cClientes();
         ob.setCedula(lis.insertar((Clientes)ob));
-        String str="insert into Clientes(" +"ced_cli,nom_cli,ape_cli,tel_cli,ema_cli,dir_cli) " + "values(?,?,?,?,?,?)";
+        String str="insert into cliente(" +"ced_cli,nom_cli,apell_cli,tel_cli,email_cli,dir_cli) " + "values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getCedula());
@@ -105,7 +105,7 @@ public class cClientes {
         cClientes lis=new cClientes();
         lis.actualizar((Clientes)ob);
         
-        String str="update Clientes set  nom_cli=?,ape_cli=?,tel_cli=?,ema_cli=?,dir_cli=? "
+        String str="update ciente set  nom_cli=?,apell_cli=?,tel_cli=?,email_cli=?,dir_cli=? "
                 + "where ced_cli=?";
         //lista de parametros
         ArrayList param=new ArrayList();
@@ -244,5 +244,23 @@ public class cClientes {
         }
         return ob;
     }      
+
+    public cClientes buscar_ruc_completo_bd(String ruc) {
+       cClientes ob=new cClientes();
+        String str="select * from Clientes where ced_cli like '%" + ruc + "%' order by ced_cli";
+        System.out.println(""+str);
+        ResultSet rs = null;
+        try{
+            rs=ConexionBD.Consulta(str);
+            ob.rellenar(rs);            
+            System.out.println("relleno");
+            rs.close();
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex.getMessage());
+        }
+        return ob;
+    }
 
 }
