@@ -568,32 +568,14 @@ public class frmClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
-        String msg="";
-        int pos=0;
-        //lee datos del formulario y valida
-        Clientes ob=leer();
-        if(ob==null) return; //Si no se ha validado,finaliza el método         
-        try{            
-            //verifica si ya se ha ingresado un producto
-            cClientes l=lis.buscar_ruc_bd(txtcedula.getText());
-            int n=l.Count();
-            if(n>=1 && op==0){
-                lbNum.setText("Ruc de Empleado ya ingresado");                
-                return; //finaliza método
-            }           
-            if(op==0){  //guardar un nuevo objeto - insert en base de datos              
-                txtcedula.setText(""+lis.insertar(ob));            
-                msg="Registro guardado exitosamente";  
-            }
-            else{ //guarda un objeto modificado; update en base dedatos                
-                lis.actualizar(ob);                
-                msg="Registro actualizado exitosamente";                
-            }           
-        }catch(Exception ex){lbNum.setText(ex.getMessage());}
-        //mover_tabla(pos);
-        lbNum.setText(msg);
-        //Limpiar();
-        Habilitar();
+        //limpiar textos
+        Limpiar();
+        //habilitar textos
+        Habilitar();        
+        txtcedula.requestFocus();
+        //desabilitar botones
+
+        op=0; //insert
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed

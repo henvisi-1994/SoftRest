@@ -26,7 +26,7 @@ public class ConexionBD {
     static String bd = "SoftRest";
     static String user = leer()[1][1];
     static String pass = leer()[1][2];
-    static String puerto = "5433";
+    static String puerto = leer()[1][3];
 
     //Archivo de configuracion
     public static String[][] leer() {
