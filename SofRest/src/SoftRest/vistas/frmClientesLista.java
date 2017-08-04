@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package SoftRest.vistas;
+import SoftRest.controladores.cClientes;
 import SoftRest.modelos.Clientes;
 import SoftRest.modelos.ConexionBD;
 import java.awt.Image;
@@ -41,6 +42,7 @@ public class frmClientesLista extends javax.swing.JFrame {
     
     //Se crea la lista enlazada ListaCli
   //  public ListaEnlazadaClientes ListaCli = new ListaEnlazadaClientes();
+    cClientes lista = new cClientes();
     public Clientes cli;
     
     
@@ -60,8 +62,8 @@ public class frmClientesLista extends javax.swing.JFrame {
         
     }
     public void MostrarTabla(String valor) {
-     /*   
-       DefaultTableModel modelo = new DefaultTableModel();
+       
+      /* DefaultTableModel modelo = new DefaultTableModel();
         
         //nombre de los parametros del la tabla modelo
         modelo.addColumn("Cedula");
@@ -97,8 +99,9 @@ public class frmClientesLista extends javax.swing.JFrame {
             tabla.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(frmClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-*/
+        }*/
+       
+
     }
     
     public void Inhabilitar() {
@@ -220,6 +223,7 @@ public class frmClientesLista extends javax.swing.JFrame {
         btnCancelarEliminar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnMostrarTabla = new javax.swing.JButton();
+        lbMensaje = new javax.swing.JLabel();
 
         VentanaActualizar.setSize(new java.awt.Dimension(684, 330));
         VentanaActualizar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -385,10 +389,10 @@ public class frmClientesLista extends javax.swing.JFrame {
             }
         });
         txtBuscar.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txtBuscarInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -521,6 +525,7 @@ public class frmClientesLista extends javax.swing.JFrame {
         jPanel7.add(btnMostrarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 110, -1));
 
         jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 670, 60));
+        jPanel4.add(lbMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 670, 20));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 360));
 
@@ -724,21 +729,24 @@ public class frmClientesLista extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarCedulaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try{
+            cClientes p = new cClientes();
         if(buscarCedula.isSelected()||buscarNombre.isSelected()||buscarApellido.isSelected()){
+     
+            
             if (buscarCedula.isSelected()) {
-                atributo = "cli_ced";
-                MostrarTabla(txtBuscar.getText());
+                 p=lista.buscar_ruc_completo_bd(txtBuscar.getText()); //busca por código
             } else if (buscarNombre.isSelected()) {
-                atributo = "cli_nom";
-                MostrarTabla(txtBuscar.getText());
+                p=lista.buscar_nombre(txtBuscar.getText());
             } else if (buscarApellido.isSelected()) {
-                atributo = "cli_ape";
-                MostrarTabla(txtBuscar.getText());
+                 p=lista.buscar_ape(txtBuscar.getText());
             }
+             tabla.setModel(p.getTablaDatos());
             btnRegresar.setEnabled(true);
         }else{
             JOptionPane.showMessageDialog(null, "Debe primero escoger como desea buscarlo");
         }
+         }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -865,6 +873,7 @@ public class frmClientesLista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbMensaje;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido1;
     private javax.swing.JTextField txtBuscar;

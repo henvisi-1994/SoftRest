@@ -140,8 +140,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
         if (txtUsuario.getText().equals("Administrador") && clavedef.equals("12345"))
         {
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Bienvenido\n"+"Has ingresado satisfactoriamente al sistema"
-                    ,"Mensaje de bienvenida",JOptionPane.INFORMATION_MESSAGE);
                     FrmMenuPrincipal menu = new FrmMenuPrincipal();
                     menu.setVisible(true);
             }else {

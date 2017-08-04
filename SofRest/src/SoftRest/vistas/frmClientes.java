@@ -8,6 +8,7 @@ package SoftRest.vistas;
 
 import SoftRest.controladores.cClientes;
 import SoftRest.modelos.Clientes;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -27,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author henvisi
  */
-public class frmClientes extends javax.swing.JFrame {
+public class frmClientes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmClientes
@@ -51,7 +53,6 @@ public class frmClientes extends javax.swing.JFrame {
     public frmClientes() {
         this.setTitle("INSERTAR CLIENTE");
         initComponents();
-        setLocationRelativeTo(null);
         setResizable(true);
        /* ListaCli.Cargar();
         ListaCli.Visualizar();*/
@@ -160,7 +161,7 @@ public class frmClientes extends javax.swing.JFrame {
     }//habilitar/deshabilitar cuadros de texto
     public void cerrar(){
         try{
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
             addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e){
                     confirmaSalida();
@@ -300,7 +301,8 @@ public class frmClientes extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         lbMensaje = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
 
         jToolBar1.setBackground(new java.awt.Color(102, 102, 102));
         jToolBar1.setForeground(new java.awt.Color(153, 153, 153));
@@ -462,88 +464,38 @@ public class frmClientes extends javax.swing.JFrame {
         jToolBar1.add(btCerrar);
 
         panelCentral.setBackground(new java.awt.Color(204, 204, 204));
+        panelCentral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel1.setText("C.i.");
+        panelCentral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 28, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel2.setText("Apellido");
+        panelCentral.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel3.setText("Nombre");
+        panelCentral.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 70, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel7.setText("Direccion");
+        panelCentral.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 152, -1, -1));
+        panelCentral.add(txtcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 29, 174, -1));
+        panelCentral.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 71, 174, -1));
+        panelCentral.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 111, 174, -1));
+        panelCentral.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 153, 174, -1));
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel6.setText("email");
+        panelCentral.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 194, -1, -1));
+        panelCentral.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 195, 174, -1));
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel8.setText("telefono");
-
-        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
-        panelCentral.setLayout(panelCentralLayout);
-        panelCentralLayout.setHorizontalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addGroup(panelCentralLayout.createSequentialGroup()
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panelCentralLayout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(50, 50, 50))
-                                .addGroup(panelCentralLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtApellido)
-                            .addGroup(panelCentralLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(txtcedula))))))
-                .addGap(591, 591, 591))
-        );
-        panelCentralLayout.setVerticalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCentralLayout.createSequentialGroup()
-                .addComponent(lbMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
-        );
+        panelCentral.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 236, -1, -1));
+        panelCentral.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 237, 174, -1));
+        panelCentral.add(lbMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 0, 291, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -598,20 +550,26 @@ public class frmClientes extends javax.swing.JFrame {
 
         try {
             //verifica si ya se ha ingresado categoría
-            
-               System.out.println("Paso1 ..."+cli.getCedula());
-               cClientes l=lis.buscar_ruc_completo_bd(cli.getCedula());
-               System.out.println("Paso2 cliente consultado ..."+l.Count());
-               pos =l.Count();
-              
-                if (pos>=1 && op==0) {
-                    lbMensaje.setText("Nombre de Cliente  ya ingresado");
-                     return; //finaliza método
+
+            System.out.println("Paso1 ..." + cli.getCedula());
+            cClientes l = lis.buscar_ruc_completo_bd(cli.getCedula());
+            System.out.println("Paso2 cliente consultado ..." + l.Count());
+            pos = l.Count();
+
+            if (pos >= 1 && op == 0) {
+                lbMensaje.setText("Nombre de Cliente  ya ingresado");
+            }
+            if (op == 0) {
+                l.insertar(cli);
+                msg = "Cliente  ingresado correctamente";
+            } else {
+                int valor = JOptionPane.showConfirmDialog(this, "Esta seguro quee quiere modificarlo", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (valor == JOptionPane.YES_OPTION) {
+                    lis.actualizar(cli);
+                    msg = "Registro actualizado exitosamente";
                 }
-                if (op==0) {
-                    l.insertar(cli);
-                  msg="Cliente  ingresado correctamente";
-                } 
+                     
+                }
        } catch (Exception ex) {
 
             lbMensaje.setText(ex.getMessage());
@@ -630,7 +588,22 @@ public class frmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        // TODO add your handling code here:
+         try{           
+            if(JOptionPane.showConfirmDialog(null, 
+            "Esta seguro de eliminar el registro con ID="+txtcedula.getText()+
+            " ?")==JOptionPane.YES_OPTION)
+            {
+               lis.eliminar(txtcedula.getText());
+               System.out.println("Paso  1");
+               lis.consultaAll();
+               //tabla.setModel(lis.getTablaDatos());
+               Registro=Registro>=lis.Count()?lis.Count()-1:Registro;
+               System.out.println("Paso  2");
+               ver_registro(Registro);
+               System.out.println("Paso3  3");
+               lbMensaje.setText("Registro eliminado exitosamente");
+            }            
+        }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
@@ -665,40 +638,7 @@ public class frmClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btCerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmClientes().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;

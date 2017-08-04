@@ -118,7 +118,7 @@ public class cClientes {
      //actualizar un registro en la base de datos
     public void eliminar(String cedula)
     {
-        String str="delete from Clientes where ced_cli=?";
+        String str="delete from cliente where ced_cli=?";
         //lista de parametros
         ArrayList param=new ArrayList();        
         param.add(cedula);           
@@ -147,11 +147,11 @@ public class cClientes {
                 ob.setNombre(rs.getObject("nom_cli").toString());
                 ob.setApellido(rs.getObject("ape_cli").toString());
                 ob.setTelefono(rs.getObject("tel_cli").toString());
-                ob.setEmail(rs.getObject("ema_cli").toString());          
-                ob.setDireccion(rs.getObject("dir_cli").toString());          
+                ob.setEmail(rs.getObject("email_cli").toString());          
+                ob.setDireccion(rs.getObject("dir_cli").toString());  
+                System.out.println("Persona:"+ ob.Imprimir());
                 addFila(ob.getCedula(), ob.getNombre(), ob.getApellido(), ob.getTelefono(), ob.getEmail(), ob.getDireccion());
                 Lista.add(ob);
-                System.out.println("Nombre: "+ob.getNombre());
             }
             ConexionBD.CloseBD();
         }
@@ -161,7 +161,7 @@ public class cClientes {
     //consulta todos los elementos de la tabla productos
     public void consultaAll()
     {
-        String str="select * from Clientes order by ced_cli";
+        String str="select * from cliente order by ced_cli";
         ResultSet rs = null;
         try{
                 rs=ConexionBD.Consulta(str);
@@ -171,34 +171,34 @@ public class cClientes {
         catch(Exception ex){}
     }
        
-    //consulta por codigo
-    public cClientes buscar_codigo_bd(String cedula)
-    {
-        cClientes ob=new cClientes();
-        String str="select * from Clientes where ced_cli =" + cedula +
-                " order by ced_cli";
-        System.out.println(""+str);
-        ResultSet rs = null;
-        try{
-            rs=ConexionBD.Consulta(str);
-            ob.rellenar(rs);            
-            System.out.println("relleno");
-            rs.close();
-        }
-        catch(Exception ex){
-            System.out.println(ex.getMessage());
-            throw new RuntimeException(ex.getMessage());
-        }
-        return ob;
-    }   
-    
+//    //consulta por codigo
+//    public cClientes buscar_codigo_bd(String cedula)
+//    {
+//        cClientes ob=new cClientes();
+//        String str="select * from Clientes where ced_cli =" + cedula +
+//                " order by ced_cli";
+//        System.out.println(""+str);
+//        ResultSet rs = null;
+//        try{
+//            rs=ConexionBD.Consulta(str);
+//            ob.rellenar(rs);            
+//            System.out.println("relleno");
+//            rs.close();
+//        }
+//        catch(Exception ex){
+//            System.out.println(ex.getMessage());
+//            throw new RuntimeException(ex.getMessage());
+//        }
+//        return ob;
+//    }   
+//    
     
     //consulta por codigo
     public cClientes buscar_nombre(String nom)
     {
         cClientes ob=new cClientes();
-        String str="select * from Clientes where nom_cli like '%"
-            + nom + "%' order by per_codigo";//que es esto????
+        String str="select * from cliente where nom_cli ilike '%"
+            + nom + "%' order by ced_cli";//que es esto????
         System.out.println(""+str);
         ResultSet rs = null;
         try{
@@ -218,7 +218,7 @@ public class cClientes {
     public cClientes buscar_ruc_bd(String ruc)
     {
         cClientes ob=new cClientes();
-        String str="select * from Clientes where ced_cli like '%" + ruc + "%' order by ced_cli";
+        String str="select * from cliente where ced_cli like '%" + ruc + "%' order by ced_cli";
         System.out.println(""+str);
         ResultSet rs = null;
         try{
@@ -245,6 +245,25 @@ public class cClientes {
             rs=ConexionBD.Consulta(str);
             ob.rellenar(rs);            
             System.out.println("Paso1.2, tabla rellenada ...");
+            rs.close();
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex.getMessage());
+        }
+        return ob;
+    }
+
+    public cClientes buscar_ape(String ape) {
+        cClientes ob=new cClientes();
+        String str="select * from cliente where ape_cli ilike '%"
+            + ape + "%' order by ced_cli";//que es esto????
+        System.out.println(""+str);
+        ResultSet rs = null;
+        try{
+            rs=ConexionBD.Consulta(str);
+            ob.rellenar(rs);            
+            System.out.println("relleno");
             rs.close();
         }
         catch(Exception ex){

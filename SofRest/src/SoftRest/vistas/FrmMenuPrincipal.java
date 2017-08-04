@@ -262,7 +262,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         frmClientes cli=new frmClientes();
-        cli.setVisible(true);
+        cli.setSize(568,350);
+        Dimension desktopSize = Escritorio.getSize();
+        Dimension jInternalFrameSize = cli.getSize();
+        cli.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        Escritorio.add(cli);
+        cli.show();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
