@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SoftRest.controladores;
 
 import SoftRest.modelos.ConexionBD;
@@ -11,10 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author usuario
- */
 public class cClientes {
     ArrayList<Clientes> Lista;    
            
@@ -37,7 +28,6 @@ public class cClientes {
         return (Clientes)Lista.get(pos);
     }
     
-   //agrega la nueva fila al modelo de tabla   
     //agrega la nueva fila al modelo de tabla   
     public void addFila(String cedula, String nom,String apellido, String telefono, String email, String direccion)
     {
