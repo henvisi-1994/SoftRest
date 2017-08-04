@@ -53,10 +53,7 @@ public class frmClientesLista extends javax.swing.JFrame {
         setResizable(true);
         
       //  MostrarTabla("");
-        buttonGroup1.add(buscarCedula);
-        buttonGroup1.add(buscarNombre);
-        buttonGroup1.add(buscarApellido);
-        buscarCedula.doClick();
+       
 /*        ListaCli.Cargar();
         ListaCli.Visualizar();*/
         
@@ -104,6 +101,15 @@ public class frmClientesLista extends javax.swing.JFrame {
 
     }
     
+     public void buscar_varios()
+    {
+        try{
+            cClientes p=lista.buscar_ruc_bd(txtBuscar.getText()); //busca por cedula
+            if(p.Count()==0)p=lista.buscar_nombre(txtBuscar.getText()); //buscar por nombre
+            if(p.Count()==0)p=lista.buscar_ape(txtBuscar.getText()); //buscar por apellido
+            tabla.setModel(p.getTablaDatos());
+        }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
+    }
     public void Inhabilitar() {
         
         btnEditar.setEnabled(true);
@@ -211,10 +217,8 @@ public class frmClientesLista extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
-        buscarApellido = new javax.swing.JRadioButton();
-        buscarNombre = new javax.swing.JRadioButton();
-        buscarCedula = new javax.swing.JRadioButton();
         btnBuscar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
@@ -389,10 +393,10 @@ public class frmClientesLista extends javax.swing.JFrame {
             }
         });
         txtBuscar.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txtBuscarInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -408,39 +412,7 @@ public class frmClientesLista extends javax.swing.JFrame {
                 txtBuscarKeyTyped(evt);
             }
         });
-        jPanel5.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 15, 283, -1));
-
-        buscarApellido.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
-        buscarApellido.setText("Apellido");
-        buscarApellido.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscarApellidoMouseClicked(evt);
-            }
-        });
-        jPanel5.add(buscarApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 16, -1, -1));
-
-        buscarNombre.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
-        buscarNombre.setText("Nombre");
-        buscarNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscarNombreMouseClicked(evt);
-            }
-        });
-        jPanel5.add(buscarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 16, -1, -1));
-
-        buscarCedula.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
-        buscarCedula.setText("Cedula");
-        buscarCedula.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscarCedulaMouseClicked(evt);
-            }
-        });
-        buscarCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarCedulaActionPerformed(evt);
-            }
-        });
-        jPanel5.add(buscarCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 16, -1, -1));
+        jPanel5.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 15, 370, -1));
 
         btnBuscar.setFont(new java.awt.Font("Candara", 0, 13)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
@@ -451,6 +423,10 @@ public class frmClientesLista extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 136, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Dato a buscar:");
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 14, 190, 20));
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 666, 60));
 
@@ -712,41 +688,9 @@ public class frmClientesLista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void buscarApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarApellidoMouseClicked
-        txtBuscar.requestFocus();
-    }//GEN-LAST:event_buscarApellidoMouseClicked
-
-    private void buscarNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarNombreMouseClicked
-        txtBuscar.requestFocus();
-    }//GEN-LAST:event_buscarNombreMouseClicked
-
-    private void buscarCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarCedulaMouseClicked
-        txtBuscar.requestFocus();
-    }//GEN-LAST:event_buscarCedulaMouseClicked
-
-    private void buscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCedulaActionPerformed
-
-    }//GEN-LAST:event_buscarCedulaActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try{
-            cClientes p = new cClientes();
-        if(buscarCedula.isSelected()||buscarNombre.isSelected()||buscarApellido.isSelected()){
-     
-            
-            if (buscarCedula.isSelected()) {
-                 p=lista.buscar_ruc_completo_bd(txtBuscar.getText()); //busca por código
-            } else if (buscarNombre.isSelected()) {
-                p=lista.buscar_nombre(txtBuscar.getText());
-            } else if (buscarApellido.isSelected()) {
-                 p=lista.buscar_ape(txtBuscar.getText());
-            }
-             tabla.setModel(p.getTablaDatos());
-            btnRegresar.setEnabled(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe primero escoger como desea buscarlo");
-        }
-         }catch(Exception ex){lbMensaje.setText(ex.getMessage());}
+        buscar_varios();
+        btnRegresar.setEnabled(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -858,10 +802,8 @@ public class frmClientesLista extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarUno;
     private javax.swing.JButton btnMostrarTabla;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JRadioButton buscarApellido;
-    private javax.swing.JRadioButton buscarCedula;
-    private javax.swing.JRadioButton buscarNombre;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
