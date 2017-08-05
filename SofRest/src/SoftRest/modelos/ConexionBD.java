@@ -33,7 +33,7 @@ public class ConexionBD {
 //    static String bd = "SoftRest";
 //    static String user = "postgres";
     static String pass =leer()[1][2];
-    static String puerto = "5432";
+    static String puerto = "5433";
 
     
     

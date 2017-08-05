@@ -5,6 +5,7 @@
  */
 package SoftRest.vistas;
 
+import SoftRest.controladores.cUsuario;
 import SoftRest.vistas.FrmMenuPrincipal;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -15,11 +16,13 @@ import javax.swing.JOptionPane;
  */
 public class frmInicioSesion extends javax.swing.JFrame {
 
+    private cUsuario lis;
     /**
      * Creates new form InicioSesión
      */
     public frmInicioSesion() {
         initComponents();
+        lis = new cUsuario();
         
     }
 
@@ -135,9 +138,9 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
     private void Logeo() {
          char clave[]=jpassClave.getPassword();
-
         String clavedef=new String(clave);
-        if (txtUsuario.getText().equals("Administrador") && clavedef.equals("12345"))
+        System.out.print("Paso1 Usuario:"+txtUsuario.getText()+"Contrasenia: "+ clavedef);
+        if (lis.Login(txtUsuario.getText(), clavedef)== true)
         {
             this.dispose();
                     FrmMenuPrincipal menu = new FrmMenuPrincipal();
