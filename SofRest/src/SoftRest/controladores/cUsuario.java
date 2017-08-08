@@ -8,7 +8,6 @@ import SoftRest.modelos.Cargo;
 import SoftRest.modelos.Usuario;
 import SoftRest.vistas.FrmMenuPrincipal;
 import javax.swing.JOptionPane;
-import org.apache.commons.codec.digest.DigestUtils;
 
 public class cUsuario {
 
