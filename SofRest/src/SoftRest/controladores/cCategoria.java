@@ -33,7 +33,11 @@ public class cCategoria {
    
    //Metodos que retornan valores de una celda segun campos individuales
     public String get_Codigo(int pos){
-        return datos.getValueAt(pos, 0).toString();
+        if (pos==-1|| pos >0) {
+            return "0";
+        } else {
+             return datos.getValueAt(pos, 0).toString();
+        }
     }
     public String get_Nombre(int pos){
         return datos.getValueAt(pos, 1).toString();

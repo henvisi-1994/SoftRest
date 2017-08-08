@@ -362,7 +362,7 @@ public class frmClientesLista extends javax.swing.JFrame {
 
         VentanaActualizar.getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 640, 252));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -372,12 +372,12 @@ public class frmClientesLista extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBuscar.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtBuscarAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         txtBuscar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -393,10 +393,10 @@ public class frmClientesLista extends javax.swing.JFrame {
             }
         });
         txtBuscar.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txtBuscarInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {

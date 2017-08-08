@@ -24,7 +24,11 @@ public class cCargo {
    
    //Metodos que retornan valores de una celda segun campos individuales
     public String get_Codigo(int pos){
-        return datos.getValueAt(pos, 0).toString();
+        if (pos==-1|| pos >0) {
+            return "0";
+        } else {
+             return datos.getValueAt(pos, 0).toString();
+        }
     }
     public String get_Nombre(int pos){
         return datos.getValueAt(pos, 1).toString();
@@ -60,12 +64,13 @@ public class cCargo {
         //boolean estado=false;
         try{
             int cod=Integer.parseInt(get_Codigo(Count()-1))+1; //extraer el último código generado
-            System.out.print("Ultimo codigo "+ cod);
+             System.out.print("Ultimo codigo "+ cod);
             //modifica secuencia según codigo del último registro
             ConexionBD.EjecutarSql("ALTER SEQUENCE sec_idcargo RESTART WITH "+cod);
             ConexionBD.Ejecutar_sql_parametro(str,param);
             //estado=true;
             System.out.print("inserto");
+            
         }
         catch(Exception ex){throw new RuntimeException("Error al insertar el nuevo registro");}
         //return estado;
