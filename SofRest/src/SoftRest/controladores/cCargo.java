@@ -24,7 +24,7 @@ public class cCargo {
    
    //Metodos que retornan valores de una celda segun campos individuales
     public String get_Codigo(int pos){
-        if (pos==-1|| pos >0) {
+        if (pos==-1|| pos <0) {
             return "0";
         } else {
              return datos.getValueAt(pos, 0).toString();
