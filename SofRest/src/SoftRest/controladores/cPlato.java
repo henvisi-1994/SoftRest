@@ -200,7 +200,7 @@ public class cPlato
     public cPlato buscar_nombre(String nom)
     {
         cPlato ob=null;
-        String str="select * from plato where nombre_plato like '%"
+        String str="select * from view_plato where nombre_plato like '%"
                 + nom + "%' order by id_plato";
         System.out.println(""+str);
         ResultSet rs = null;
@@ -213,6 +213,22 @@ public class cPlato
         }
         catch(Exception ex){}
         return ob;
+    }
+    public cPlato buscar_varios(String nom)
+    {
+        cPlato plat=null;
+        String str="select * from view_plato where nombre_plato ilike '%"
+                + nom + "%'" + "order by id_plato";
+        System.out.println(""+str);
+        ResultSet rs = null;
+        try{
+            rs=ConexionBD.Consulta(str);
+            plat=new cPlato();
+            plat.rellenar(rs);                
+            rs.close();
+        }
+        catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
+        return plat;
     }
     
     

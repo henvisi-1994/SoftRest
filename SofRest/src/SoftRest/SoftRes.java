@@ -5,6 +5,8 @@
  */
 package SoftRest;
 
+import SoftRest.vistas.frmInicioSesion;
+
 /**
  *
  * @author Usuario
@@ -15,7 +17,9 @@ public class SoftRes {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        frmInicioSesion inicio = new frmInicioSesion();
+        inicio.setVisible(true);
+                
     }
     
 }
