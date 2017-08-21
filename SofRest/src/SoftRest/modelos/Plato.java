@@ -15,6 +15,7 @@ public class Plato {
     private String nombre;
     private int cantidad;
     private int tipoplato_id;
+    private String tipoplato_nom;
 
     public Plato(int plato_id, String nombre, int cantidad, int tipoplato_id) {
         this.plato_id = plato_id;
@@ -22,6 +23,14 @@ public class Plato {
         this.cantidad = cantidad;
         this.tipoplato_id = tipoplato_id;
     }
+
+    public Plato(int plato_id, String nombre, int cantidad, String tipoplato_nom) {
+        this.plato_id = plato_id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.tipoplato_nom = tipoplato_nom;
+    }
+    
 
     public Plato() {
     }

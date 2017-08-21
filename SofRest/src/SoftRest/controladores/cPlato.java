@@ -68,6 +68,13 @@ public class cPlato
                      };
         datos.addRow(row);
     }
+     public void addFilaTP(int id, String nom, int cant,String tipPlato)
+    {
+        Object[] row={new Integer(id),nom,new Integer(cant),
+                      tipPlato
+                     };
+        datos.addRow(row);
+    }
     //limpia todos los datos del Modelo de tabla
     public void reset()
     {
@@ -158,6 +165,7 @@ public class cPlato
     {
         try{
             int id, can, tipoplato;
+            
             String cod, nom, desc, cate,fabr;
            
             boolean iva, estado;
@@ -168,14 +176,40 @@ public class cPlato
                 nom=rs.getObject("nombre_plato").toString();
                 can=Integer.parseInt(rs.getObject("cant_plato").toString());     
                               
-                //obtiene el nombre del tipo de plato            
+                //obtiene el nombre del tipo de plato   
                 tipoplato=Integer.parseInt(rs.getObject("id_tipo_plato").toString());
-                cTipoPlato listipPlat=new cTipoPlato();
+               cTipoPlato listipPlat=new cTipoPlato();
                 listipPlat.consultaAll();
                 fabr=listipPlat.get_Nombre(listipPlat.buscar_codigo(""+tipoplato));
                 
                 addFila(id, nom,can, tipoplato);
                 Lista.add(new Plato(id,nom,can,tipoplato));
+                System.out.println(id);
+            }
+            ConexionBD.CloseBD();
+        }
+        catch(Exception ex){System.out.println(ex.getMessage());}
+    }
+   //rellena el modelo de table seg�n los resultados obtenidos de la BD  con vistas
+   public void rellenarV(ResultSet rs)
+    {
+        try{
+            int id, can;
+            
+            String cod, nom, desc, cate,fabr,nomTiPlato;
+           
+            boolean iva, estado;
+            reset();  //limpia modelo de tabla
+            Lista.clear(); //limpia la lista de productos
+            while (rs.next()) {
+                id=Integer.parseInt(rs.getObject("id_plato").toString());
+                nom=rs.getObject("nombre_plato").toString();
+                can=Integer.parseInt(rs.getObject("cant_plato").toString());     
+                              
+                //obtiene el nombre del tipo de plato   
+                nomTiPlato = rs.getObject("nombre_tipo_plato").toString();
+                addFilaTP(id, nom,can, nomTiPlato);
+                Lista.add(new Plato(id,nom,can,nomTiPlato));
                 System.out.println(id);
             }
             ConexionBD.CloseBD();
@@ -207,7 +241,7 @@ public class cPlato
         try{
             rs=ConexionBD.Consulta(str);
             ob=new cPlato();
-            ob.rellenar(rs); 
+            ob.rellenarV(rs); 
             System.out.println("relleno");
             rs.close();
         }
@@ -224,7 +258,7 @@ public class cPlato
         try{
             rs=ConexionBD.Consulta(str);
             plat=new cPlato();
-            plat.rellenar(rs);                
+            plat.rellenarV(rs);                
             rs.close();
         }
         catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
