@@ -3,6 +3,21 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     empleado.id_cargo,
+     empleado.nombre_emp,
+     empleado."ced_empleado" AS empleado_ced_empleado,
+     empleado."nombre_emp" AS empleado_nombre_emp,
+     empleado."id_cargo" AS empleado_id_cargo
+FROM
+     "public"."empleado" empleado]]>
+	</queryString>
+	<field name="id_cargo" class="java.lang.Long"/>
+	<field name="nombre_emp" class="java.lang.String"/>
+	<field name="empleado_ced_empleado" class="java.lang.String"/>
+	<field name="empleado_nombre_emp" class="java.lang.String"/>
+	<field name="empleado_id_cargo" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -10,12 +25,48 @@
 		<band height="61" splitType="Stretch">
 			<staticText>
 				<reportElement x="52" y="10" width="116" height="15" uuid="2bf07f9f-8c51-41c1-ba23-f4a52d91e6fc"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<text><![CDATA[Nombre de Empleado:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="373" y="10" width="100" height="20" uuid="97c5bc53-3647-429a-9546-d9a085fa69e1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<text><![CDATA[Cargo:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="373" y="41" width="100" height="20" uuid="b0d1c3b6-9c0a-4564-a7e5-aac8f56914af"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{id_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="41" width="100" height="20" uuid="0acd9222-f6dd-4a48-b26f-c2ef9b188e1c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{nombre_emp}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
