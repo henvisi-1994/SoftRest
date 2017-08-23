@@ -10,5 +10,5 @@ package SoftRest.modelos;
  * @author usuario
  */
 public class Menu {
-    
+   
 }
