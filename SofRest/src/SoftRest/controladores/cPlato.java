@@ -84,7 +84,7 @@ public class cPlato {
     //inserta un registro en la base de datos
     public void insertar(Plato ob) {
         String str = "INSERT INTO plato(nombre_plato, cant_plato, id_tipo_plato)"
-                + "VALUES (?, ?, ?, ?)";
+                + "VALUES (?, ?, ?)";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getNombre());
@@ -171,7 +171,7 @@ public class cPlato {
                 cate = liscat.get_Nombre(liscat.buscar_codigo("" + cat));
                 addFila(id,nom, can,cate);
                 Lista.add(new Plato(id,nom,can,cat));
-
+                 System.out.println(id);
             }
             ConexionBD.CloseBD();
         } catch (Exception ex) {
@@ -206,11 +206,11 @@ public class cPlato {
     }
     //consulta todos los elementos de la tabla productos
     public void consultaAll() {
-        String str = "select * from plato order by id_plato";
+        String str = "select * from view_plato ";
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
-            rellenar(rs);
+            rellenarV(rs);
             rs.close();
         } catch (Exception ex) {
         }

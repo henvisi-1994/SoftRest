@@ -39,7 +39,7 @@ public class dlgPlato extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        //inicia en el primer registro
+         //inicia en el primer registro
         Registro=0;
         int op=0;
         lis=new cPlato();
@@ -507,13 +507,6 @@ public class dlgPlato extends javax.swing.JDialog {
         if(p==null) return; //Si no se ha validado,finaliza el método
          
         try{            
-            //verifica si ya se ha ingresado un producto
-            cPlato ob=lis.buscar_codigo(txtId.getText());
-            int n=ob.Count();
-            if(n>=1 && op==0){
-                lbMensaje.setText("Código de Producto ya ingresado");                
-                return; //finaliza método
-            }           
             if(op==0){  //guardar un nuevo objeto - insert en base de datos              
                 lis.insertar(p);            
                 msg="Registro guardado exitosamente";  
@@ -532,7 +525,7 @@ public class dlgPlato extends javax.swing.JDialog {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
-        //limpiar textos
+         //limpiar textos
         limpiar_textos();
         //habilitar textos
         habilitar_textos(true);
@@ -540,6 +533,7 @@ public class dlgPlato extends javax.swing.JDialog {
         if(lis.Count()>=0)
             pos=lis.get_Plato(lis.Count()-1).getPlato_id()+1;
         txtId.setText(pos+"");
+
         //desabilitar botones
         habilitar_botones(false);
         op=0;
