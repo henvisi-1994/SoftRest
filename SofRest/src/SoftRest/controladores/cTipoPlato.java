@@ -7,6 +7,7 @@ package SoftRest.controladores;
 
 import SoftRest.modelos.Categoria;
 import SoftRest.modelos.ConexionBD;
+import SoftRest.modelos.TipoPlato;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -62,12 +63,12 @@ public class cTipoPlato {
 
     /********Metodos de acceso a la base de datos*/
     //inserta un registro en la base de datos
-    public void insertar(Categoria ob)
+    public void insertar(TipoPlato ob)
     {
         String str="insert into tipo_plato(nombre_tipo_plato) values(?)";
         //lista de parametros
         ArrayList param=new ArrayList();
-        param.add(ob.getNombre_categoria());
+        param.add(ob.getTipoplato_nombre());
 
         System.out.print(str);
         //boolean estado=false;
@@ -85,13 +86,13 @@ public class cTipoPlato {
     }
 
     //actualizar un registro en la base de datos
-    public void actualizar(Categoria ob)
+    public void actualizar(TipoPlato ob)
     {
         String str="update tipo_plato set nombre_tipo_plato=? where id_tipo_plato=?";
         //lista de parametros
         ArrayList param=new ArrayList();
-        param.add(ob.getNombre_categoria());
-        param.add(ob.getCodigo_categoria());           
+        param.add(ob.getTipoplato_nombre());
+        param.add(ob.getTipoplato_id());           
 
         System.out.print(str);
         //boolean estado=false;
@@ -154,7 +155,7 @@ public class cTipoPlato {
     //consulta todos los elementos de la tabla productos
     public void consultaAll()
     {
-        String str="select * from categoria order by id_categoria";
+        String str="select * from tipo_plato order by id_tipo_plato";
         ResultSet rs = null;
         try{
             System.out.println("Aqui  1.1");

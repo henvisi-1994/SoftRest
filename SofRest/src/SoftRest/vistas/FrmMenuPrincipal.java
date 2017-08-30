@@ -141,6 +141,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem23);
 
         jMenuItem4.setText("Platos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuItem12.setText("Factura");
@@ -326,6 +331,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         Escritorio.add(prov);
         prov.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       dlgPlato dlg = new dlgPlato(null, false);
+        dlg.setModal(true);
+        dlg.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
