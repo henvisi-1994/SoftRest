@@ -252,17 +252,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        frmEmpleados emp = new frmEmpleados();
-
-        int x = Escritorio.getHeight() - 10;
-        int y = Escritorio.getWidth() - 180;
-        emp.setSize(y, x);
-        Dimension desktopSize = Escritorio.getSize();
-        Dimension jInternalFrameSize = emp.getSize();
-        emp.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
-        Escritorio.add(emp);
-        emp.show();
+        dlgEmpleado dlg = new dlgEmpleado(null, false);
+        dlg.setModal(true);
+        dlg.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -333,7 +325,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       dlgPlato dlg = new dlgPlato(null, false);
+        dlgPlato dlg = new dlgPlato(null, false);
         dlg.setModal(true);
         dlg.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed

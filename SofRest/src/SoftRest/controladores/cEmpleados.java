@@ -62,7 +62,8 @@ public class cEmpleados {
    //agrega la nueva fila al modelo de tabla   
     public void addFila(String cedula, String nom, String direccion, String telefono)
     {
-        Object[] row={new Empleados(cedula,nom, direccion,telefono)};
+        Object[] row={new Empleados(cedula, nom, direccion, telefono, cedula, 0, 0)
+        };
         datos.addRow(row);
     }
     //limpia todos los datos del Modelo de tabla

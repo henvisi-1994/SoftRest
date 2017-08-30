@@ -14,16 +14,24 @@ public class Empleados {
     private String nombre;
     private String direcion;
     private String telefono;
+    private String fecha;
+    private int cargo;
+    private int local;
     public Empleados()
     {
         
     }
-    public Empleados(String cedula, String nombre, String direcion, String telefono) {
+
+    public Empleados(String cedula, String nombre, String direcion, String telefono, String fecha, int cargo, int local) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.direcion = direcion;
         this.telefono = telefono;
+        this.fecha = fecha;
+        this.cargo = cargo;
+        this.local = local;
     }
+    
     
     public String getCedula() {
         return cedula;
@@ -55,6 +63,30 @@ public class Empleados {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
+    }
+
+    public int getLocal() {
+        return local;
+    }
+
+    public void setLocal(int local) {
+        this.local = local;
     }
     
 }
