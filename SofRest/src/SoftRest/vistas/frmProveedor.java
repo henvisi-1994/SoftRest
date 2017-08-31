@@ -77,6 +77,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
         btGuardar = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        btPdf = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         lbRegistro = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -267,10 +268,22 @@ public class frmProveedor extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btEliminar);
+
+        btPdf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pdf.png"))); // NOI18N
+        btPdf.setToolTipText("Eliminar");
+        btPdf.setFocusable(false);
+        btPdf.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPdf.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPdfActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btPdf);
         jToolBar1.add(jSeparator1);
         jToolBar1.add(lbRegistro);
 
-        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 40));
 
         jLabel5.setText("Dato a buscar:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, 20));
@@ -482,6 +495,13 @@ public class frmProveedor extends javax.swing.JInternalFrame {
     private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailKeyTyped
+
+    private void btPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPdfActionPerformed
+        try{
+            Global.generarReporte("ReporteProveedor");
+        }catch(Exception e){}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPdfActionPerformed
     //metodos personalizados
     //desahabilita textos, habilita botones y muestra datos en el formulario
 
@@ -551,6 +571,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btNuevo;
+    private javax.swing.JButton btPdf;
     private javax.swing.JButton btbuscar_varios;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

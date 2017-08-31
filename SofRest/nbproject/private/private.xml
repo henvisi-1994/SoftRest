@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/cTipoPlato.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmProveedor.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/dlgPlato.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/modelos/ConexionBD.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmLocal.java</file>
         </group>
     </open-files>
 </project-private>
