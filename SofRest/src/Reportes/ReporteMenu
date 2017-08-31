@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteMenu" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="464da57d-f1b0-4bce-916e-a650f367a6eb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     menu."num_menu" AS menu_num_menu,
+     menu."fecha_menu" AS menu_fecha_menu,
+     menu."id_plato" AS menu_id_plato,
+     menu."id_local" AS menu_id_local
+FROM
+     "menu" menu]]>
+	</queryString>
+	<field name="num_menu" class="java.lang.Integer"/>
+	<field name="fecha_menu" class="java.sql.Date"/>
+	<field name="id_plato" class="java.lang.Integer"/>
+	<field name="id_local" class="java.lang.Integer"/>
+	<field name="menu_num_menu" class="java.lang.Integer"/>
+	<field name="menu_fecha_menu" class="java.sql.Date"/>
+	<field name="menu_id_plato" class="java.lang.Integer"/>
+	<field name="menu_id_local" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="17" width="336" height="50" uuid="d7996a62-3e76-4938-979c-155205ed1ba2"/>
+				<textElement>
+					<font fontName="Arial" size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restaurante Nicole]]></text>
+			</staticText>
+			<image>
+				<reportElement x="54" y="2" width="75" height="75" uuid="00a18595-7140-44d4-85c4-b6225de64ba3"/>
+				<imageExpression><![CDATA["C:\\Users\\usuario\\Documents\\NetBeansProjects\\SoftRest\\SofRest\\src\\Imagenes\\Restau.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="6" width="188" height="31" uuid="6a5f7dbb-c3e4-4b63-a6b1-81ee3234ebba"/>
+				<textElement>
+					<font fontName="Arial" size="24"/>
+				</textElement>
+				<text><![CDATA[Reporte de Menu]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="12" width="100" height="20" uuid="9595ae9e-5414-45fa-9917-5129f41dec8e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Creacion Menu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="100" height="20" uuid="6e4a9a1b-0c9b-46ba-8f95-9ccba95bc347"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero de Menu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="12" width="76" height="20" uuid="42ebcf4f-324a-494f-830b-26a588757e61"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo de Plato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="12" width="100" height="20" uuid="c48d338a-9b0f-4a67-ad83-47d90711075c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local donde se Hizo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="137" y="16" width="100" height="20" uuid="1a4db500-1d88-467b-bb1e-dea52f85edcf"/>
+				<textFieldExpression><![CDATA[$F{fecha_menu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="16" width="43" height="20" uuid="e3e15457-da8d-460b-9420-e0ed80242e06"/>
+				<textFieldExpression><![CDATA[$F{num_menu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="16" width="42" height="20" uuid="9eb0097c-6750-4def-8b8d-1aa10e8222a5"/>
+				<textFieldExpression><![CDATA[$F{id_plato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="16" width="49" height="20" uuid="34ae46b2-5b80-4d02-8f5d-68610d8d2297"/>
+				<textFieldExpression><![CDATA[$F{menu_id_local}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="454" y="34" width="25" height="20" uuid="cde20e82-00a1-4440-9d90-0538d2e70323"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="519" y="34" width="36" height="20" uuid="5b5a342a-f7d1-4c6a-a856-2fb8013a5996"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="493" y="34" width="17" height="20" uuid="47a63b6d-cdd6-4591-8335-93ab2ba68b34"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="34" width="41" height="20" uuid="fc4571b6-9975-409f-b748-132bd55ee2b5"/>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

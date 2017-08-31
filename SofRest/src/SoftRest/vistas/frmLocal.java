@@ -11,7 +11,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.JViewport;
-import jdk.nashorn.internal.objects.Global;
+import SoftRest.vistas.Global;
 
 /**
  *
@@ -481,7 +481,8 @@ public class frmLocal extends javax.swing.JInternalFrame {
 
     private void btReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReporteActionPerformed
         try {
-          
+            Global.generarReporte("ReporteMenu");
+            Global.generarReporte("ReporteLocales");
         } catch (Exception ex) { }
     }//GEN-LAST:event_btReporteActionPerformed
 
