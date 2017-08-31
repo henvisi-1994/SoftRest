@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Empleados" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="24ea12fd-6607-4a9f-b287-b5b886708688">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CEDULA_EMP" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+  empleado.ced_empleado,
+  empleado.nombre_emp,
+  empleado.dir_emp,
+  empleado.telf_emp,
+  empleado.fecha_ingreso_emp,
+  cargo.nombre_cargo,
+  local.dir_loc
+FROM
+  public.empleado,
+  public.cargo,
+  public.local
+WHERE
+  ced_empleado like '%$P!{CEDULA_EMP}%'
+  AND cargo.id_cargo = empleado.id_cargo
+  AND local.id_local = empleado.id_local;]]>
+	</queryString>
+	<field name="ced_empleado" class="java.lang.String"/>
+	<field name="nombre_emp" class="java.lang.String"/>
+	<field name="dir_emp" class="java.lang.String"/>
+	<field name="telf_emp" class="java.lang.String"/>
+	<field name="fecha_ingreso_emp" class="java.sql.Date"/>
+	<field name="nombre_cargo" class="java.lang.String"/>
+	<field name="dir_loc" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="44" width="555" height="35" uuid="a6ac0b6a-3c9f-4756-a44b-64c753c12c22"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Hoja de Ingreso de  Empleado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="44" uuid="f4cf493f-2001-4369-be35-ebbf46d52775"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restaurante Nicole]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="315" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="186" width="555" height="119" uuid="a51ce540-20c7-4a22-9968-0da18330434f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="164" uuid="30a6fa3f-84bc-4668-a84d-d3c53cfac4db"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="24" width="100" height="20" uuid="eebfde86-bcf4-4d90-b4ae-99e566a28bd6"/>
+				<text><![CDATA[Cedula:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="24" width="100" height="20" uuid="dfa26e5b-782e-4cdd-bdc8-f7dbc4edaa24"/>
+				<textFieldExpression><![CDATA[$F{ced_empleado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="55" width="100" height="20" uuid="a8be41a8-9ada-4480-b15c-6b89d398d7a0"/>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="55" width="100" height="20" uuid="45e11470-d731-4eee-a80a-de1af55f77ec"/>
+				<textFieldExpression><![CDATA[$F{nombre_emp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="100" width="100" height="20" uuid="3df7fe98-7f99-4e33-a207-09037c028c90"/>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="100" width="100" height="20" uuid="6d7be648-ea76-423b-b586-527e03efef5f"/>
+				<textFieldExpression><![CDATA[$F{dir_emp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="134" width="100" height="20" uuid="e75ddc9c-f35b-417d-ac7e-ea8cb9efbcf1"/>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="134" width="100" height="20" uuid="6ad0d078-4ec5-4bad-a477-63623ac76890"/>
+				<textFieldExpression><![CDATA[$F{telf_emp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="217" width="100" height="20" uuid="8da82def-41f6-434c-8faa-2d65c9311dae"/>
+				<text><![CDATA[Fecha de ingreso]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="217" width="100" height="20" uuid="300120ef-6757-418c-82f2-f8dcdf46764d"/>
+				<textFieldExpression><![CDATA[$F{fecha_ingreso_emp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="248" width="100" height="20" uuid="933c6722-a8bd-4b95-931d-871b53164fe5"/>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="248" width="100" height="20" uuid="c3c3af37-d365-4892-8efb-d4206d3e4c7c"/>
+				<textFieldExpression><![CDATA[$F{nombre_cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="280" width="100" height="20" uuid="f789b5f5-c91c-440b-b72c-379252dd3398"/>
+				<text><![CDATA[Direccion del Local]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="280" width="100" height="20" uuid="b65c2ae0-7c51-40cb-9d72-806e35c7beae"/>
+				<textFieldExpression><![CDATA[$F{dir_loc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="24" uuid="31907e2a-8ba1-4e9e-aa0c-951c854a016a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Personales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="186" width="555" height="26" uuid="7eead9a4-5fae-4a8f-b615-35f68f596cff"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignacion de Cargo]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

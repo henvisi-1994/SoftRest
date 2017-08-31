@@ -5,26 +5,57 @@
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
-     empleado.id_cargo,
-     empleado.nombre_emp,
-     empleado."ced_empleado" AS empleado_ced_empleado,
-     empleado."nombre_emp" AS empleado_nombre_emp,
-     empleado."id_cargo" AS empleado_id_cargo
+  empleado.ced_empleado,
+  empleado.nombre_emp,
+  empleado.dir_emp,
+  empleado.telf_emp,
+  empleado.fecha_ingreso_emp,
+  cargo.nombre_cargo,
+  local.dir_loc
 FROM
-     "public"."empleado" empleado]]>
+  public.empleado,
+  public.cargo,
+  public.local
+WHERE
+ cargo.id_cargo = empleado.id_cargo
+  AND local.id_local = empleado.id_local;]]>
 	</queryString>
-	<field name="id_cargo" class="java.lang.Long"/>
+	<field name="ced_empleado" class="java.lang.String"/>
 	<field name="nombre_emp" class="java.lang.String"/>
-	<field name="empleado_ced_empleado" class="java.lang.String"/>
-	<field name="empleado_nombre_emp" class="java.lang.String"/>
-	<field name="empleado_id_cargo" class="java.lang.Long"/>
+	<field name="dir_emp" class="java.lang.String"/>
+	<field name="telf_emp" class="java.lang.String"/>
+	<field name="fecha_ingreso_emp" class="java.sql.Date"/>
+	<field name="nombre_cargo" class="java.lang.String"/>
+	<field name="dir_loc" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<columnHeader>
-		<band height="61" splitType="Stretch">
+	<title>
+		<band height="50">
 			<staticText>
-				<reportElement x="52" y="10" width="116" height="15" uuid="2bf07f9f-8c51-41c1-ba23-f4a52d91e6fc"/>
+				<reportElement x="-24" y="0" width="579" height="50" uuid="03b397dd-8607-43c2-847a-fc64ec9000e4"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restaurante Nicole]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="27" uuid="e7ef6ebb-d754-4040-9e7f-9c3d18c39762"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Empleados]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="132" y="0" width="182" height="25" uuid="2bf07f9f-8c51-41c1-ba23-f4a52d91e6fc"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -32,10 +63,13 @@ FROM
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Nombre de Empleado:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="373" y="10" width="100" height="20" uuid="97c5bc53-3647-429a-9546-d9a085fa69e1"/>
+				<reportElement x="314" y="0" width="100" height="25" uuid="97c5bc53-3647-429a-9546-d9a085fa69e1"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -43,10 +77,13 @@ FROM
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Cargo:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="373" y="41" width="100" height="20" uuid="b0d1c3b6-9c0a-4564-a7e5-aac8f56914af"/>
+			<staticText>
+				<reportElement x="414" y="0" width="100" height="25" uuid="bd0c4904-4468-48a0-a825-1c4a5396ec37"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -54,10 +91,42 @@ FROM
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{id_cargo}]]></textFieldExpression>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="132" height="25" uuid="37c38e57-6862-4fb0-9b51-5fcca5049de1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="132" height="20" uuid="438871d2-8ce6-45f8-a09a-9e0c8535f08e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{ced_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="68" y="41" width="100" height="20" uuid="0acd9222-f6dd-4a48-b26f-c2ef9b188e1c"/>
+				<reportElement x="132" y="2" width="182" height="20" uuid="805af5ce-12ba-4e0b-8a29-fe972ee0d6dc"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -67,9 +136,28 @@ FROM
 				</box>
 				<textFieldExpression><![CDATA[$F{nombre_emp}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="314" y="2" width="100" height="20" uuid="dd15db1c-5ca1-475e-8fe8-aacb2cd06805"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{nombre_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="2" width="100" height="20" uuid="0bfdb807-ec5f-45b3-95fc-4e78014f4612"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{fecha_ingreso_emp}]]></textFieldExpression>
+			</textField>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
 	</detail>
 </jasperReport>

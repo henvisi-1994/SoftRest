@@ -13,10 +13,14 @@ import SoftRest.modelos.TipoPlato;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -103,6 +107,7 @@ public class dlgPlato extends javax.swing.JDialog {
         btGuardar = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btInicio = new javax.swing.JButton();
         btAtras = new javax.swing.JButton();
@@ -206,6 +211,17 @@ public class dlgPlato extends javax.swing.JDialog {
             }
         });
         jToolBar1.add(btEliminar);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pdf.png"))); // NOI18N
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator1);
 
         btInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SoftRest/Imagenes2/inicio.png"))); // NOI18N
@@ -694,6 +710,12 @@ public class dlgPlato extends javax.swing.JDialog {
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
         Validaciones.esRequerido(txtNombre);
     }//GEN-LAST:event_txtNombreFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Global.generarReporte("Platos");
+         } catch (Exception ex) { } 
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -873,6 +895,7 @@ public class dlgPlato extends javax.swing.JDialog {
     private javax.swing.JButton btbuscar_varios;
     private javax.swing.JButton btnueva_cat;
     private javax.swing.JComboBox cmbTipoPlato;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -218,7 +218,7 @@ public class cEmpleado1 {
     }
     //consulta todos los elementos de la tabla productos
     public void consultaAll() {
-        String str = "select * from view_plato ";
+        String str = "select * from view_empleado ";
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
