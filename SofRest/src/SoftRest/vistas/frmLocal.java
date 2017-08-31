@@ -239,7 +239,7 @@ public class frmLocal extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Datos de la Cargo");
+        jLabel3.setText("Datos del Local");
         jLabel3.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

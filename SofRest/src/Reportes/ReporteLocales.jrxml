@@ -74,21 +74,14 @@ ORDER BY
 				<text><![CDATA[Direccion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="0" width="60" height="20" uuid="53cb809f-b1c8-4d72-b119-c010bbb49015"/>
-				<textElement>
-					<font isBold="true" isUnderline="false" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[# Proveedor]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="290" y="0" width="90" height="20" uuid="d8cd6603-eaa1-43fc-aafc-7dd5e0ce935f"/>
+				<reportElement x="257" y="0" width="90" height="20" uuid="d8cd6603-eaa1-43fc-aafc-7dd5e0ce935f"/>
 				<textElement>
 					<font isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Nombre Proveedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="427" y="0" width="100" height="20" uuid="0ad212a7-0f6b-47a0-a997-655103b2d2d2"/>
+				<reportElement x="422" y="0" width="100" height="20" uuid="0ad212a7-0f6b-47a0-a997-655103b2d2d2"/>
 				<textElement>
 					<font isBold="true" isUnderline="false"/>
 				</textElement>
@@ -103,15 +96,11 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{id_local}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="0" width="117" height="20" uuid="527dc1d0-e81a-463b-ac90-a6ac549aade4"/>
+				<reportElement x="94" y="0" width="117" height="20" uuid="527dc1d0-e81a-463b-ac90-a6ac549aade4"/>
 				<textFieldExpression><![CDATA[$F{dir_loc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="218" y="0" width="29" height="20" uuid="32b15cca-0c10-4d83-a1a5-49dc26585e4e"/>
-				<textFieldExpression><![CDATA[$F{id_prov}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="278" y="0" width="117" height="20" uuid="a04d758c-33ae-401c-967e-4eab27cca9bc"/>
+				<reportElement x="257" y="0" width="117" height="20" uuid="a04d758c-33ae-401c-967e-4eab27cca9bc"/>
 				<textFieldExpression><![CDATA[$F{nom_prov}]]></textFieldExpression>
 			</textField>
 			<textField>

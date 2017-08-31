@@ -86,7 +86,7 @@ public class frmProveedor extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Gestion de Empleados");
+        setTitle("Gestion de Proveedores");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Personales"));
