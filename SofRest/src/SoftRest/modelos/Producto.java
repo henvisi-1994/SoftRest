@@ -16,6 +16,7 @@ public class Producto {
     public int cantidad_proc;
     public double precio_produc;
     public int id_categoria;
+    private String nom_categoria;
 
     public Producto() {
     }
@@ -28,6 +29,16 @@ public class Producto {
         this.precio_produc = precio_produc;
         this.id_categoria = id_categoria;
     }
+
+    public Producto(int id_producto, String nom_produc, String unidad_medida_produc, int cantidad_proc, double precio_produc, String nom_categoria) {
+        this.id_producto = id_producto;
+        this.nom_produc = nom_produc;
+        this.unidad_medida_produc = unidad_medida_produc;
+        this.cantidad_proc = cantidad_proc;
+        this.precio_produc = precio_produc;
+        this.nom_categoria = nom_categoria;
+    }
+    
 
     public int getId_producto() {
         return id_producto;
@@ -75,6 +86,14 @@ public class Producto {
 
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
+    }
+
+    public String getNom_categoria() {
+        return nom_categoria;
+    }
+
+    public void setNom_categoria(String nom_categoria) {
+        this.nom_categoria = nom_categoria;
     }
     
     

@@ -14,8 +14,7 @@ public class cProductoFalta {
     DefaultTableModel datos;
     
     //etiquetas de tabla
-    public String[] columnNames = {"id_producto","nom_produc","unidad_medida_produc","cantidad_proc","precio_produc" +
-                                   "id_categoria"};
+    public String[] columnNames = {"id_producto","nom_produc","unidad_medida_produc","cantidad_proc","precio_produc","categoria"};
     
     //metodo que retorna el numero de filas
     public int Count(){return datos.getRowCount();}
@@ -50,9 +49,9 @@ public class cProductoFalta {
         Object[] row = {new Integer(id), nom,new String(uni), new Integer(can), new Double (pre), new String (cat)};
         datos.addRow(row);
     }
-    public void addFilaTP(int id, String nom, String uni,int can,double pre,int idcate)
+    public void addFilaTP(int id, String nom, String uni,int can,double pre,String cat)
     {
-        Object[] row={new Integer(id), nom,new String(uni), new Integer(can), new Double (pre), idcate};
+        Object[] row={new Integer(id), nom,new String(uni), new Integer(can), new Double (pre), new String(cat)};
         datos.addRow(row);
     }
     //limpia todos los datos del Modelo de tabla
@@ -154,7 +153,7 @@ public class cProductoFalta {
             Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
                 id = Integer.parseInt(rs.getObject("id_producto").toString());
-                nom = rs.getObject("nombre_produc").toString();
+                nom = rs.getObject("nom_produc").toString();
                 can = rs.getObject("unidad_medida_produc").toString();
                 cant = Integer.parseInt(rs.getObject("cantidad_produc").toString());
                 pre = Double.parseDouble(rs.getObject("precio_produc").toString());
@@ -186,16 +185,17 @@ public class cProductoFalta {
             Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
                 id=Integer.parseInt(rs.getObject("id_producto").toString());
-                nom=rs.getObject("nombre_produc").toString();
+                nom=rs.getObject("nom_produc").toString();
                 uni=rs.getObject("unidad_medida_produc").toString();
                 cant=Integer.parseInt(rs.getObject("cantidad_produc").toString());
                 pre=Double.parseDouble(rs.getObject("precio_produc").toString());
                 
                               
                 //obtiene el nombre del tipo de plato   
-                idcate =Integer.parseInt(rs.getObject("id_categoria").toString());
-                addFilaTP(id, nom,uni,cant,pre,idcate);
-                Lista.add(new Producto(id, nom, uni, cant, pre, idcate));
+                cate =(rs.getObject("nombre_categoria").toString());
+                
+                addFilaTP(id, nom,uni,cant,pre,cate);
+                Lista.add(new Producto(id, nom, uni, cant, pre, cate));
                 System.out.println(id);
             }
             ConexionBD.CloseBD();

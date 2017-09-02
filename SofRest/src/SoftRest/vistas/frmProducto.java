@@ -841,8 +841,8 @@ public class frmProducto extends javax.swing.JDialog {
         btSiguiente.setEnabled(ok);
         btUltimo.setEnabled(ok);    
         //hacen lo contrario de los otros botones
-        btGuardar.setEnabled(ok);
-        btCancelar.setEnabled(ok);
+        btGuardar.setEnabled(!ok);
+        btCancelar.setEnabled(!ok);
     }
 
     //metodo para crear un objeto
