@@ -45,7 +45,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
@@ -102,9 +101,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu6);
 
-        jMenuItem18.setText("Configuracion");
-        jMenu1.add(jMenuItem18);
-
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Inventario");
@@ -152,6 +148,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem12);
 
         jMenuItem22.setText("Producto");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem22);
 
         jMenuItem16.setText("Categoria");
@@ -330,6 +331,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         dlg.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+       frmProducto pro=new frmProducto(this, false);
+       pro.setModal(true);
+       pro.setVisible(true);
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,7 +399,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;

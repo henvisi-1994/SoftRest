@@ -326,7 +326,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         txtCedula.requestFocus();
         //desabilitar botones
         habilitar_botones(false);
-        op = 1;
+        op = 1;//
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed

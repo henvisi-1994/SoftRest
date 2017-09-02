@@ -581,7 +581,7 @@ public class frmLocal extends javax.swing.JInternalFrame {
         btAtras.setEnabled(ok);
         btSiguiente.setEnabled(ok);
         btUltimo.setEnabled(ok);    
-        //hacen lo contrario de los otros botones
+        //hacen lo contrario de los otros botonesfg
         btGuardar.setEnabled(!ok);
         btCancelar.setEnabled(!ok);
     }

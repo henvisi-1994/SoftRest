@@ -1,109 +1,130 @@
 package SoftRest.controladores;
 
 import SoftRest.modelos.ConexionBD;
+import SoftRest.modelos.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import SoftRest.modelos.Cargo;
 
 public class cProductoFalta {
+    
+    //arreglo de objetos
+    ArrayList<Producto> Lista;
+    
     DefaultTableModel datos;
     
     //etiquetas de tabla
-    public String[] columnNames = {"Código", "Cargo"};
+    public String[] columnNames = {"id_producto","nom_produc","unidad_medida_produc","cantidad_proc","precio_produc" +
+                                   "id_categoria"};
     
+    //metodo que retorna el numero de filas
+    public int Count(){return datos.getRowCount();}
     //Constructor
     public cProductoFalta(){
-        datos=new DefaultTableModel();
-        for(int i=0;i<columnNames.length;i++)
-            datos.addColumn(columnNames[i]);
-    }
+        Lista = new ArrayList<Producto>();
+        datos = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //return (column == 7) || (column == 8);
+                //bloquea edición de columnas
+                return false;
+            }
 
-    //metodo que retorna el numero de filas
-   public int Count(){return datos.getRowCount();}
-   
-   //Metodos que retornan valores de una celda segun campos individuales
-    public String get_Codigo(int pos){
-        if (pos==-1|| pos <0) {
-            return "0";
-        } else {
-             return datos.getValueAt(pos, 0).toString();
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 7 || (columnIndex == 8)) {
+                    return Boolean.class;
+                }
+                return super.getColumnClass(columnIndex);
+            }
+        };
+        for (int i = 0; i < columnNames.length; i++) {
+            datos.addColumn(columnNames[i]);
         }
     }
-    public String get_Nombre(int pos){
-        return datos.getValueAt(pos, 1).toString();
+    public Producto get_Producto(int pos) {
+        return (Producto) Lista.get(pos);
     }
-    
-   //agrega la nueva fila
-    public void addFila(int cod,String nombre){
-        Object[] row={new Integer(cod),nombre};
+    //agrega la nueva fila al modelo de tabla   
+    public void addFila(int id, String nom, String uni,int can,double pre,String cat) {
+        Object[] row = {new Integer(id), nom,new String(uni), new Integer(can), new Double (pre), new String (cat)};
+        datos.addRow(row);
+    }
+    public void addFilaTP(int id, String nom, String uni,int can,double pre,int idcate)
+    {
+        Object[] row={new Integer(id), nom,new String(uni), new Integer(can), new Double (pre), idcate};
         datos.addRow(row);
     }
     //limpia todos los datos del Modelo de tabla
-    public void reset()
-    {
-        while(Count()>0)
-            datos.removeRow(Count()-1);
-    }
-    //Retorna el modelo de tabla
-    public DefaultTableModel getTablaDatos()
-    {
-        return datos;
+    public void reset() {
+        while (Count() > 0) {
+            datos.removeRow(Count() - 1);
+        }
     }
 
+    //Retorna el modelo de tabla
+    public DefaultTableModel getTablaDatos() {
+        return datos;
+    }
     /********Metodos de acceso a la base de datos*/
     //inserta un registro en la base de datos
-    public void insertar(Cargo ob)
+    public void insertar(Producto ob)
     {
-        String str="insert into cargo(nombre_cargo) values(?)";
+        String str="insert into productos (id_producto,nom_produc,unidad_medida_produc,cantidad_proc,precio_produc,id_categoria) values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
-        param.add(ob.getNombre_cargo());
+        param.add(ob.getId_producto());
+        param.add(ob.getNom_produc());
+        param.add(ob.getUnidad_medida_produc());
+        param.add(ob.getCantidad_proc());
+        param.add(ob.getPrecio_produc());
+        param.add(ob.getId_categoria());
 
         System.out.print(str);
         //boolean estado=false;
-        try{
-            int cod=Integer.parseInt(get_Codigo(Count()-1))+1; //extraer el último código generado
-             System.out.print("Ultimo codigo "+ cod);
-            //modifica secuencia según codigo del último registro
-            ConexionBD.EjecutarSql("ALTER SEQUENCE sec_idcargo RESTART WITH "+cod);
-            ConexionBD.Ejecutar_sql_parametro(str,param);
-            //estado=true;
+       try {
+            Producto ob1 = (Producto) Lista.get(Count() - 1); //extraer el último código generado 
+            int cod = ob1.getId_producto()+ 1; //incrementa en 1 último código generado
+            System.out.println("Ultimo codigo " + cod);
+            //modifica la secuencia según codigo del último registro
+            ConexionBD.EjecutarSql("ALTER SEQUENCE sec_id_producto RESTART WITH " + cod);
+            ConexionBD.Ejecutar_sql_parametro(str, param);
+
             System.out.print("inserto");
-            
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al insertar el nuevo registro");
         }
-        catch(Exception ex){throw new RuntimeException("Error al insertar el nuevo registro");}
         //return estado;
     }
 
     //actualizar un registro en la base de datos
-    public void actualizar(Cargo ob)
-    {
-        String str="update cargo set nombre_cargo=? where id_cargo=?";
+    public void actualizar(Producto ob) {
+        String str = "update productos set nom_produc=?, unidad_medida_produc=?, cantidad_proc=?, precio_produc=?, id_categoria=? where id_producto=?";
         //lista de parametros
-        ArrayList param=new ArrayList();
-        param.add(ob.getNombre_cargo());
-        param.add(ob.getCodigo_cargo());           
-
+        ArrayList param = new ArrayList();
+        param.add(ob.getNom_produc());
+        param.add(ob.getUnidad_medida_produc());
+        param.add(ob.getCantidad_proc());
+        param.add(ob.getPrecio_produc());
+        param.add(ob.getId_categoria());
+        param.add(ob.getId_producto());
+        
         System.out.print(str);
         //boolean estado=false;
-        try{
-            ConexionBD.Ejecutar_sql_parametro(str,param);
+        try {
+            ConexionBD.Ejecutar_sql_parametro(str, param);
             //estado=true;
             System.out.print("actualizacion exitosa");
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException("Error al actualizar los datos ");
-            //throw new RuntimeException(ex.getMessage());
-
         }
         //return estado;
-    }   
+    }
     
      //actualizar un registro en la base de datos
     public void eliminar(int cod)
     {
-        String str="delete from cargo where id_cargo=?";
+        String str="delete from productos where id_producto=?";
         //lista de parametros
         ArrayList param=new ArrayList();        
         param.add(cod);           
@@ -124,73 +145,150 @@ public class cProductoFalta {
     } 
 
     //carga datos en el modelo de tabla
-    public void rellenar(ResultSet rs)
+   public void rellenar(ResultSet rs) {
+        try {
+            double pre;
+            int id, categor,cant;
+            String nom,can,cate;
+            reset();  //limpia modelo de tabla
+            Lista.clear(); //limpia la lista de productos
+            while (rs.next()) {
+                id = Integer.parseInt(rs.getObject("id_producto").toString());
+                nom = rs.getObject("nombre_produc").toString();
+                can = rs.getObject("unidad_medida_produc").toString();
+                cant = Integer.parseInt(rs.getObject("cantidad_produc").toString());
+                pre = Double.parseDouble(rs.getObject("precio_produc").toString());
+                //obtiene el nombre de la categoria
+                categor = Integer.parseInt(rs.getObject("id_categoria").toString());
+                cCategoria liscat = new cCategoria();
+                liscat.consultaAll();
+                cate = liscat.get_Nombre(liscat.buscar_codigo(" " + categor));
+                addFila(id, nom, can, cant, pre, cate);
+                Lista.add(new Producto(id, nom, can, cant, pre, categor));
+                 System.out.println(id);
+            }
+            ConexionBD.CloseBD();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+   public void rellenarV(ResultSet rs)
     {
         try{
-            int cod;
-            String nom;
-            reset();  //limpia la lista de productos
+            int id, can;
+            String cod, nom, desc, cate,fabr,nomTiPlato;
+           
+           String uni;
+           double pre;
+           int cant,idcate;
+           boolean iva, estado;
+            reset();  //limpia modelo de tabla
+            Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
-                cod=Integer.parseInt(rs.getObject("id_cargo").toString());
-                nom=rs.getObject("nombre_cargo").toString();
-                addFila(cod,nom); //añade una fila al modelo
-                System.out.println(nom);
+                id=Integer.parseInt(rs.getObject("id_producto").toString());
+                nom=rs.getObject("nombre_produc").toString();
+                uni=rs.getObject("unidad_medida_produc").toString();
+                cant=Integer.parseInt(rs.getObject("cantidad_produc").toString());
+                pre=Double.parseDouble(rs.getObject("precio_produc").toString());
+                
+                              
+                //obtiene el nombre del tipo de plato   
+                idcate =Integer.parseInt(rs.getObject("id_categoria").toString());
+                addFilaTP(id, nom,uni,cant,pre,idcate);
+                Lista.add(new Producto(id, nom, uni, cant, pre, idcate));
+                System.out.println(id);
             }
-            System.out.println("Aqui  1.2.1");
             ConexionBD.CloseBD();
         }
-        catch(Exception ex){//throw new RuntimeException("Error de visualización de datos");            
-        }
+        catch(Exception ex){System.out.println(ex.getMessage());}
     }
-
-    //consulta todos los elementos de la tabla productos
-    public void consultaAll()
-    {
-        String str="select * from cargo order by id_cargo";
+   //consulta todos los elementos de la tabla productos
+    public void consultaAll() {
+        String str = "select * from view_producto ";
         ResultSet rs = null;
-        try{
-            System.out.println("Aqui  1.1");
-            rs=ConexionBD.Consulta(str);
-            System.out.println("Aqui  1.2");
-            rellenar(rs);
-            System.out.println("Aqui  1.3");
+        try {
+            rs = ConexionBD.Consulta(str);
+            rellenarV(rs);
             rs.close();
+        } catch (Exception ex) {
         }
-        catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
     }
 
-    //consulta los elementos segun la descripci�n
+    //consulta por nombre
+    public cProductoFalta buscar_nombre(String nom) {
+        cProductoFalta ob = null;
+        String str = "select * from productos where nom_produc like '%"
+                + nom + "%' order by id_producto";
+        System.out.println("" + str);
+        ResultSet rs = null;
+        try {
+            rs = ConexionBD.Consulta(str);
+            ob = new cProductoFalta();
+            ob.rellenar(rs);
+            System.out.println("relleno");
+            rs.close();
+        } catch (Exception ex) {
+        }
+        return ob;
+    }
     public cProductoFalta buscar_varios(String nom)
-    {
-        cProductoFalta cat=null;
-        String str="select * from cargo where nombre_cargo ilike '%"
-                + nom + "%'" + "order by id_cargo";
-        System.out.println(""+str);
-        ResultSet rs = null;
-        try{
-            rs=ConexionBD.Consulta(str);
-            cat=new cProductoFalta();
-            cat.rellenar(rs);                
-            rs.close();
-        }
-        catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
-        return cat;
-    }
+       {
+           cProductoFalta plat=null;
+           String str="select * from view_producto where nom_producto ilike '%"
+                   + nom + "%'" + "order by id_producto";
+           System.out.println(""+str);
+           ResultSet rs = null;
+           try{
+               rs=ConexionBD.Consulta(str);
+               plat=new cProductoFalta();
+               plat.rellenarV(rs);                
+               rs.close();
+           }
+           catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
+           return plat;
+       }
+       //consulta por codigo
+       public cProductoFalta buscar_codigo(String codigo) {
+           cProductoFalta ob = null;
+           String str = "select * from productos where id_producto="
+                   + codigo ;
+           System.out.println("" + str);
+           ResultSet rs = null;
+           try {
+               rs = ConexionBD.Consulta(str);
+               ob = new cProductoFalta();
+               ob.rellenar(rs);
+               System.out.println("relleno");
+               rs.close();
+           } catch (Exception ex) {
+           }
+           return ob;
+       }
 
-    //buscar por código
-    public int buscar_codigo(String cod)
-    {
-        for(int i=0; i<Count();i++)
-            if(get_Codigo(i).equals(cod))
-                return i;
-        return -1;        
-    }
-    //buscar por nombre
-    public int buscar_nombre(String nom)
-    {
-        for(int i=0; i<Count();i++)
-            if(get_Nombre(i).equalsIgnoreCase(nom))
-                return i;
-        return -1;        
+       //consulta por id en base de datos
+       public Producto buscar_id_bd(String id) {
+           cProductoFalta ob = null;
+           String str = "select * from productos where id_prodcuto =" + id;
+           System.out.println("" + str);
+           ResultSet rs = null;
+           try {
+               rs = ConexionBD.Consulta(str);
+               ob = new cProductoFalta();
+               ob.rellenar(rs);
+               System.out.println("relleno");
+               rs.close();
+           } catch (Exception ex) {
+           }
+           return ob.Count() > 0 ? ob.get_Producto(0) : null;
+       }
+
+       //buscar por id
+       public int buscar_id(int id) {
+           for (int i = 0; i < Count(); i++) {
+               if (get_Producto(i).getId_producto()== id) {
+                   return i;
+               }
+           }
+           return -1;
     }
 }

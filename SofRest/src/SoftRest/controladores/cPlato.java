@@ -52,17 +52,13 @@ public class cPlato {
 
     //agrega la nueva fila al modelo de tabla   
     public void addFila(int id, String nom, int cant, String tipo) {
-        Object[] row = {new Integer(id), nom, new Integer(cant),
-            new String(tipo)
-        };
+        Object[] row = {new Integer(id), nom, new Integer(cant),new String(tipo)};
         datos.addRow(row);
     }
     
     public void addFilaTP(int id, String nom, int cant,String tipPlato)
     {
-        Object[] row={new Integer(id),nom,new Integer(cant),
-                      tipPlato
-                     };
+        Object[] row={new Integer(id),nom,new Integer(cant),tipPlato};
         datos.addRow(row);
     }
 
@@ -183,7 +179,6 @@ public class cPlato {
     {
         try{
             int id, can;
-            
             String cod, nom, desc, cate,fabr,nomTiPlato;
            
             boolean iva, estado;
