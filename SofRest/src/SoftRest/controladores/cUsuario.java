@@ -8,6 +8,7 @@ import SoftRest.modelos.Cargo;
 import SoftRest.modelos.Usuario;
 import SoftRest.vistas.FrmMenuPrincipal;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class cUsuario {
 
@@ -204,7 +205,7 @@ public class cUsuario {
         String str = "select * from usuario where nombre_usuario ilike '%"
                 + nombre + "%'" + "and contrasenia_usuario ilike '%"
                 + contrasena + "%'";
-        System.out.println("Paso 2" + str);
+        System.out.println("Paso 2 " + str);
         ResultSet rs = null;
         boolean correcto = false;
         try {
@@ -218,7 +219,7 @@ public class cUsuario {
             {
                 correcto= false;
             }
-            System.out.println("Paso 3"+correcto);
+            System.out.println("Paso 3 "+correcto);
             }
              ConexionBD.CloseBD();
         } catch (Exception ex) {

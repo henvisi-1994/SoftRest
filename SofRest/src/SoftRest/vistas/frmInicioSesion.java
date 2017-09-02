@@ -9,6 +9,7 @@ import SoftRest.controladores.cUsuario;
 import SoftRest.vistas.FrmMenuPrincipal;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -138,9 +139,9 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
     private void Logeo() {
          char clave[]=jpassClave.getPassword();
-        String clavedef=new String(clave);
+        String clavedef=DigestUtils.md5Hex(new String(clave));
         System.out.print("Paso1 Usuario:"+txtUsuario.getText()+"Contrasenia: "+ clavedef);
-        if (lis.Login(txtUsuario.getText(), clavedef)== true)
+        if (lis.Login(txtUsuario.getText(),clavedef.trim())== true)
         {
             this.dispose();
                     FrmMenuPrincipal menu = new FrmMenuPrincipal();

@@ -19,73 +19,95 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
  *
  * @author Berty
  */
 public class Global {
-    public static double iva=0.14;
+
+    public static double iva = 0.14;
+
     //obtiene ruta de la carpeta de reportes
-    public static String getPathReport(){
-        return getPath()+"Reportes\\";
+    public static String getPathReport() {
+        String os = System.getProperty("os.name");
+        if (!os.equals("Linux")) {
+            return getPath() + "Reportes\\";
+        } else {
+            return getPath() + "Reportes//";
+        }
     }
+
     //obtiene ruta de la carpeta de vistas
-    public static String getPathVistas(){
-        return getPath()+"proyinventario\\vistas";
+    public static String getPathVistas() {
+        String os = System.getProperty("os.name");
+        if (!os.equals("Linux")) {
+            return getPath() + "proyinventario\\vistas";
+        } else {
+            return getPath() + "proyinventario//vistas";
+        }
     }
+
     //obtiene ruta de la carpeta de vistas
-    public static String getPathImagenes(){
-        return getPath()+"imagenes\\";
+    public static String getPathImagenes() {
+        String os = System.getProperty("os.name");
+        if (!os.equals("Linux")) {
+            return getPath() + "imagenes\\";
+        } else {
+
+            return getPath() + "imagenes//";
+        }
+
     }
-    
+
     //obtiene ruta del código fuente del Proyecto
-    public static String getPath(){
+    public static String getPath() {
         //extraer ruta del proyecto de forma dinámica
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
         System.out.println("Path del Proyecto " + path);
         //eliminar los dos caracteres del final del path
-        path=path.substring(0,path.length()-2);
-        return path+="\\src\\";
-    }  
-    
+        path = path.substring(0, path.length() - 2);
+          String os = System.getProperty("os.name");
+        if (!os.equals("Linux")) {
+             return path+="\\src\\";
+        }else
+        {
+            return path += "//src//";
+        }
+    }
+
     //genera reportes sin parámetros
-    public static void generarReporte(String reporte) throws JRException, FileNotFoundException
-    {
+    public static void generarReporte(String reporte) throws JRException, FileNotFoundException {
         Map<String, Object> params = new HashMap<String, Object>();
-        generarReporte(reporte,params);
-    }  
-    
+        generarReporte(reporte, params);
+    }
+
     //carga reporte simple
-    public static void generarReporte(String reporte,Map<String, Object> params) throws JRException, FileNotFoundException {     
+    public static void generarReporte(String reporte, Map<String, Object> params) throws JRException, FileNotFoundException {
         //conexión base de datos
-        Connection con= new ConexionBD().ConectarBD();         
+        Connection con = new ConexionBD().ConectarBD();
         //extraer ruta de la carpeta de reportes     
-        String path = Global.getPathReport()+reporte; 
-        String pathlogo = Global.getPathImagenes()+"logo.jpg"; 
+        String path = Global.getPathReport() + reporte;
+        String pathlogo = Global.getPathImagenes() + "logo.jpg";
         //reporte fuente
-        String reportSource = path+".jrxml";
+        String reportSource = path + ".jrxml";
         //archivo pdf destino
-        String reportDest  = path+".pdf";  
-        
+        String reportDest = path + ".pdf";
+
         System.out.println(reportSource);
         System.out.println(reportDest);
         System.out.println(pathlogo);
-        
+
         //Map<String, Object> params = new HashMap<String, Object>();
-        params.put("Titulo",new String("Empresa ABC"));
-        params.put("Logo",new String(pathlogo));
-        
-        try
-        {
+        params.put("Titulo", new String("Empresa ABC"));
+        params.put("Logo", new String(pathlogo));
+
+        try {
             JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, con);            
-            JasperExportManager.exportReportToPdfFile(jasperPrint, reportDest);            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, con);
+            JasperExportManager.exportReportToPdfFile(jasperPrint, reportDest);
             JasperViewer.viewReport(jasperPrint, false);
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             ex.printStackTrace();
         }
     }
