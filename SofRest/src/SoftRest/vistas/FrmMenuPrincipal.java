@@ -24,9 +24,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public FrmMenuPrincipal() {
         initComponents();
         disenio("fondo.jpg");
-        Connection cn =ConexionBD.ConectarBD();
+        Connection cn = ConexionBD.ConectarBD();
 
-        
     }
 
     /**
@@ -259,13 +258,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        frmClientes cli=new frmClientes();
-        cli.setSize(568,350);
+        frmClientes cli = new frmClientes();
+        cli.setSize(568, 350);
         Dimension desktopSize = Escritorio.getSize();
         Dimension jInternalFrameSize = cli.getSize();
         cli.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -275,13 +274,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        frmClientesLista clilis=new frmClientesLista();
+        frmClientesLista clilis = new frmClientesLista();
         clilis.setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        frmCargo cargo=new frmCargo();
-        cargo.setSize(568,350);
+        frmCargo cargo = new frmCargo();
+        cargo.setSize(568, 350);
         Dimension desktopSize = Escritorio.getSize();
         Dimension jInternalFrameSize = cargo.getSize();
         cargo.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -291,8 +290,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        frmCategoria cargo=new frmCategoria();
-        cargo.setSize(568,350);
+        frmCategoria cargo = new frmCategoria();
+        cargo.setSize(568, 350);
         Dimension desktopSize = Escritorio.getSize();
         Dimension jInternalFrameSize = cargo.getSize();
         cargo.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -302,8 +301,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        frmLocal local=new frmLocal();
-        local.setSize(568,350);
+        frmLocal local = new frmLocal();
+        local.setSize(568, 350);
         Dimension desktopSize = Escritorio.getSize();
         Dimension jInternalFrameSize = local.getSize();
         local.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -332,9 +331,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-       frmProducto pro=new frmProducto(this, false);
-       pro.setModal(true);
-       pro.setVisible(true);
+        frmProducto pro = new frmProducto(this, false);
+        pro.setModal(true);
+        pro.setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     /**
@@ -413,5 +412,4 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 
-   
 }

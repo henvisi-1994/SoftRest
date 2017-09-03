@@ -13,8 +13,7 @@ public class cEmpleado1 {
 
     //tabla de datos
     DefaultTableModel datos;
-    public String[] columnNames = {"Cedula", "Nombre", "Direccion", "Telefono", "Fecha_Ingreso","Cargo", "Local"
-    };
+    public String[] columnNames = {"Cedula", "Nombre", "Direccion", "Telefono", "Fecha_Ingreso","Cargo", "Local" };
 
     //retorna el número de filas
     public int Count() {
@@ -162,7 +161,6 @@ public class cEmpleado1 {
             int  car, fab;
             String ced, nom, dir, tel, fec,cate,loca;
             int loc;
-            boolean iva, estado;
             reset();  //limpia modelo de tabla
             Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
@@ -194,7 +192,7 @@ public class cEmpleado1 {
    public void rellenarV(ResultSet rs)
     {
         try{
-            int nomcargo,dirlocal;
+            String nomcargo,dirlocal;
             String ced,nom,dir,tel,fec, desc;
             reset();  //limpia modelo de tabla
             Lista.clear(); //limpia la lista de productos
@@ -202,13 +200,13 @@ public class cEmpleado1 {
                 ced=rs.getObject("ced_empleado").toString();
                 nom=rs.getObject("nombre_emp").toString();
                 dir=rs.getObject("dir_emp").toString();
-                tel=rs.getObject("tel_emp").toString();
+                tel=rs.getObject("telf_emp").toString();
                 fec=rs.getObject("fecha_ingreso_emp").toString();              
                 //obtiene el nombre del tipo de plato   
-                nomcargo = Integer.parseInt(rs.getObject("nombre_cargo").toString());
+                nomcargo = rs.getObject("nombre_cargo").toString();
                 //obtiene el nombre del tipo de plato   
-                dirlocal = Integer.parseInt( rs.getObject("dir_loc").toString());
-                addFilaTP(ced, nom, dir, tel, fec, dir, fec);
+                dirlocal =  rs.getObject("dir_loc").toString();
+                addFilaTP(ced, nom, dir, tel, fec, nomcargo, dirlocal);
                 Lista.add(new Empleados(ced, nom, dir, tel, fec, nomcargo, dirlocal));
                 System.out.println(ced);
             }
