@@ -1,4 +1,4 @@
-package SoftRest.controladores;
+package SoftRest.modelos;
 
 /**
  *
@@ -7,26 +7,26 @@ package SoftRest.controladores;
 public class Proveedores {
     protected String ruc;
     protected String nombre; 
-    protected String telefono;
-    protected String email;
+    protected String telefono;    
     protected String direccion;
-    
-    public Proveedores(String ruc, String nombre, String telefono, String email, String direccion) {
+    protected int id_local;
+
+    public Proveedores() {
+    }
+
+    public Proveedores(String ruc, String nombre, String telefono, String direccion, int id_local) {
         this.ruc = ruc;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.email = email;
         this.direccion = direccion;
-        }
-    public Proveedores(){
-        
+        this.id_local = id_local;
     }
 
     public String getRuc() {
         return ruc;
     }
 
-    public void setRuc(String cedula) {
+    public void setRuc(String ruc) {
         this.ruc = ruc;
     }
 
@@ -46,14 +46,6 @@ public class Proveedores {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -62,8 +54,16 @@ public class Proveedores {
         this.direccion = direccion;
     }
 
+    public int getId_local() {
+        return id_local;
+    }
+
+    public void setId_local(int id_local) {
+        this.id_local = id_local;
+    }
+    
+    
     public String ImprimirProveedor() {
-        return "[ " + ruc + "\t" + nombre + "\t" + email 
-                + "\t" + direccion + "\t"+ telefono ;
+        return ruc + "\t" + nombre + "\t" + direccion + "\t"+ telefono + "\t"+id_local;
     }    
 }

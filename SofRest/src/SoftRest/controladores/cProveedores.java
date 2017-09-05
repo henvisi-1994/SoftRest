@@ -9,7 +9,7 @@ import SoftRest.modelos.ConexionBD;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import SoftRest.modelos.Empleados;
+import SoftRest.modelos.Proveedores;
 import static SoftRest.vistas.Validaciones.cedula;
 import java.sql.Connection;
 
@@ -25,7 +25,7 @@ public class cProveedores {
 
     //tabla de datos
     DefaultTableModel datos;
-    public String[] columnNames = {"RUC", "Nombre", "Direccion", "Email", "Telefono"};
+    public String[] columnNames = {"Ruc - Cedula", "Nombre", "Direccion", "Telefono", "# Local Abastecido"};
 
     //retorna el número de filas
 
@@ -69,10 +69,9 @@ public class cProveedores {
         return datos.getValueAt(pos, 1).toString();
     }
 
-    //agrega la nueva fila al modelo de tabla   
-
-    public void addFila(String ruc, String nom, String direccion, String email, String telefono) {
-        Object[] row = {new Proveedores(ruc, nom, direccion, email, telefono)};
+    //agrega la nueva fila al modelo de tabla
+    public void addFila(String ruc, String nom, String direccion, String telefono, String id_local) {
+        Object[] row = {new Proveedores(ruc, nom, direccion, telefono,new Integer(id_local))};
         datos.addRow(row);
     }
 
@@ -98,19 +97,15 @@ public class cProveedores {
         cProveedores lis = new cProveedores();
         ob.setRuc(lis.insertar((Proveedores) ob));
         String str = "insert into proveedores("
-                + "ruc_prov, nombre_prov, dir_prov, email_prov, telef_prov) " + "values(?,?,?,?,?)";
+                + "ruc_prov, nombre_prov, dir_prov, telf_prov, id_local) " + "values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getRuc());
         param.add(ob.getNombre());
         param.add(ob.getDireccion());
-        param.add(ob.getEmail());
         param.add(ob.getTelefono());
-        //param.add(1);
-
+        param.add(ob.getId_local());        
         System.out.println(str);
-
-        //boolean estado=false;
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
             System.out.println("inserto");
@@ -118,28 +113,24 @@ public class cProveedores {
         } catch (Exception ex) {
             throw new RuntimeException("Error al insertar el nuevo registro");
         }
-        //return estado;
     }
 
     //actualizar un registro en la base de datos
     public void actualizar(Proveedores ob) {
         cProveedores lis = new cProveedores();
         lis.actualizar((Proveedores) ob);
-
-        String str = "update proveedores SET  nombre_prov=?, dir_prov=?, email_prov=?, telef_prov=? "
+        String str = "update proveedores SET  nombre_prov=?, dir_prov=?, telf_prov=?, id_local=? "
                 + "where ruc_prov=?";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getNombre());
         param.add(ob.getDireccion());
-        param.add(ob.getEmail());
         param.add(ob.getTelefono());        
         param.add(ob.getRuc());
-
+        param.add(ob.getId_local());
         System.out.print(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-
             System.out.print("actualizacion exitosa");
         } catch (Exception ex) {
             throw new RuntimeException("Error al actualizar los datos ");
@@ -170,16 +161,23 @@ public class cProveedores {
     //rellena el modelo de table seg�n los resultados obtenidos de la BD   
     public void rellenar(ResultSet rs) {
         try {
+            //int idloc;
+            String cate,ruc,nom,dir,tel,idloc;
             Proveedores ob = new Proveedores();
             reset();  //limpia modelo de tabla
             Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
-                ob.setRuc(rs.getObject("ruc_prov").toString());
-                ob.setNombre(rs.getObject("nombre_prov").toString());
-                ob.setDireccion(rs.getObject("dir_prov").toString());
-                ob.setEmail(rs.getObject("email_prov").toString());
-                ob.setTelefono(rs.getObject("telef_prov").toString());
-                addFila(ob.getRuc(), ob.getNombre(), ob.getDireccion(), ob.getEmail(), ob.getTelefono());
+                ruc = rs.getObject("ruc_prov").toString();
+                nom = rs.getObject("nombre_prov").toString();
+                dir = rs.getObject("dir_prov").toString();
+                tel = rs.getObject("telf_prov").toString();
+                //obtiene el id de locales
+                idloc = rs.getObject("id_local").toString();
+                cLocales liscat = new cLocales();
+                liscat.consultaAll();
+                cate = liscat.get_Codigo(liscat.buscar_codigo("" + idloc));
+                
+                addFila(ruc, nom, dir, tel,idloc);
                 Lista.add(ob);
                 System.out.println("Nombre: " + ob.getNombre());
             }

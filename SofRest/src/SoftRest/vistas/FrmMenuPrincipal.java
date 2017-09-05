@@ -124,6 +124,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Venta");
 
         jMenuItem23.setText("Menu");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem23);
 
         jMenuItem4.setText("Platos");
@@ -299,16 +304,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        frmProveedor prov = new frmProveedor();
-        int x = 338;
-        int y = Escritorio.getWidth() - 180;
-        prov.setSize(y, x);
-        Dimension desktopSize = Escritorio.getSize();
-        Dimension jInternalFrameSize = prov.getSize();
-        prov.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
-        Escritorio.add(prov);
-        prov.show();
+//        frmProveedor prov = new frmProveedor();
+//        int x = 338;
+//        int y = Escritorio.getWidth() - 180;
+//        prov.setSize(y, x);
+//        Dimension desktopSize = Escritorio.getSize();
+//        Dimension jInternalFrameSize = prov.getSize();
+//        prov.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+//                (desktopSize.height - jInternalFrameSize.height) / 2);
+//        Escritorio.add(prov);
+//        prov.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -322,6 +327,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pro.setModal(true);
         pro.setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        frmMenu menu = new frmMenu();
+        menu.setSize(700, 350);
+        Dimension desktopSize = Escritorio.getSize();
+        Dimension jInternalFrameSize = menu.getSize();
+        menu.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        Escritorio.add(menu);
+        menu.show();
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     /**
      * @param args the command line arguments

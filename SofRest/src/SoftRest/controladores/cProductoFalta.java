@@ -14,7 +14,7 @@ public class cProductoFalta {
     DefaultTableModel datos;
     
     //etiquetas de tabla
-    public String[] columnNames = {"id_producto","nom_produc","unidad_medida_produc","cantidad_proc","precio_produc","categoria"};
+    public String[] columnNames = {"Codigo","Nombre","Unidad Medida","Cantidad","Precio","Categoria"};
     
     //metodo que retorna el numero de filas
     public int Count(){return datos.getRowCount();}
@@ -69,7 +69,7 @@ public class cProductoFalta {
     //inserta un registro en la base de datos
     public void insertar(Producto ob)
     {
-        String str="insert into productos (id_producto,nom_produc,unidad_medida_produc,cantidad_proc,precio_produc,id_categoria) values(?,?,?,?,?,?)";
+        String str="insert into productos (id_producto,nom_produc,unidad_medida_produc,cantidad_produc,precio_produc,id_categoria) values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getId_producto());
@@ -98,7 +98,7 @@ public class cProductoFalta {
 
     //actualizar un registro en la base de datos
     public void actualizar(Producto ob) {
-        String str = "update productos set nom_produc=?, unidad_medida_produc=?, cantidad_proc=?, precio_produc=?, id_categoria=? where id_producto=?";
+        String str = "update productos set nom_produc=?, unidad_medida_produc=?, cantidad_produc=?, precio_produc=?, id_categoria=? where id_producto=?";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getNom_produc());
