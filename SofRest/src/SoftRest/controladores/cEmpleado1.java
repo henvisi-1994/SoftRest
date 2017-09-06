@@ -91,22 +91,7 @@ public class cEmpleado1 {
         param.add(ob.getCargo());
         param.add(ob.getLocal());
         param.add(ob.getCedula());
-
         System.out.print(str);
-        //boolean estado=false;
-//        try {
-//            Empleados ob1 = (Empleados) Lista.get(Count() - 1); //extraer el último código generado 
-//            int cod = ob1.getCedula() + 1; //incrementa en 1 último código generado
-//            System.out.println("Ultimo codigo " + cod);
-//            //modifica la secuencia según codigo del último registro
-//            ConexionBD.EjecutarSql("ALTER SEQUENCE sec_idplato RESTART WITH " + cod);
-//            ConexionBD.Ejecutar_sql_parametro(str, param);
-//
-//            System.out.print("inserto");
-//        } catch (Exception ex) {
-//            throw new RuntimeException("Error al insertar el nuevo registro");
-//        }
-        //return estado;
     }
 
     //actualizar un registro en la base de datos
@@ -124,35 +109,27 @@ public class cEmpleado1 {
         param.add(ob.getCedula());
 
         System.out.print(str);
-        //boolean estado=false;
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            //estado=true;
             System.out.print("actualizacion exitosa");
         } catch (Exception ex) {
             throw new RuntimeException("Error al actualizar los datos ");
         }
-        //return estado;
     }
 
-    //actualizar un registro en la base de datos
+    //eliminar un registro en la base de datos
     public void eliminar(int ced) {
         String str = "delete from empleado where ced_empleado=?";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ced);
-
-        System.out.print(str);
-        //boolean estado=false;
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            //estado=true;
             System.out.print("eliminación exitosa");
         } catch (Exception ex) {
             throw new RuntimeException("Error: No se puede eliminar el registro,"
                     + " existen dependencias en producto");
         }
-        //return estado;
     }
 
     //rellena el modelo de table seg�n los resultados obtenidos de la BD   

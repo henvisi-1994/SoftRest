@@ -23,7 +23,7 @@ public class cClientes {
             datos.addColumn(columnNames[i]);
     }
     
-    //obtener un producto
+    //obtener un cliente
     public Clientes get_Clientes(int pos){
         return (Clientes)Lista.get(pos);
     }
@@ -49,12 +49,8 @@ public class cClientes {
 
     /********Metodos de acceso a la base de datos*/
     //inserta un registro en la base de datos
-    public String insertar(Clientes ob)
-    {
-        //cClientes lis=new cClientes();
-        //ob.setCedula(insertar((Clientes)ob));
-        String str="insert into cliente(ced_cli,nom_cli,ape_cli,tel_cli,email_cli,dir_cli)" + 
-                    "values(?,?,?,?,?,?)";
+    public String insertar(Clientes ob){
+        String str="insert into cliente(ced_cli,nom_cli,ape_cli,tel_cli,email_cli,dir_cli)values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getCedula());
@@ -63,71 +59,49 @@ public class cClientes {
         param.add(ob.getTelefono());
         param.add(ob.getEmail());
         param.add(ob.getDireccion());
-         
-        System.out.println("Paso3...."+str);
-        
-        //boolean estado=false;
         try{           
-            ConexionBD.Ejecutar_sql_parametro(str,param);    
-            System.out.println("Paso4....");
-            System.out.println("inserto");
+            ConexionBD.Ejecutar_sql_parametro(str,param);  
             return ob.getCedula();
         }
         catch(Exception ex){throw new RuntimeException("Error al insertar el nuevo registro");}
-        //return estado;
     }
-
    
     //actualizar un registro en la base de datos
-    public void actualizar(Clientes ob)
-    {
+    public void actualizar(Clientes ob)    {
         cClientes lis=new cClientes();
-        lis.actualizar((Clientes)ob);
-        
-        String str="update ciente set  nom_cli=?,ape_cli=?,tel_cli=?,email_cli=?,dir_cli=? "
-                + "where ced_cli=?";
+        lis.actualizar((Clientes)ob);        
+        String str="update ciente set  nom_cli=?,ape_cli=?,tel_cli=?,email_cli=?,dir_cli=? where ced_cli=?";
         //lista de parametros
-        ArrayList param=new ArrayList();
-       
+        ArrayList param=new ArrayList();       
         param.add(ob.getNombre());
         param.add(ob.getApellido());
         param.add(ob.getTelefono());
         param.add(ob.getEmail());
         param.add(ob.getDireccion());
         param.add(ob.getCedula());
-        System.out.print(str);
         try{
-            ConexionBD.Ejecutar_sql_parametro(str,param);
-            
+            ConexionBD.Ejecutar_sql_parametro(str,param);            
             System.out.print("actualizacion exitosa");
         }
         catch(Exception ex){throw new RuntimeException("Error al actualizar los datos ");}
-        //return estado;
     }   
     
      //actualizar un registro en la base de datos
-    public void eliminar(String cedula)
-    {
+    public void eliminar(String cedula)    {
         String str="delete from cliente where ced_cli=?";
         //lista de parametros
         ArrayList param=new ArrayList();        
-        param.add(cedula);           
-
-        System.out.print(str);
-        //boolean estado=false;
+        param.add(cedula);       
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
-            //estado=true;
             System.out.print("eliminación exitosa");
         }
         catch(Exception ex){throw new RuntimeException("Error: No se puede eliminar el registro,"
             +" existen dependencias");}
-        //return estado;
     } 
   
-    //rellena el modelo de table seg�n los resultados obtenidos de la BD   
-    public void rellenar(ResultSet rs)
-    {
+    //rellena el modelo de table segun los resultados obtenidos de la BD   
+    public void rellenar(ResultSet rs)    {
         try{
             Clientes ob=new Clientes();  
             reset();  //limpia modelo de tabla
@@ -160,29 +134,7 @@ public class cClientes {
         }
         catch(Exception ex){}
     }
-       
-//    //consulta por codigo
-//    public cClientes buscar_codigo_bd(String cedula)
-//    {
-//        cClientes ob=new cClientes();
-//        String str="select * from Clientes where ced_cli =" + cedula +
-//                " order by ced_cli";
-//        System.out.println(""+str);
-//        ResultSet rs = null;
-//        try{
-//            rs=ConexionBD.Consulta(str);
-//            ob.rellenar(rs);            
-//            System.out.println("relleno");
-//            rs.close();
-//        }
-//        catch(Exception ex){
-//            System.out.println(ex.getMessage());
-//            throw new RuntimeException(ex.getMessage());
-//        }
-//        return ob;
-//    }   
-//    
-    
+
     //consulta por codigo
     public cClientes buscar_nombre(String nom)
     {
@@ -234,7 +186,6 @@ public class cClientes {
         try{
             rs=ConexionBD.Consulta(str);
             ob.rellenar(rs);            
-            System.out.println("Paso1.2, tabla rellenada ...");
             rs.close();
         }
         catch(Exception ex){
@@ -247,7 +198,7 @@ public class cClientes {
     public cClientes buscar_ape(String ape) {
         cClientes ob=new cClientes();
         String str="select * from cliente where ape_cli ilike '%"
-            + ape + "%' order by ced_cli";//que es esto????
+            + ape + "%' order by ced_cli";
         System.out.println(""+str);
         ResultSet rs = null;
         try{

@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmMenu.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/cMenu.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/dlgPlato.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/frmProveedores.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/vistas/FrmMenuPrincipal.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/cPlato.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/modelos/Proveedores.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SoftRest/SofRest/src/SoftRest/controladores/cProveedores.java</file>
         </group>
     </open-files>
 </project-private>

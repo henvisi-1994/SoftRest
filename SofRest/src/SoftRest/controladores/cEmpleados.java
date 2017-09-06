@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SoftRest.controladores;
 
 import SoftRest.modelos.ConexionBD;
@@ -12,10 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import SoftRest.modelos.Empleados;
 import static SoftRest.vistas.Validaciones.cedula;
 import java.sql.Connection;
-/**
- *
- * @author Usuario
- */
+
 public class cEmpleados {
       //arreglo de objetos
     ArrayList<Empleados> Lista;    
@@ -60,62 +52,46 @@ public class cEmpleados {
         return datos.getValueAt(pos, 1).toString();
     }
    //agrega la nueva fila al modelo de tabla   
-    public void addFila(String cedula, String nom, String direccion, String telefono)
-    {
+    public void addFila(String cedula, String nom, String direccion, String telefono)    {
         Object[] row={new Empleados(cedula, nom, direccion, telefono, cedula, 0, 0)
         };
         datos.addRow(row);
     }
     //limpia todos los datos del Modelo de tabla
-    public void reset()
-    {
+    public void reset()    {
         while(Count()>0){
             datos.removeRow(Count()-1);                
         }
     }
     //Retorna el modelo de tabla
-    public DefaultTableModel getTablaDatos()
-    {
+    public DefaultTableModel getTablaDatos()    {
         return datos;
     }
 
     /********Metodos de acceso a la base de datos*/
     //inserta un registro en la base de datos
-    public String insertar(Empleados ob)
-    {
+    public String insertar(Empleados ob)    {
         cEmpleados lis=new cEmpleados();
         ob.setCedula(lis.insertar((Empleados)ob));
-        String str="insert into empleados(" +
-                "ced_empleado, nombre_emp, dir_emp, telf_emp, id_local) " + "values(?,?,?,?,?)";
+        String str="insert into empleados(" +"ced_empleado, nombre_emp, dir_emp, telf_emp, id_local)values(?,?,?,?,?)";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getCedula());
         param.add(ob.getNombre());
         param.add(ob.getDirecion());
-         param.add(ob.getTelefono());
-         param.add(1);
-         
-        System.out.println(str);
-        
-        //boolean estado=false;
+        param.add(ob.getTelefono());
+        param.add(1);
         try{           
-            ConexionBD.Ejecutar_sql_parametro(str,param);            
-            System.out.println("inserto");
+            ConexionBD.Ejecutar_sql_parametro(str,param);   
             return ob.getCedula();
         }
         catch(Exception ex){throw new RuntimeException("Error al insertar el nuevo registro");}
-        //return estado;
-    }
-
-   
+    }   
     //actualizar un registro en la base de datos
-    public void actualizar(Empleados ob)
-    {
-          cEmpleados lis=new cEmpleados();
-        lis.actualizar((Empleados)ob);
-        
-        String str="update empleados SET  nombre_emp=?, dir_emp=?, telf_emp=?, id_local=? "
-                + "where ced_empleado=?";
+    public void actualizar(Empleados ob)    {
+        cEmpleados lis=new cEmpleados();
+        lis.actualizar((Empleados)ob);        
+        String str="update empleados SET  nombre_emp=?, dir_emp=?, telf_emp=?, id_local=? where ced_empleado=?";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getNombre());  
@@ -123,40 +99,27 @@ public class cEmpleados {
         param.add(ob.getTelefono()); 
         param.add(1);
         param.add(ob.getCedula());
-        
-        System.out.print(str);
         try{
-            ConexionBD.Ejecutar_sql_parametro(str,param);
-            
+            ConexionBD.Ejecutar_sql_parametro(str,param);            
             System.out.print("actualizacion exitosa");
         }
         catch(Exception ex){throw new RuntimeException("Error al actualizar los datos ");}
-        //return estado;
-    }   
-    
+    }       
      //actualizar un registro en la base de datos
-    public void eliminar(String cedula)
-    {
+    public void eliminar(String cedula)    {
         String str="delete from cliente where ced_empleado=?";
         //lista de parametros
         ArrayList param=new ArrayList();        
-        param.add(cedula);           
-
-        System.out.print(str);
-        //boolean estado=false;
+        param.add(cedula);   
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
-            //estado=true;
             System.out.print("eliminación exitosa");
         }
-        catch(Exception ex){throw new RuntimeException("Error: No se puede eliminar el registro,"
-            +" existen dependencias");}
-        //return estado;
+        catch(Exception ex){throw new RuntimeException("Error: No se puede eliminar el registro");}
     } 
   
     //rellena el modelo de table seg�n los resultados obtenidos de la BD   
-    public void rellenar(ResultSet rs)
-    {
+    public void rellenar(ResultSet rs)    {
         try{
             Empleados ob=new Empleados();  
             reset();  //limpia modelo de tabla
@@ -176,80 +139,61 @@ public class cEmpleados {
     }
 
     //consulta todos los elementos de la tabla productos
-    public void consultaAll()
-    {
+    public void consultaAll()    {
         String str="select * from empleados order by ced_empleado";
         ResultSet rs = null;
         try{
-                rs=ConexionBD.Consulta(str);
-                rellenar(rs);
-                rs.close();
+            rs=ConexionBD.Consulta(str);
+            rellenar(rs);
+            rs.close();
         }
         catch(Exception ex){}
     }
        
     //consulta por codigo
-     public cEmpleados buscar_ruc_completo_bd(String ruc)
-    {
+     public cEmpleados buscar_ruc_completo_bd(String ruc)    {
         cEmpleados ob=new cEmpleados();
         String str="select * from empleados where ced_empleado = '" + ruc + "'";
-        System.out.println(""+str);
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
             ob.rellenar(rs);            
-            System.out.println("relleno");
             rs.close();
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
             throw new RuntimeException(ex.getMessage());
         }
         return ob;
-    } 
-    
-    
-    
-    
+    }     
     //consulta por codigo
-    public cEmpleados buscar_nombre(String nom)
-    {
+    public cEmpleados buscar_nombre(String nom)    {
         cEmpleados ob=new cEmpleados();
-        String str="select * from Empleados where nombre_emp like '%"
-            + nom + "%' order by per_codigo";
-        System.out.println(""+str);
+        String str="select * from Empleados where nombre_emp like '%" + nom + "%' order by per_codigo";
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
             ob.rellenar(rs);            
-            System.out.println("relleno");
             rs.close();
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
             throw new RuntimeException(ex.getMessage());
         }
         return ob;
     }    
     
     //consulta por ruc
-    public cEmpleados buscar_ruc_bd(String ruc)
-    {
+    public cEmpleados buscar_ruc_bd(String ruc)    {
         cEmpleados ob=new cEmpleados();
         String str="select * from Empleados where ced_empleado like '%" + ruc + "%' order by ced_empleado";
-        System.out.println(""+str);
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
-            ob.rellenar(rs);            
-            System.out.println("relleno");
+            ob.rellenar(rs);
             rs.close();
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
             throw new RuntimeException(ex.getMessage());
         }
         return ob;
     }      
-
 }

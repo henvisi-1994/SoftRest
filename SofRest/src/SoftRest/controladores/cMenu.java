@@ -27,11 +27,8 @@ public class cMenu {
         datos = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                //return (column == 7) || (column == 8);
-                //bloquea edición de columnas
                 return false;
             }
-
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 if (columnIndex == 7 || (columnIndex == 8)) {
@@ -88,18 +85,15 @@ public class cMenu {
      */
     //inserta un registro en la base de datos
     public void insertar(Menu ob) {
-        String str = "INSERT INTO menu(num_menu,fecha_menu,id_plato,id_local)"
-                + "VALUES (?, ?, ?,?)";
+        String str = "INSERT INTO menu(num_menu,fecha_menu,id_plato,id_local)" + "VALUES (?, ?, ?,?)";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getNum_menu());
         param.add(ob.getFecha());        
         param.add(ob.getId_plato());
         param.add(ob.getId_local());
-        System.out.print(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            System.out.print("inserto");
         } catch (Exception ex) {
             throw new RuntimeException("Error al insertar el nuevo registro");
         }
@@ -107,19 +101,15 @@ public class cMenu {
 
     //actualizar un registro en la base de datos
     public void actualizar(Menu ob) {
-        String str = "update menu set fecha_menu=?, id_plato=?, id_local=?"
-                + "where num_menu=?";
+        String str = "update menu set fecha_menu=?, id_plato=?, id_local=?" + "where num_menu=?";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ob.getNum_menu());
         param.add(ob.getFecha());
         param.add(ob.getId_plato());
         param.add(ob.getId_local());
-
-        System.out.print(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            System.out.print("actualizacion exitosa");
         } catch (Exception ex) {
             throw new RuntimeException("Error al actualizar los datos ");
         }
@@ -131,13 +121,10 @@ public class cMenu {
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(id);
-        System.out.print(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            System.out.print("eliminación exitosa");
         } catch (Exception ex) {
-            throw new RuntimeException("Error: No se puede eliminar el registro,"
-                    + " existen dependencias en menu");
+            throw new RuntimeException("Error: No se puede eliminar el registro");
         }
     }
 
@@ -156,11 +143,9 @@ public class cMenu {
                 dir = rs.getObject("dir_loc").toString();
                 addFila(id,nom,fecha.toString(),dir);
                 Lista.add(new Menu(nom,fecha,dir));
-
             }
             ConexionBD.CloseBD();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception ex) {System.out.println(ex.getMessage());
         }
     }
 
@@ -176,12 +161,9 @@ public class cMenu {
         }
     }
 
-    public cMenu buscar_varios(String nom)
-    {
+    public cMenu buscar_varios(String nom)    {
         cMenu plat=null;
-        String str="select * from view_menu where nombre_plato ilike '%"
-                + nom + "%'" + "order by id_plato";
-        System.out.println(""+str);
+        String str="select * from view_menu where nombre_plato ilike '%"+ nom + "%'" + "order by id_plato";
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
@@ -195,15 +177,12 @@ public class cMenu {
     //consulta por codigo
     public cMenu buscar_codigo(String codigo) {
         cMenu ob = null;
-        String str = "select * from menu where num_menu ="
-                + codigo ;
-        System.out.println("" + str);
+        String str = "select * from menu where num_menu =" + codigo ;
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
             ob = new cMenu();
             ob.rellenar(rs);
-            System.out.println("relleno");
             rs.close();
         } catch (Exception ex) {
         }
@@ -214,13 +193,11 @@ public class cMenu {
     public Menu buscar_id_bd(String id) {
         cMenu ob = null;
         String str = "select * from menu where num_menu =" + id;
-        System.out.println("" + str);
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
             ob = new cMenu();
             ob.rellenar(rs);
-            System.out.println("relleno");
             rs.close();
         } catch (Exception ex) {
         }

@@ -541,11 +541,11 @@ public class frmProveedores extends javax.swing.JInternalFrame {
             pos = l.Count();
 
             if (pos >= 1 && op == 0) {
-                lbMensaje.setText("Nombre de Cliente  ya ingresado");
+                lbMensaje.setText("Nombre de Proveedor  ya ingresado");
             }
             if (op == 0) {
                 l.insertar(cli);
-                msg = "Cliente  ingresado correctamente";
+                msg = "Proveedor  ingresado correctamente";
             } else {
                 int valor = JOptionPane.showConfirmDialog(this, "Esta seguro quee quiere modificarlo", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (valor == JOptionPane.YES_OPTION) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SoftRest.controladores;
 
 import SoftRest.modelos.ConexionBD;
@@ -13,10 +8,6 @@ import SoftRest.modelos.Proveedores;
 import static SoftRest.vistas.Validaciones.cedula;
 import java.sql.Connection;
 
-/**
- *
- * @author Paul Torres
- */
 public class cProveedores {
 
     //arreglo de objetos
@@ -98,8 +89,6 @@ public class cProveedores {
      */
     //inserta un registro en la base de datos
     public String insertar(Proveedores ob) {
-//        cProveedores lis = new cProveedores();
-//        ob.setRuc(lis.insertar((Proveedores) ob));
         String str = "insert into proveedores("
                 + "id_prov, ruc_prov, nombre_prov, dir_prov, telf_prov, id_local) " + "values(?,?,?,?,?,?)";
         //lista de parametros
@@ -113,7 +102,6 @@ public class cProveedores {
         System.out.println(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
-            System.out.println("inserto");
             return ob.getRuc();
         } catch (Exception ex) {
             throw new RuntimeException("Error al insertar el nuevo registro");
@@ -183,7 +171,6 @@ public class cProveedores {
                 cLocales liscat = new cLocales();
                 liscat.consultaAll();
                 cate = liscat.get_Codigo(liscat.buscar_codigo("" + idloc));
-
                 addFila(cod, ruc, nom, dir, tel, idloc);
                 Lista.add(ob);
                 System.out.println("Nombre: " + ob.getNombre());
@@ -252,10 +239,8 @@ public class cProveedores {
         try {
             rs = ConexionBD.Consulta(str);
             ob.rellenar(rs);
-            System.out.println("relleno");
             rs.close();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
             throw new RuntimeException(ex.getMessage());
         }
         return ob;
