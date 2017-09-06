@@ -1,21 +1,21 @@
 package SoftRest.controladores;
 
 import SoftRest.modelos.ConexionBD;
+import SoftRest.modelos.Pedido;
 import SoftRest.modelos.Plato;
 import SoftRest.modelos.TipoPlato;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class cPlato {
+public class cPedido {
 
     //arreglo de objetos
     ArrayList<Plato> Lista;
 
     //tabla de datos
     DefaultTableModel datos;
-    public String[] columnNames = {"Id", "Nombre", "Cantidad", "Tipo"
-    };
+    public String[] columnNames = {"Id", "Tipo", "Cliente"};
 
     //retorna el número de filas
     public int Count() {
@@ -23,7 +23,7 @@ public class cPlato {
     }
 
     //Constructor
-    public cPlato() {
+    public cPedido() {
         Lista = new ArrayList<Plato>();
         datos = new DefaultTableModel() {
             @Override
@@ -57,12 +57,7 @@ public class cPlato {
         datos.addRow(row);
     }
     
-    public void addFilaTP(int id, String nom, int cant,String tipPlato)
-    {
-        Object[] row={new Integer(id),nom,new Integer(cant),tipPlato};
-        datos.addRow(row);
-    }
-
+  
     //limpia todos los datos del Modelo de tabla
     public void reset() {
         while (Count() > 0) {
@@ -79,14 +74,14 @@ public class cPlato {
      * ******Metodos de acceso a la base de datos
      */
     //inserta un registro en la base de datos
-    public void insertar(Plato ob) {
-        String str = "INSERT INTO plato(nombre_plato, cant_plato, id_tipo_plato)"
+    public void insertar(Pedido ob) {
+        String str = "INSERT INTO pedidos_cli(id_pedido, tipo_pedido, ced_cli)"
                 + "VALUES (?, ?, ?)";
         //lista de parametros
         ArrayList param = new ArrayList();
-        param.add(ob.getNombre());
-        param.add(ob.getCantidad());
-        param.add(ob.getTipoplato_id());
+        param.add(ob.getIdPedido());
+        param.add(ob.getTipo_pedido());
+        param.add(ob.getCedula_cli());
 
         System.out.print(str);
         //boolean estado=false;
@@ -106,15 +101,14 @@ public class cPlato {
     }
 
     //actualizar un registro en la base de datos
-    public void actualizar(Plato ob) {
-        String str = "update plato set nombre_plato=?, cant_plato=?, id_tipo_plato=?"
-                + "where id_plato=?";
+    public void actualizar(Pedido ob) {
+        String str = "update pedidos_cli set tipo_pedido=?, ced_cli=?"
+                + "where id_pedido=?";
         //lista de parametros
         ArrayList param = new ArrayList();
-        param.add(ob.getNombre());
-        param.add(ob.getCantidad());
-        param.add(ob.getTipoplato_id());
-        param.add(ob.getPlato_id());
+        param.add(ob.getTipo_pedido());
+        param.add(ob.getCedula_cli());
+        param.add(ob.getIdPedido());
 
         System.out.print(str);
         //boolean estado=false;
@@ -128,25 +122,7 @@ public class cPlato {
         //return estado;
     }
 
-    //actualizar un registro en la base de datos
-    public void eliminar(int id) {
-        String str = "delete from plato where id_plato=?";
-        //lista de parametros
-        ArrayList param = new ArrayList();
-        param.add(id);
-
-        System.out.print(str);
-        //boolean estado=false;
-        try {
-            ConexionBD.Ejecutar_sql_parametro(str, param);
-            //estado=true;
-            System.out.print("eliminación exitosa");
-        } catch (Exception ex) {
-            throw new RuntimeException("Error: No se puede eliminar el registro,"
-                    + " existen dependencias en producto");
-        }
-        //return estado;
-    }
+  
 
     //rellena el modelo de table seg�n los resultados obtenidos de la BD   
     public void rellenar(ResultSet rs) {
@@ -175,53 +151,29 @@ public class cPlato {
             System.out.println(ex.getMessage());
         }
     }
-//rellena el modelo de table seg�n los resultados obtenidos de la BD  con vistas
-   public void rellenarV(ResultSet rs)
-    {
-        try{
-            int id, can;
-            String cod, nom, desc, cate,fabr,nomTiPlato;
-           
-            boolean iva, estado;
-            reset();  //limpia modelo de tabla
-            Lista.clear(); //limpia la lista de productos
-            while (rs.next()) {
-                id=Integer.parseInt(rs.getObject("id_plato").toString());
-                nom=rs.getObject("nombre_plato").toString();
-                can=Integer.parseInt(rs.getObject("cant_plato").toString());     
-                              
-                //obtiene el nombre del tipo de plato   
-                nomTiPlato = rs.getObject("nombre_tipo_plato").toString();
-                addFilaTP(id, nom,can, nomTiPlato);
-                Lista.add(new Plato(id,nom,can,nomTiPlato));
-                System.out.println(id);
-            }
-            ConexionBD.CloseBD();
-        }
-        catch(Exception ex){System.out.println(ex.getMessage());}
-    }
+
     //consulta todos los elementos de la tabla productos
     public void consultaAll() {
         String str = "select * from view_plato ";
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
-            rellenarV(rs);
+            rellenar(rs);
             rs.close();
         } catch (Exception ex) {
         }
     }
 
     //consulta por nombre
-    public cPlato buscar_nombre(String nom) {
-        cPlato ob = null;
+    public cPedido buscar_nombre(String nom) {
+        cPedido ob = null;
         String str = "select * from plato where nombre_plato like '%"
                 + nom + "%' order by id_plato";
         System.out.println("" + str);
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
-            ob = new cPlato();
+            ob = new cPedido();
             ob.rellenar(rs);
             System.out.println("relleno");
             rs.close();
@@ -229,32 +181,32 @@ public class cPlato {
         }
         return ob;
     }
- public cPlato buscar_varios(String nom)
+ public cPedido buscar_varios(String nom)
     {
-        cPlato plat=null;
+        cPedido plat=null;
         String str="select * from view_plato where nombre_plato ilike '%"
                 + nom + "%'" + "order by id_plato";
         System.out.println(""+str);
         ResultSet rs = null;
         try{
             rs=ConexionBD.Consulta(str);
-            plat=new cPlato();
-            plat.rellenarV(rs);                
+            plat=new cPedido();
+            plat.rellenar(rs);                
             rs.close();
         }
         catch(Exception ex){throw new RuntimeException("Error de conexión con el servidor de datos");}
         return plat;
     }
     //consulta por codigo
-    public cPlato buscar_codigo(String codigo) {
-        cPlato ob = null;
+    public cPedido buscar_codigo(String codigo) {
+        cPedido ob = null;
         String str = "select * from plato where id_plato ="
                 + codigo ;
         System.out.println("" + str);
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
-            ob = new cPlato();
+            ob = new cPedido();
             ob.rellenar(rs);
             System.out.println("relleno");
             rs.close();
@@ -265,13 +217,13 @@ public class cPlato {
 
     //consulta por id en base de datos
     public Plato buscar_id_bd(String id) {
-        cPlato ob = null;
+        cPedido ob = null;
         String str = "select * from plato where id_plato =" + id;
         System.out.println("" + str);
         ResultSet rs = null;
         try {
             rs = ConexionBD.Consulta(str);
-            ob = new cPlato();
+            ob = new cPedido();
             ob.rellenar(rs);
             System.out.println("relleno");
             rs.close();
@@ -279,35 +231,11 @@ public class cPlato {
         }
         return ob.Count() > 0 ? ob.get_Plato(0) : null;
     }
-     //consulta por id en base de datos
-    public int buscar_id_nombre(String nombre) {
-        cPlato ob = null;
-        String str = "select * from plato where nombre_plato ilike '%" + nombre+"%'";
-        System.out.println("" + str);
-        ResultSet rs = null;
-        try {
-            rs = ConexionBD.Consulta(str);
-            ob = new cPlato();
-            ob.rellenar(rs);
-            System.out.println("relleno");
-            rs.close();
-        } catch (Exception ex) {
-        }
-        return ob.Count() > 0 ? ob.get_Plato(0).getPlato_id() : null;
-    }
 
     //buscar por id
     public int buscar_id(int id) {
         for (int i = 0; i < Count(); i++) {
             if (get_Plato(i).getPlato_id() == id) {
-                return i;
-            }
-        }
-        return -1;
-    }
-        public int buscar_id_nom(String nom) {
-        for (int i = 0; i < Count(); i++) {
-            if (get_Plato(i).getNombre().equals(nom)) {
                 return i;
             }
         }

@@ -329,7 +329,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        frmMenu menu = new frmMenu();
+        FrmMenuPrincipal menu = new FrmMenuPrincipal();
         menu.setSize(700, 350);
         Dimension desktopSize = Escritorio.getSize();
         Dimension jInternalFrameSize = menu.getSize();

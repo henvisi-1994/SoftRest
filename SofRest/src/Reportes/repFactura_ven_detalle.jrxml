@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repFactura_ven_detalle" language="groovy" pageWidth="500" pageHeight="802" columnWidth="500" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bd792408-81cb-4e9f-9fe9-25ae915af2fe">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fac_codigo" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     *
+FROM
+     view_detalle_fac
+where  num_fac = $P{fac_codigo};
+]]>
+	</queryString>
+	<field name="nombre_plato" class="java.lang.String"/>
+	<field name="prec_tipo_plato" class="java.lang.Double"/>
+	<field name="tipo_pedido" class="java.lang.String"/>
+	<field name="cant_fp" class="java.lang.Integer"/>
+	<field name="puv_fp" class="java.lang.Double"/>
+	<field name="iva_fp" class="java.lang.Double"/>
+	<field name="descuento_fp" class="java.lang.Double"/>
+	<field name="num_fac" class="java.lang.Integer"/>
+	<field name="fecha_menu" class="java.sql.Date"/>
+	<field name="num_menu" class="java.lang.Integer"/>
+	<field name="id_pedido" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="2" width="500" height="20" uuid="445acb93-3270-4780-8026-aacf8510d1c4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="1f0e582c-d8af-45de-9678-97e2c23a7822"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="a44243aa-8dcd-4cee-bfe2-95e7c4a2752d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="c274a857-3f1d-4006-9c81-847556a86c97"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="100" height="20" uuid="caed9974-8a0f-4a55-ba6f-597588e8e891"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="2" width="74" height="20" uuid="aa8c38ce-211b-4cfd-a523-9d5d6dd34345"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="98" y="2" width="1" height="20" uuid="13568ef7-3ec2-404b-8c26-ba222200549c"/>
+			</line>
+			<line>
+				<reportElement x="200" y="2" width="1" height="20" uuid="efdff246-fc25-4a43-8367-f6f8d412b39e"/>
+			</line>
+			<line>
+				<reportElement x="300" y="2" width="1" height="20" uuid="5d0257fb-d055-4b2c-9aed-edaf78168b22"/>
+			</line>
+			<line>
+				<reportElement x="400" y="2" width="1" height="19" uuid="71ec89ac-37da-426e-a41a-7e30d7f511f0"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="0" width="500" height="20" uuid="8a0a9d7b-0253-45b3-99bb-98cfe76842a1"/>
+			</rectangle>
+			<line>
+				<reportElement x="98" y="1" width="1" height="19" uuid="fa41da6d-53e8-4702-8ada-9fc843c91a27"/>
+			</line>
+			<line>
+				<reportElement x="200" y="1" width="1" height="19" uuid="4500f379-5fa9-476e-af83-97e70cef244a"/>
+			</line>
+			<line>
+				<reportElement x="300" y="1" width="1" height="19" uuid="95b4cc5b-ce58-44fd-b1d8-08da01477174"/>
+			</line>
+			<line>
+				<reportElement x="400" y="0" width="1" height="20" uuid="095b9fed-65e3-4a64-a81b-5752abad6545"/>
+			</line>
+			<textField>
+				<reportElement x="10" y="0" width="88" height="20" uuid="f00ed91e-a6f4-4161-9e03-c08c613084f0"/>
+				<textFieldExpression><![CDATA[$F{id_pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="1" width="85" height="19" uuid="500f1846-65de-4419-8a71-d998dcd96907"/>
+				<textFieldExpression><![CDATA[$F{nombre_plato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="1" width="95" height="20" uuid="8ddec4bd-96ad-4fa2-9f8b-b0ead566bafe"/>
+				<textFieldExpression><![CDATA[$F{cant_fp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="1" width="100" height="20" uuid="7d45dbe3-d1cb-4d14-b35c-26de1724e2a4"/>
+				<textFieldExpression><![CDATA[$F{prec_tipo_plato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="1" width="100" height="20" uuid="95470646-eba4-4d20-9459-ad5c1b47c728"/>
+				<textFieldExpression><![CDATA[$F{puv_fp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

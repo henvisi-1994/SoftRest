@@ -17,6 +17,7 @@ public class Menu {
    private Date fecha;
    private String direccion;
    private int num_menu;
+   private double precio;
    private int id_local;
    private int id_plato;
 
@@ -33,6 +34,10 @@ public class Menu {
         this.id_plato = id_plato;
     }   
 
+    public Menu(String nombreMenu, double precio) {
+        this.nombreMenu = nombreMenu;
+        this.precio = precio;
+    }
     public Menu() {
     }
 
@@ -82,6 +87,14 @@ public class Menu {
 
     public void setNum_menu(int num_menu) {
         this.num_menu = num_menu;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
 }

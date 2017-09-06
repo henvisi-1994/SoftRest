@@ -77,20 +77,27 @@ public class cCargo {
     }
 
     //actualizar un registro en la base de datos
-    public void actualizar(Cargo ob){
+    public void actualizar(Cargo ob)
+    {
         String str="update cargo set nombre_cargo=? where id_cargo=?";
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getNombre_cargo());
-        param.add(ob.getCodigo_cargo());
+        param.add(ob.getCodigo_cargo());           
+
         System.out.print(str);
+        //boolean estado=false;
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
+            //estado=true;
             System.out.print("actualizacion exitosa");
         }
         catch(Exception ex){
             throw new RuntimeException("Error al actualizar los datos ");
+            //throw new RuntimeException(ex.getMessage());
+
         }
+        //return estado;
     }   
     
      //actualizar un registro en la base de datos

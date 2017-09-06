@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Paul Torres
+ * @author usuario
  */
 public class cCategoria {
    DefaultTableModel datos;
@@ -68,16 +68,20 @@ public class cCategoria {
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getNombre_categoria());
+
         System.out.print(str);
+        //boolean estado=false;
         try{
             int cod=Integer.parseInt(get_Codigo(Count()-1))+1; //extraer el último código generado
             System.out.print("Ultimo codigo "+ cod);
             //modifica secuencia según codigo del último registro
             ConexionBD.EjecutarSql("ALTER SEQUENCE sec_idcargo RESTART WITH "+cod);
             ConexionBD.Ejecutar_sql_parametro(str,param);
+            //estado=true;
             System.out.print("inserto");
         }
         catch(Exception ex){throw new RuntimeException("Error al insertar el nuevo registro");}
+        //return estado;
     }
 
     //actualizar un registro en la base de datos
@@ -87,15 +91,21 @@ public class cCategoria {
         //lista de parametros
         ArrayList param=new ArrayList();
         param.add(ob.getNombre_categoria());
-        param.add(ob.getCodigo_categoria());
+        param.add(ob.getCodigo_categoria());           
+
         System.out.print(str);
+        //boolean estado=false;
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
+            //estado=true;
             System.out.print("actualizacion exitosa");
         }
         catch(Exception ex){
             throw new RuntimeException("Error al actualizar los datos ");
+            //throw new RuntimeException(ex.getMessage());
+
         }
+        //return estado;
     }   
     
      //actualizar un registro en la base de datos
@@ -104,16 +114,21 @@ public class cCategoria {
         String str="delete from categoria where id_categoria=?";
         //lista de parametros
         ArrayList param=new ArrayList();        
-        param.add(cod);       
+        param.add(cod);           
+
         System.out.print(str);
+        //boolean estado=false;
         try{
             ConexionBD.Ejecutar_sql_parametro(str,param);
+            //estado=true;
             System.out.print("eliminación exitosa");
         }
         catch(Exception ex){            
             throw new RuntimeException("Error: No se puede eliminar el registro,"
-            +" existen dependencias");    
+            +" existen dependencias en producto");            
+            //throw new RuntimeException(ex.getMessage());
         }
+        //return estado;
     } 
 
     //carga datos en el modelo de tabla
