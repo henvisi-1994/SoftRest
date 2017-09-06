@@ -20,15 +20,13 @@ import java.sql.Connection;
 public class cProveedores {
 
     //arreglo de objetos
-
     ArrayList<Proveedores> Lista;
 
     //tabla de datos
     DefaultTableModel datos;
-    public String[] columnNames = {"Ruc - Cedula", "Nombre", "Direccion", "Telefono", "# Local Abastecido"};
+    public String[] columnNames = {"Codigo", "Ruc - Cedula", "Nombre", "Direccion", "Telefono", "# Local Abastecido"};
 
     //retorna el número de filas
-
     public int Count() {
         return datos.getRowCount();
     }
@@ -56,7 +54,7 @@ public class cProveedores {
     }
 
     //obtener un producto
-    public Proveedores get_Proveedores(int pos) {
+    public Proveedores get_Proveedor(int pos) {
         return (Proveedores) Lista.get(pos);
     }
 
@@ -69,14 +67,21 @@ public class cProveedores {
         return datos.getValueAt(pos, 1).toString();
     }
 
+    public String get_Codigo(int pos) {
+        if (pos == -1 || pos < 0) {
+            return "0";
+        } else {
+            return datos.getValueAt(pos, 0).toString();
+        }
+    }
+
     //agrega la nueva fila al modelo de tabla
-    public void addFila(String ruc, String nom, String direccion, String telefono, String id_local) {
-        Object[] row = {new Proveedores(ruc, nom, direccion, telefono,new Integer(id_local))};
+    public void addFila(String cod, String ruc, String nom, String direccion, String telefono, String id_local) {
+        Object[] row = {new Proveedores(new Integer(cod), ruc, nom, direccion, telefono, new Integer(id_local))};
         datos.addRow(row);
     }
 
     //limpia todos los datos del Modelo de tabla
-
     public void reset() {
         while (Count() > 0) {
             datos.removeRow(Count() - 1);
@@ -84,7 +89,6 @@ public class cProveedores {
     }
 
     //Retorna el modelo de tabla
-
     public DefaultTableModel getTablaDatos() {
         return datos;
     }
@@ -94,17 +98,18 @@ public class cProveedores {
      */
     //inserta un registro en la base de datos
     public String insertar(Proveedores ob) {
-        cProveedores lis = new cProveedores();
-        ob.setRuc(lis.insertar((Proveedores) ob));
+//        cProveedores lis = new cProveedores();
+//        ob.setRuc(lis.insertar((Proveedores) ob));
         String str = "insert into proveedores("
-                + "ruc_prov, nombre_prov, dir_prov, telf_prov, id_local) " + "values(?,?,?,?,?,?)";
+                + "id_prov, ruc_prov, nombre_prov, dir_prov, telf_prov, id_local) " + "values(?,?,?,?,?,?)";
         //lista de parametros
         ArrayList param = new ArrayList();
+        param.add(ob.getCodigo());
         param.add(ob.getRuc());
         param.add(ob.getNombre());
         param.add(ob.getDireccion());
         param.add(ob.getTelefono());
-        param.add(ob.getId_local());        
+        param.add(ob.getId_local());
         System.out.println(str);
         try {
             ConexionBD.Ejecutar_sql_parametro(str, param);
@@ -119,13 +124,14 @@ public class cProveedores {
     public void actualizar(Proveedores ob) {
         cProveedores lis = new cProveedores();
         lis.actualizar((Proveedores) ob);
-        String str = "update proveedores SET  nombre_prov=?, dir_prov=?, telf_prov=?, id_local=? "
-                + "where ruc_prov=?";
+        String str = "update proveedores SET  ruc_prov=?,nombre_prov=?, dir_prov=?, telf_prov=?, id_local=? "
+                + "where id_prov=?";
         //lista de parametros
         ArrayList param = new ArrayList();
+        param.add(ob.getCodigo());
         param.add(ob.getNombre());
         param.add(ob.getDireccion());
-        param.add(ob.getTelefono());        
+        param.add(ob.getTelefono());
         param.add(ob.getRuc());
         param.add(ob.getId_local());
         System.out.print(str);
@@ -140,7 +146,7 @@ public class cProveedores {
 
     //eliminar un registro en la base de datos
     public void eliminar(String ruc) {
-        String str = "delete from proveedores where ruc_prov=?";
+        String str = "delete from proveedores where id_prov=?";
         //lista de parametros
         ArrayList param = new ArrayList();
         param.add(ruc);
@@ -162,11 +168,12 @@ public class cProveedores {
     public void rellenar(ResultSet rs) {
         try {
             //int idloc;
-            String cate,ruc,nom,dir,tel,idloc;
+            String cate, ruc, nom, dir, tel, idloc, cod;
             Proveedores ob = new Proveedores();
             reset();  //limpia modelo de tabla
             Lista.clear(); //limpia la lista de productos
             while (rs.next()) {
+                cod = rs.getObject("id_prov").toString();
                 ruc = rs.getObject("ruc_prov").toString();
                 nom = rs.getObject("nombre_prov").toString();
                 dir = rs.getObject("dir_prov").toString();
@@ -176,8 +183,8 @@ public class cProveedores {
                 cLocales liscat = new cLocales();
                 liscat.consultaAll();
                 cate = liscat.get_Codigo(liscat.buscar_codigo("" + idloc));
-                
-                addFila(ruc, nom, dir, tel,idloc);
+
+                addFila(cod, ruc, nom, dir, tel, idloc);
                 Lista.add(ob);
                 System.out.println("Nombre: " + ob.getNombre());
             }
@@ -221,7 +228,7 @@ public class cProveedores {
     public cProveedores buscar_nombre(String nom) {
         cProveedores ob = new cProveedores();
         String str = "select * from proveedores where nombre_prov like '%"
-                + nom + "%' order by per_codigo";
+                + nom + "%' order by id_prov";
         System.out.println("" + str);
         ResultSet rs = null;
         try {

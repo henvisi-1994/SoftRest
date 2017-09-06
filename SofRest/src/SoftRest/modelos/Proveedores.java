@@ -5,6 +5,7 @@ package SoftRest.modelos;
  * @author Paul Torres
  */
 public class Proveedores {
+    protected int codigo;
     protected String ruc;
     protected String nombre; 
     protected String telefono;    
@@ -14,12 +15,21 @@ public class Proveedores {
     public Proveedores() {
     }
 
-    public Proveedores(String ruc, String nombre, String telefono, String direccion, int id_local) {
+    public Proveedores(int codigo, String ruc, String nombre, String telefono, String direccion, int id_local) {
+        this.codigo = codigo;
         this.ruc = ruc;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.id_local = id_local;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getRuc() {
@@ -61,9 +71,6 @@ public class Proveedores {
     public void setId_local(int id_local) {
         this.id_local = id_local;
     }
+
     
-    
-    public String ImprimirProveedor() {
-        return ruc + "\t" + nombre + "\t" + direccion + "\t"+ telefono + "\t"+id_local;
-    }    
 }

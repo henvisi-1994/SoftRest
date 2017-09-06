@@ -304,16 +304,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-//        frmProveedor prov = new frmProveedor();
-//        int x = 338;
-//        int y = Escritorio.getWidth() - 180;
-//        prov.setSize(y, x);
-//        Dimension desktopSize = Escritorio.getSize();
-//        Dimension jInternalFrameSize = prov.getSize();
-//        prov.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-//                (desktopSize.height - jInternalFrameSize.height) / 2);
-//        Escritorio.add(prov);
-//        prov.show();
+        frmProveedores prov = new frmProveedores();
+        int x = 338;
+        int y = Escritorio.getWidth() - 180;
+        prov.setSize(y, x);
+        Dimension desktopSize = Escritorio.getSize();
+        Dimension jInternalFrameSize = prov.getSize();
+        prov.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        Escritorio.add(prov);
+        prov.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
